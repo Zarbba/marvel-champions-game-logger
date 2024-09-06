@@ -39,7 +39,7 @@ router.post(`/signup`, async (req, res) => {
         }
         if (req.body.password !== req.body.confirm) {
             res.render(`auth/signup`, {
-                message: `Those passwords do not match.`,
+                message: `Those passwords do not match. Please try again.`,
                 userName: req.body.userName,
                 email: req.body.email
             })
@@ -107,6 +107,21 @@ router.post(`/login`, async (req, res) => {
         console.log(err)
         res.status(500).render(`error-500`)
     }
-})    
+})
+
+router.get(`/logout`, (req, res) => {
+    if (!req.session.user) {
+        res.redirect(`/auth/login?redirect=1`)
+        return
+    }
+    try {
+        req.session.destroy()
+        res.redirect(`/`)
+    } catch(err) {
+        console.log(err)
+        res.status(500).render(`errors/error-500`)
+    }
+})
+
 
 module.exports = router
