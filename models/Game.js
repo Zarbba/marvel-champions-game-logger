@@ -30,6 +30,6 @@ const gameSchema = new mongoose.Schema ({
     }
 }, {timestamps: true, virtuals: true})
 
-const Game = mongoose.Model(`Game`, gameSchema)
+const Game = mongoose.model(`Game`, gameSchema)
 
-mondule.exports = Game
+module.exports = Game
