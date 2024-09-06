@@ -32,6 +32,7 @@ app.use((req, res, next) => {
     res.locals.user = req.session.user ? req.session.user : null
     next()
 })
+app.use(`/auth`, authController)
 app.listen(process.env.PORT,() => {
     console.log(`Server listening at http://localhost:${process.env.PORT}/`)
 })
