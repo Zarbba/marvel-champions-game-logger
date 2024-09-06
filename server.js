@@ -1,7 +1,7 @@
 //----------------------- DB Setup
 require(`dotenv`).config()
 const mongoose = require(`mongoose`)
-const MongoStore = require(`connect-mongoose`)
+const MongoStore = require(`connect-mongo`)
 mongoose.connect(process.env.MONGODB_URI)
 
 //----------------------- Module Imports
@@ -10,7 +10,7 @@ const express = require(`express`)
 const methodOverride = require(`method-override`)
 const session = require(`express-session`)
 const app = express()
-const authController = require(`.controllers/auth`)
+const authController = require(`./controllers/auth`)
 const gameController = require(`./controllers/games`)
 
 //----------------------- Server Config
@@ -35,3 +35,7 @@ app.listen(process.env.PORT,() => {
 })
 
 //----------------------- Routing
+
+app.get(`/`, (req, res) =>{
+    res.render(`home`)
+})
