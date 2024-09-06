@@ -1,2 +1,17 @@
-<%- include(`./partials/header`) %>
-<%- include(`./partials/footer`) %>
+<%- include(`../partials/header`) %>
+<h2>Login to your account</h2>
+<div class="message">
+    <% if(locals.message) {%> <%= message %><% } %>
+</div>
+<form action="/auth/login" method="post">
+    <label>
+        User Name:
+        <input type="text" name="userName" required <% if (locals.userName) {%> value="<%= userName %>" <% } %> > 
+    </label>
+    <label>
+        Password:
+        <input type="password" name="password" required>
+    </label>
+    <button>Login</button>
+</form>
+<%- include(`../partials/footer`) %>

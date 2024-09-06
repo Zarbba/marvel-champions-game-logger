@@ -1,7 +1,7 @@
 <%- include(`../partials/header`) %>
 <h2>Signup for an account</h2>
 <div class="message">
-    <% if(locals.message) {%><%= message %><% } %>
+    <% if(locals.message) {%> <%= message %><% } %>
 </div>
 <form action="/auth/signup" method="post">
     <label>

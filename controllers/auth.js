@@ -5,10 +5,11 @@ const User = require(`../models/User`)
 require(`dotenv`).config()
 
 router.get(`/signup`, (req, res) => {
+    if (req.session.user !== null) {
+        res.redirect(`/`)
+        return
+    }
     try {
-        if (res.session.user !== null) {
-            res.redirect(`/`)
-        }
         res.render(`auth/signup`)
     } catch(err) {
         console.log(err)
@@ -52,15 +53,60 @@ router.post(`/signup`, async (req, res) => {
                 ownedGames: []
             }
         )
-        res.session.user = {
+        req.session.user = {
             _id: createdUser._id,
             userName: createdUser.userName
         }
-        res.redirect(`/`)
+        req.session.save( () => {
+            res.redirect(`/`)
+        })
     } catch(err) {
         console.log(err)
         res.status(500).render(`error-500`)
     }
 })
+
+router.get(`/login`, (req, res) => {
+    try{
+        let message
+        if (req.query.redirect === `1`) {
+            message = `You must be logged in to perform that action. Please login and try again.`
+        }
+        res.render(`auth/login`, {message})
+    } catch(err) {
+        console.log(err)
+        res.status(500).render(`error-500`)
+    }
+})    
+
+router.post(`/login`, async (req, res) => {
+    try {
+        const userInDatabase = await User.findOne({userName: req.body.userName})
+        if (userInDatabase === null) {
+            res.render(`auth/login`, {
+            message: `That user name does not exist.`,
+            userName: req.body.userName
+        })
+        return
+    }
+    if(bcrypt.compareSync(req.body.password, userInDatabase.password) === false) {
+        res.render(`auth/login`, {
+            message: `That password is incorrect.`,
+            userName: req.body.userName
+        })
+        return
+    }
+    req.session.user = {
+        userName: userInDatabase.userName,
+        _id: userInDatabase._id,
+    }
+    req.session.save( () => {
+        res.redirect(`/`)
+    })
+    } catch(err) {
+        console.log(err)
+        res.status(500).render(`error-500`)
+    }
+})    
 
 module.exports = router
