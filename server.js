@@ -10,6 +10,8 @@ const express = require(`express`)
 const methodOverride = require(`method-override`)
 const session = require(`express-session`)
 const app = express()
+const Game = require(`./models/Game`)
+const User = require(`./models/User`)
 const authController = require(`./controllers/auth`)
 const gameController = require(`./controllers/games`)
 
@@ -36,6 +38,7 @@ app.listen(process.env.PORT,() => {
 
 //----------------------- Routing
 
-app.get(`/`, (req, res) =>{
-    res.render(`home`)
+app.get(`/`, async (req, res) =>{
+    const recentGames = (await Game.find().populate(`owner`).sort({createdAt: `desc`})).slice(0, 9)
+    res.render(`home`, {recentGames})
 })

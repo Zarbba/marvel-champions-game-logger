@@ -1,3 +1,10 @@
 <%- include(`./partials/header`) %>
-<!-- This section of code will render a list of the 10 most recent games logged on the site -->
+<h2>Recent Games</h2>
+<ul>
+    <% recentGames.forEach((game) => { %>
+        <li>
+            <a href="/games/<%= game.id %>"><%= game.gameName %></a> <%= game.owner.userName %> <%= game.createdAt %>
+        </li>
+    <% }) %>
+</ul>
 <%- include(`./partials/footer`) %>
