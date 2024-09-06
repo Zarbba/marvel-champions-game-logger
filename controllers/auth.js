@@ -5,7 +5,7 @@ const User = require(`../models/User`)
 require(`dotenv`).config()
 
 router.get(`/signup`, (req, res) => {
-    if (req.session.user !== null) {
+    if (req.session.user) {
         res.redirect(`/`)
         return
     }

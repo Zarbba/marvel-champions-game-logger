@@ -1,0 +1,10 @@
+<%- include(`../partials/header`) %>
+<h2>All Games</h2>
+<ul>
+    <% games.forEach((game) => { %>
+        <li>
+            <a href="/games/<%= game.id %>"><%= game.gameName %></a> <%= game.owner.userName %> <%= game.createdAt %>
+        </li>
+    <% }) %>
+</ul>
+<%- include(`../partials/footer`) %>

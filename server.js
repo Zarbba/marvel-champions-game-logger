@@ -33,6 +33,7 @@ app.use((req, res, next) => {
     next()
 })
 app.use(`/auth`, authController)
+app.use(`/games`, gameController)
 app.listen(process.env.PORT,() => {
     console.log(`Server listening at http://localhost:${process.env.PORT}/`)
 })
