@@ -4,14 +4,10 @@
     <% if(locals.message) {%> <%= message %><% } %>
 </div>
 <form action="/auth/login" method="post">
-    <label>
-        User Name:
-        <input type="text" name="userName" required <% if (locals.userName) {%> value="<%= userName %>" <% } %> > 
-    </label>
-    <label>
-        Password:
-        <input type="password" name="password" required>
-    </label>
+    <label for="user-name">User Name:</label>
+    <input id="user-name" type="text" name="userName" required <% if (locals.userName) {%> value="<%= userName %>" <% } %> > 
+    <label for="password">Password:</label>
+    <input id="password" type="password" name="password" required>
     <button>Login</button>
 </form>
 <%- include(`../partials/footer`) %>

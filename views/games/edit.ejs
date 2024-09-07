@@ -1,42 +1,30 @@
 <%- include(`../partials/header`) %>
 <h2>Update <%= game.gameName %></h2>
 <form action="/games/<%= game._id %>?_method=put" method="post">
-    <label>
-        Game Name:
-        <input type="text" name="gameName" required value="<%= game.gameName %>">
-    </label>
-    <label>
-        Date Played:
-        <input type="date" name="datePlayed" required value="<%= game.htmlDate %>">
-    </label>
-    <label>
-        Scenario:
-        <input type="text" name="scenario" required value="<%= game.scenario %>">
-    </label>
+    <label for="game-name">Game Name:</label>
+    <input id="game-name" type="text" name="gameName" required value="<%= game.gameName %>">
+    <label for="date-played">Date Played:</label>
+    <input id="date-played" type="date" name="datePlayed" required value="<%= game.htmlDate %>">
+    <label for="scenario">Scenario:</label>
+    <input id="scenario" type="text" name="scenario" required value="<%= game.scenario %>">
     <section class="player-section">
-        <button type="button" class="add-player">Add a player</button>
-        <% game.players.forEach( (player) => { %>
-            <label>
-                Player Name:
-                <input type="text" name="playerName" required value="<%= player.playerName %>">
-            </label>
-            <label>
-                Hero:
-                <input type="text" name="playerHero" required value="<%= player.identity %>">
-            </label>
+        
+        <% game.players.forEach( (player, i) => { %>
+            <label for="player-name<%= i %>">Player Name:</label>
+            <input id="player-name<%= i %>" type="text" name="playerName" required value="<%= player.playerName %>">
+
+            <label for="hero<%= i %>">Hero:</label>
+            <input id="hero<%= i %>" type="text" name="playerHero" required value="<%= player.identity %>">
         <% }) %>
 </section>
-    <label>
-        The players:
-        <select name="wonGame">
+<button type="button" class="add-player">Add a player</button>
+    <label for="won-game">The players:</label>
+        <select id="won-game" name="wonGame">
             <option value="true" <% if (game.wonGame) { %> selected <% } %>>Won</option>
             <option value="false" <% if (!game.wonGame) { %> selected <% } %>>Lost</option>
         </select>
-    </label>
-    <label>
-        Notes:
-        <textarea type="" name="notes"><%= game.notes %></textarea>
-    </label>
+    <label for="notes">Notes:</label>
+    <textarea id="notes" type="" name="notes"><%= game.notes %></textarea>
     <button>Update Game Log</button>
 </form>
 <div class="hidden counter"><%= game.players.length %></div>

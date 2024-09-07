@@ -18,30 +18,17 @@ if (addPlayerEl) {
 // -----Functions-----
 function handleClick(e) {
     if (playerCounter < 3) {
-        const newPlayerFormEl = document.createElement(`div`)
-        newPlayerFormEl.innerHTML = 
-        `<label>
-            Player Name:
-            <input type="text" name="playerName" required>
-        </label>
-        <label>
-            Hero:
-            <input type="text" name="playerHero" required>
-        </label>`
-        playerSectionEl.appendChild(newPlayerFormEl)
+        console.log(playerCounter)
+        playerSectionEl.innerHTML +=`<label for="player-name${playerCounter}">Player Name:</label>
+        <input id="player-name${playerCounter}" type="text" name="playerName" required>
+        <label for="hero${playerCounter}">Hero:</label>
+        <input id="hero${playerCounter}" type="text" name="playerHero" required>`
         playerCounter++
     } else {
-        const newPlayerFormEl = document.createElement(`div`)
-        newPlayerFormEl.innerHTML = 
-        `<label>
-            Player Name:
-            <input type="text" name="playerName" required>
-        </label>
-        <label>
-            Hero:
-            <input type="text" name="playerHero" required>
-        </label>`
-        playerSectionEl.appendChild(newPlayerFormEl)
+        playerSectionEl.innerHTML +=`<label for="player-name${playerCounter}">Player Name:</label>
+        <input id="player-name${playerCounter}" type="text" name="playerName" required>
+        <label for="hero${playerCounter}">Hero:</label>
+        <input id="hero${playerCounter}" type="text" name="playerHero" required>`
         addPlayerEl.classList.add(`hidden`)
     }
 }
