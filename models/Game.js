@@ -17,6 +17,10 @@ const gameSchema = new mongoose.Schema ({
         type: String,
         required: true
     },
+    datePlayed: {
+        type: Date,
+        required: true
+    },
     players: [playerSchema],
     scenario: {
         type: String,
@@ -29,6 +33,14 @@ const gameSchema = new mongoose.Schema ({
         ref: `User`
     }
 }, {timestamps: true, virtuals: true})
+
+gameSchema.virtual(`playerNames`).get(function () {
+    let playerNames = []
+    this.players.forEach( (player) => {
+        playerNames.push(player.playerName)
+    })
+    return playerNames
+})
 
 const Game = mongoose.model(`Game`, gameSchema)
 

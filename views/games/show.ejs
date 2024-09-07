@@ -1,2 +1,14 @@
 <%- include(`../partials/header`) %>
+<h2><%= game.gameName %></h2>
+<p>
+    Date played: <%= game.datePlayed %>
+    Players: <%= game.playerNames.join(`, `) %>
+    Scenario: <%= game.scenario %>
+    The players <%= game.wonGame ? `won` : `lost` %> this game.
+    Notes: <%= game.notes %>
+</p>
+<% if (user !== null && user._id == game.owner._id) {%>
+    <a href="/games/<%= game.id %>/edit">Update</a>
+    <a href="/games/<%= game.id %>/delete">Delete</a>
+<% } %>
 <%- include(`../partials/footer`) %>

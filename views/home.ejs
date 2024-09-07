@@ -4,6 +4,10 @@
     <% recentGames.forEach((game) => { %>
         <li>
             <a href="/games/<%= game.id %>"><%= game.gameName %></a> <%= game.owner.userName %> <%= game.createdAt %>
+            <% if (user !== null && user._id == game.owner._id) {%>
+                <a href="/games/<%= game.id %>/edit">Update</a>
+                <a href="/games/<%= game.id %>/delete">Delete</a>
+            <% } %>
         </li>
     <% }) %>
 </ul>
