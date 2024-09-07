@@ -1,0 +1,10 @@
+<%- include(`../partials/header`) %>
+<h2>Delete <%= game.gameName  %></h2>
+<p>Are you sure you wish to delete this game log?</p>
+<form action="/games/<%= game._id %>?_method=delete" method="post">
+    <button>Delete</button>
+</form>
+<form  action="/games">
+    <button>Cancel</button>
+</form>
+<%- include(`../partials/footer`) %>

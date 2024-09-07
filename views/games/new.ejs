@@ -6,11 +6,11 @@
 <form action="/games/" method="post">
     <label>
         Game Name:
-        <input type="text" name="gameName" required value="<%= locals.gameName %>">
+        <input type="text" name="gameName" required>
     </label>
     <label>
         Date Played:
-        <input type="date" name="datePlayed" required value="<%= locals.datePlayed %>">
+        <input type="date" name="datePlayed" required>
     </label>
     <label>
         Players:
@@ -18,7 +18,7 @@
     </label>
     <label>
         Scenario:
-        <input type="text" name="scenario" required value="<%= locals.scenario %>">
+        <input type="text" name="scenario" required>
     </label>
     <label>
         The players:
@@ -30,7 +30,7 @@
     </label>
     <label>
         Notes:
-        <textarea type="" name="notes"> <%= locals.notes %> </textarea>
+        <textarea type="" name="notes"></textarea>
     </label>
     <button>Log Game</button>
 </form>

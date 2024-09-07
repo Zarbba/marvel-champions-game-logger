@@ -16,33 +16,6 @@ router.get(`/new`, isLoggedIn, (req, res) => {
 
 router.post(`/`, isLoggedIn, async (req, res) => {
     try {
-        if (req.body.gameName === null) {
-            res.render(`games/new`, {
-                message: `Please enter a unique name for your game.`,
-                datePlayed: req.body.datePlayed,
-                scenario: req.body.scenario,
-                notes: req.body.notes
-            })
-            return
-        }
-        if (req.body.datePlayed === null) {
-            res.render(`games/new`, {
-                message: `Please enter the date you played your game.`,
-                gameName: req.body.gameName,
-                scenario: req.body.scenario,
-                notes: req.body.notes
-            })
-            return
-        }
-        if (req.body.scenario === null) {
-            res.render(`games/new`, {
-                message: `Please enter the scenario you played in your game.`,
-                gameName: req.body.gameName,
-                datePlayed: req.body.datePlayed,
-                notes: req.body.notes
-            })
-            return
-        }
         const createdGame = await Game.create({
             gameName: req.body.gameName,
             datePlayed: req.body.datePlayed,
@@ -72,6 +45,35 @@ router.get(`/:gameId`, async (req, res) => {
         const game = await Game.findById(req.params.gameId)
         res.render(`games/show`, {game})
     } catch(err) {
+        res.status(500).render(`errors/error-500`)
+    }
+})
+
+router.get(`/:gameId/delete`, isLoggedIn, async (req, res) => {
+    try {
+        const game = await Game.findById(req.params.gameId)
+        if (game.owner != req.session.user._id) {
+            res.status(403).render(`errors/error-403`)
+            return
+        }
+        res.render(`games/delete`, {game})
+    } catch(err) {
+        console.log(err)
+        res.status(500).render(`errors/error-500`)
+    }
+})
+
+router.delete(`/:gameId`, isLoggedIn, async (req, res) => {
+    try {
+        const game = await Game.findById(req.params.gameId)
+        if (game.owner != req.session.user._id) {
+            res.status(403).render(`errors/error-403`)
+            return
+        }
+        const deletedGame = await Game.findOneAndDelete({_id: req.params.gameId})
+        res.redirect(`/games`)    
+    } catch(err) {
+        console.log(err)
         res.status(500).render(`errors/error-500`)
     }
 })
