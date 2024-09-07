@@ -28,7 +28,7 @@ async function seedGames() {
     const deletedGames = await Game.deleteMany()
     const createdGames = await Game.create([
         {
-            gameName: `Peni v Rhino Solo Game`,
+            gameName: `Peni vs Rhino Solo Game`,
             datePlayed: new Date(`2024-08-23`),
             players:[
                 {playerName: `Josh`,
@@ -43,7 +43,7 @@ async function seedGames() {
             owner: zarbba
         },
         {
-            gameName: `X and Cap vs Venom`,
+            gameName: `X and Cap vs Venom 2-Player Game`,
             datePlayed: new Date(`2024-09-06`),
             players:[
                 {playerName: `Josh`,

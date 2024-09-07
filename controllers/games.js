@@ -69,7 +69,27 @@ router.get(`/:gameId/edit`, isLoggedIn, isGameOwner, async (req, res) => {
         res.status(500).render(`errors/error-500`)
     }
 })
-// TODO Implement put call to complete edit functionality
+
+router.put(`/:gameId`, isLoggedIn, isGameOwner, async (req, res) => {
+    try {
+        const updatedGame = await Game.findByIdAndUpdate(
+            req.params.gameId, 
+            {
+                gameName: req.body.gameName,
+                datePlayed: req.body.datePlayed,
+                scenario: req.body.scenario,
+                players: generatePlayers(req.body),
+                wonGame: req.body.wonGame,
+                notes: req.body.notes,
+                owner: req.session.user    
+            }, 
+            {new: true}
+        )
+        res.redirect(`/games`)
+    } catch(err) {
+        res.status(500).render(`errors/error-500`)
+    }
+})
 
 router.get(`/:gameId/delete`, isLoggedIn, isGameOwner, async (req, res) => {
     try {
