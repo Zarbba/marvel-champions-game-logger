@@ -1,9 +1,20 @@
 const express = require(`express`)
 const router = express.Router()
 const isLoggedIn = require(`../middleware/isLoggedIn`)
+const isGameOwner = require(`../middleware/isGameOwner`)
 const User = require(`../models/User`)
 const Game = require(`../models/Game`)
 require(`dotenv`).config()
+function generatePlayers(input) {
+    let playersArray =[]
+    input.playerName.forEach( (player) => {
+        playersArray.push({playerName: player})
+    })
+    input.playerHero.forEach( (player, i) => {
+        playersArray[i].identity = player
+    })
+    return playersArray
+}
 
 router.get(`/new`, isLoggedIn, (req, res) => {
     try {
@@ -20,6 +31,7 @@ router.post(`/`, isLoggedIn, async (req, res) => {
             gameName: req.body.gameName,
             datePlayed: req.body.datePlayed,
             scenario: req.body.scenario,
+            players: generatePlayers(req.body),
             wonGame: req.body.wonGame,
             notes: req.body.notes,
             owner: req.session.user
@@ -49,7 +61,7 @@ router.get(`/:gameId`, async (req, res) => {
     }
 })
 
-router.get(`/:gameId/edit`, async (req, res) => {
+router.get(`/:gameId/edit`, isLoggedIn, isGameOwner, async (req, res) => {
     try {
         const game = await Game.findById(req.params.gameId)
         res.render(`games/edit`, {game})
@@ -57,14 +69,10 @@ router.get(`/:gameId/edit`, async (req, res) => {
         res.status(500).render(`errors/error-500`)
     }
 })
+// TODO Implement put call to complete edit functionality
 
-router.get(`/:gameId/delete`, isLoggedIn, async (req, res) => {
+router.get(`/:gameId/delete`, isLoggedIn, isGameOwner, async (req, res) => {
     try {
-        const game = await Game.findById(req.params.gameId)
-        if (game.owner != req.session.user._id) {
-            res.status(403).render(`errors/error-403`)
-            return
-        }
         res.render(`games/delete`, {game})
     } catch(err) {
         console.log(err)
@@ -72,7 +80,7 @@ router.get(`/:gameId/delete`, isLoggedIn, async (req, res) => {
     }
 })
 
-router.delete(`/:gameId`, isLoggedIn, async (req, res) => {
+router.delete(`/:gameId`, isLoggedIn, isGameOwner, async (req, res) => {
     try {
         const game = await Game.findById(req.params.gameId)
         if (game.owner != req.session.user._id) {

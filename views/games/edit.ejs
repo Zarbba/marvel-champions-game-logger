@@ -13,6 +13,19 @@
         Scenario:
         <input type="text" name="scenario" required value="<%= game.scenario %>">
     </label>
+    <section class="player-section">
+        <button type="button" class="add-player">Add a player</button>
+        <% game.players.forEach( (player) => { %>
+            <label>
+                Player Name:
+                <input type="text" name="playerName" required value="<%= player.playerName %>">
+            </label>
+            <label>
+                Hero:
+                <input type="text" name="playerHero" required value="<%= player.identity %>">
+            </label>
+        <% }) %>
+</section>
     <label>
         The players:
         <select name="wonGame">
@@ -26,4 +39,5 @@
     </label>
     <button>Log Game</button>
 </form>
+<div class="hidden counter"><%= game.players.length %></div>
 <%- include(`../partials/footer`) %>

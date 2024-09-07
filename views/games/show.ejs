@@ -3,6 +3,7 @@
 <p>
     Date played: <%= game.datePlayed %>
     Players: <%= game.playerNames.join(`, `) %>
+    <!-- TODO Improve players display -->
     Scenario: <%= game.scenario %>
     The players <%= game.wonGame ? `won` : `lost` %> this game.
     Notes: <%= game.notes %>
