@@ -2,8 +2,11 @@
 <h2><%= game.gameName %></h2>
 <p>
     Date played: <%= game.datePlayed.toDateString() %>
-    Players: <%= game.playerNames.join(`, `) %>
-    <!-- TODO Improve players display -->
+    Players:
+    <% game.players.forEach( (player) => { %>
+        Player Name: <%= player.playerName %>
+        Hero: <%= player.identity %>
+    <% }) %>
     Scenario: <%= game.scenario %>
     The players <%= game.wonGame ? `won` : `lost` %> this game.
     Notes: <%= game.notes %>

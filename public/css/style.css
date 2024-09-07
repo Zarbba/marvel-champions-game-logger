@@ -83,3 +83,7 @@ form {
     margin: .75rem;
     gap: 0.5rem;
 }
+
+p {
+    display: inline-block;
+}
