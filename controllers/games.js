@@ -27,6 +27,7 @@ router.get(`/new`, isLoggedIn, (req, res) => {
 
 router.post(`/`, isLoggedIn, async (req, res) => {
     try {
+        //TODO - Add check for duplicate game names.
         const createdGame = await Game.create({
             gameName: req.body.gameName,
             datePlayed: req.body.datePlayed,
@@ -75,6 +76,7 @@ router.get(`/:gameId/edit`, isLoggedIn, isGameOwner, async (req, res) => {
 
 router.put(`/:gameId`, isLoggedIn, isGameOwner, async (req, res) => {
     try {
+        //TODO - Add check for duplicate game names.
         const updatedGame = await Game.findByIdAndUpdate(
             req.params.gameId, 
             {
