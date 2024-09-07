@@ -42,6 +42,10 @@ gameSchema.virtual(`playerNames`).get(function () {
     return playerNames
 })
 
+gameSchema.virtual(`formattedDate`).get(function () {
+    return this.datePlayed.toISOString().slice(0,10)
+})
+
 const Game = mongoose.model(`Game`, gameSchema)
 
 module.exports = Game

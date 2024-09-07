@@ -1,2 +1,29 @@
 <%- include(`../partials/header`) %>
+<h2>Update <%= game.gameName %></h2>
+<form action="/games/<%= game._id %>?_method=put" method="post">
+    <label>
+        Game Name:
+        <input type="text" name="gameName" required value="<%= game.gameName %>">
+    </label>
+    <label>
+        Date Played:
+        <input type="date" name="datePlayed" required value="<%= game.formattedDate %>">
+    </label>
+    <label>
+        Scenario:
+        <input type="text" name="scenario" required value="<%= game.scenario %>">
+    </label>
+    <label>
+        The players:
+        <select name="wonGame">
+            <option value="true" <% if (game.wonGame) { %> selected <% } %>>Won</option>
+            <option value="false" <% if (!game.wonGame) { %> selected <% } %>>Lost</option>
+        </select>
+    </label>
+    <label>
+        Notes:
+        <textarea type="" name="notes"><%= game.notes %></textarea>
+    </label>
+    <button>Log Game</button>
+</form>
 <%- include(`../partials/footer`) %>

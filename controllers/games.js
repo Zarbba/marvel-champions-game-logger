@@ -49,6 +49,15 @@ router.get(`/:gameId`, async (req, res) => {
     }
 })
 
+router.get(`/:gameId/edit`, async (req, res) => {
+    try {
+        const game = await Game.findById(req.params.gameId)
+        res.render(`games/edit`, {game})
+    } catch(err) {
+        res.status(500).render(`errors/error-500`)
+    }
+})
+
 router.get(`/:gameId/delete`, isLoggedIn, async (req, res) => {
     try {
         const game = await Game.findById(req.params.gameId)

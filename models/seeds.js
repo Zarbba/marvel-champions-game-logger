@@ -29,7 +29,7 @@ async function seedGames() {
     const createdGames = await Game.create([
         {
             gameName: `Peni v Rhino Solo Game`,
-            datePlayed: new Date(`2024-09-07`),
+            datePlayed: new Date(`2024-08-23`),
             players:[
                 {playerName: `Josh`,
                     identity: `Sp//dr`,
