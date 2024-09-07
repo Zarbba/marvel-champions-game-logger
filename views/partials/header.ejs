@@ -11,14 +11,14 @@
     <header>
         <h1>Marvel Champions Game Logger</h1>
         <nav>
-            <a href="/">Home</a>
-            <a href="/games">Browse Games</a>
+            <a class="nav-link" href="/">Home</a>
+            <a class="nav-link" href="/games">Browse Games</a>
             <% if (user !== null) {%>
-                <a href="/games/new">Log a Game</a>
-                <a href="/auth/logout">Logout</a>
+                <a class="nav-link" href="/games/new">Log a Game</a>
+                <a class="nav-link" href="/auth/logout">Logout</a>
             <% } else { %>
-                <a href="/auth/login">Login</a>
-                <a href="/auth/signup">Signup</a>
+                <a class="nav-link" href="/auth/login">Login</a>
+                <a class="nav-link" href="/auth/signup">Signup</a>
             <%} %>
         </nav>
         <hr>

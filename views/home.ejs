@@ -3,14 +3,12 @@
 <ul>
     <% recentGames.forEach((game) => { %>
         <li>
-            <a href="/games/<%= game.id %>"><%= game.gameName %></a> <%= game.owner.userName %> <%= game.createdAt %>
+            <a href="/games/<%= game.id %>"><%= game.gameName %></a> <%= game.owner.userName %> <%= game.createdAt.toDateString() %>
             <% if (user !== null && user._id == game.owner._id) {%>
-                <a href="/games/<%= game.id %>/edit">Update</a>
-                <a href="/games/<%= game.id %>/delete">Delete</a>
+                <a class="body-link" href="/games/<%= game.id %>/edit">Update</a>
+                <a class="body-link" href="/games/<%= game.id %>/delete">Delete</a>
             <% } %>
         </li>
     <% }) %>
 </ul>
 <%- include(`./partials/footer`) %>
-
-<!-- TODO - find a way to render dates in a more digestible fashion -->

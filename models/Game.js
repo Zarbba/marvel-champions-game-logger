@@ -42,7 +42,7 @@ gameSchema.virtual(`playerNames`).get(function () {
     return playerNames
 })
 
-gameSchema.virtual(`formattedDate`).get(function () {
+gameSchema.virtual(`htmlDate`).get(function () {
     return this.datePlayed.toISOString().slice(0,10)
 })
 

@@ -1,3 +1,45 @@
+* {
+    margin: 0;
+}
+
+html {
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+li {
+    list-style: none;
+}
+
+header {
+    background-color: red;
+    color: rgb(0, 0, 255);
+    text-shadow: 2px 0 3px black;
+}
+
+nav {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-link:hover {
+    color: rgb(255, 255, 255);
+}
+
+button {
+    border: none;
+    background-color: rgba(0, 0, 255, .50);
+    color: rgb(255, 255, 255);
+    border-radius: 5px;
+}
+
 .hidden {
     display: none;
 }
