@@ -44,3 +44,5 @@ app.get(`/`, async (req, res) =>{
     const recentGames = (await Game.find().populate(`owner`).sort({createdAt: `desc`})).slice(0, 9)
     res.render(`home`, {recentGames})
 })
+
+//TODO - Implement error-404 handling

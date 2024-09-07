@@ -48,6 +48,7 @@ router.get(`/`, async (req, res) => {
         const games = await Game.find().sort({createdAt: `desc`})
         res.render(`games/index`, {games})    
     } catch(err) {
+        console.log(err)
         res.status(500).render(`errors/error-500`)
     }
 })
@@ -57,6 +58,7 @@ router.get(`/:gameId`, async (req, res) => {
         const game = await Game.findById(req.params.gameId)
         res.render(`games/show`, {game})
     } catch(err) {
+        console.log(err)
         res.status(500).render(`errors/error-500`)
     }
 })
@@ -66,6 +68,7 @@ router.get(`/:gameId/edit`, isLoggedIn, isGameOwner, async (req, res) => {
         const game = await Game.findById(req.params.gameId)
         res.render(`games/edit`, {game})
     } catch(err) {
+        console.log(err)
         res.status(500).render(`errors/error-500`)
     }
 })
@@ -87,6 +90,7 @@ router.put(`/:gameId`, isLoggedIn, isGameOwner, async (req, res) => {
         )
         res.redirect(`/games`)
     } catch(err) {
+        console.log(err)
         res.status(500).render(`errors/error-500`)
     }
 })
@@ -117,3 +121,5 @@ router.delete(`/:gameId`, isLoggedIn, isGameOwner, async (req, res) => {
 })
 
 module.exports = router
+
+//TODO - Implement error-404 handling

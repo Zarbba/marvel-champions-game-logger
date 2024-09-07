@@ -2,13 +2,11 @@ const express = require(`express`)
 const router = express.Router()
 const bcrypt = require(`bcrypt`)
 const User = require(`../models/User`)
+const alreadyLoggedIn = require(`../middleware/alreadyLoggedIn`)
+const isLoggedIn = require("../middleware/isLoggedIn")
 require(`dotenv`).config()
 
-router.get(`/signup`, (req, res) => {
-    if (req.session.user) {
-        res.redirect(`/`)
-        return
-    }
+router.get(`/signup`, alreadyLoggedIn, (req, res) => {
     try {
         res.render(`auth/signup`)
     } catch(err) {
@@ -17,7 +15,7 @@ router.get(`/signup`, (req, res) => {
     }
 })
 
-router.post(`/signup`, async (req, res) => {
+router.post(`/signup`, alreadyLoggedIn, async (req, res) => {
     try {
         const userInDatabase = await User.findOne({userName: req.body.userName})
         if (userInDatabase !== null) {
@@ -66,8 +64,11 @@ router.post(`/signup`, async (req, res) => {
     }
 })
 
-router.get(`/login`, (req, res) => {
+router.get(`/login`, alreadyLoggedIn, (req, res) => {
     try{
+        if (req.session.user) {
+
+        }
         let message
         if (req.query.redirect === `1`) {
             message = `You must be logged in to perform that action. Please login and try again.`
@@ -79,7 +80,7 @@ router.get(`/login`, (req, res) => {
     }
 })    
 
-router.post(`/login`, async (req, res) => {
+router.post(`/login`, alreadyLoggedIn, async (req, res) => {
     try {
         const userInDatabase = await User.findOne({userName: req.body.userName})
         if (userInDatabase === null) {
@@ -109,11 +110,7 @@ router.post(`/login`, async (req, res) => {
     }
 })
 
-router.get(`/logout`, (req, res) => {
-    if (!req.session.user) {
-        res.redirect(`/auth/login?redirect=1`)
-        return
-    }
+router.get(`/logout`, isLoggedIn, (req, res) => {
     try {
         req.session.destroy()
         res.redirect(`/`)
@@ -125,3 +122,4 @@ router.get(`/logout`, (req, res) => {
 
 
 module.exports = router
+//TODO - Implement error-404 handling
