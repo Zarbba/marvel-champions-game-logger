@@ -38,8 +38,7 @@ async function seedGames() {
             ],
             scenario: `Rhino`,
             wonGame: true,
-            notes: `Remember not to be tempted by powerful cards in your starting hand. 
-            It's always better with Peni to just go straight for some interfaces.`,
+            notes: `Remember not to be tempted by powerful cards in your starting hand. It's always better with Peni to just go straight for some interfaces.`,
             owner: zarbba
         },
         {
@@ -57,9 +56,7 @@ async function seedGames() {
             ],
             scenario: `Venom`,
             wonGame: false,
-            notes: `Thought we had the kill and went for it but miscounted.
-            Board got out of control. Do better math!
-            Also remember, Honey Badger doesn't ready X-23 if she dies.`,
+            notes: `Thought we had the kill and went for it but miscounted. Board got out of control. Do better math! Also remember, Honey Badger doesn't ready X-23 if she dies.`,
             owner: hnro
         },
     ])

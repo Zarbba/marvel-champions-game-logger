@@ -93,6 +93,7 @@ router.put(`/:gameId`, isLoggedIn, isGameOwner, async (req, res) => {
 
 router.get(`/:gameId/delete`, isLoggedIn, isGameOwner, async (req, res) => {
     try {
+        const game = await Game.findById(req.params.gameId)
         res.render(`games/delete`, {game})
     } catch(err) {
         console.log(err)
