@@ -1,2 +1,37 @@
 <%- include(`../partials/header`) %>
+<h2>Create a new game log</h2>
+<div class="message">
+    <% if(locals.message) {%> <%= message %><% } %>
+</div>
+<form action="/games/" method="post">
+    <label>
+        Game Name:
+        <input type="text" name="gameName" required value="<%= locals.gameName %>">
+    </label>
+    <label>
+        Date Played:
+        <input type="date" name="datePlayed" required value="<%= locals.datePlayed %>">
+    </label>
+    <label>
+        Players:
+        <button>Add a player</button>
+    </label>
+    <label>
+        Scenario:
+        <input type="text" name="scenario" required value="<%= locals.scenario %>">
+    </label>
+    <label>
+        The players:
+        <select name="wonGame">
+            <option value="true">Won</option>
+            <option value="false" selected>Lost</option>
+            <option class="hidden" value="" selected></option>
+        </select>
+    </label>
+    <label>
+        Notes:
+        <textarea type="" name="notes"> <%= locals.notes %> </textarea>
+    </label>
+    <button>Log Game</button>
+</form>
 <%- include(`../partials/footer`) %>
