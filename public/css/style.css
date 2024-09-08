@@ -65,7 +65,7 @@ main {
 
 .intro-text {
     font-size: 2rem;
-    margin: 1rem 0 5rem 0;
+    margin: 1rem 0 3rem 0;
 }
 
 .game-show-section {
@@ -173,3 +173,4 @@ td {
     display: none;
 }
 
+/* TODO - Responsive design!!! */

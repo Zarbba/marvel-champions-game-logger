@@ -48,8 +48,10 @@ app.get(`/`, async (req, res) =>{
 //REVIEW - By convention, where do my non-routing functions go?
 //REVIEW - By convention, where does my main.js file go?
 //REVIEW - Is there a more elegant way to pass the player count to main.js?
+//REVIEW - Is there a way to make 404 trigger on more than just a bad hex?
 //REVIEW - Where do we get our GitHub Campus link?
 
 //----------------------- References
-// 
+// As always: https://stackoverflow.co/ , https://developer.mozilla.org/en-US/ , https://www.w3schools.com/
+// Used this SO article to understand how to check if a value is an array https://stackoverflow.com/questions/767486/how-do-i-check-if-a-variable-is-an-array-in-javascript
 // Used this resource to assit with the creation of pagination https://www.turing.com/kb/implementing-javascript-pagination

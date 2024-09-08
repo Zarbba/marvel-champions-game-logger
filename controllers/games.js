@@ -28,7 +28,6 @@ async function paginateGames(page, gamesPerPage) {
     const first = (page - 1) * gamesPerPage
     const last = first + gamesPerPage
     const pages = Math.ceil(games.length / gamesPerPage)
-    console.log(pages)
     return {games: games.slice(first, last), pages, page}
 }
 
