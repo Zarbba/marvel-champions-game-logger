@@ -22,7 +22,19 @@
     <% }) %>
 <% } %>
 </table>
+<section class="pagination">
+    <% if (page > 1 && pages > 1) { %>
+        <a href="/games?page=<%= Number(page) - 1 %>">&#8592;</a>
+    <% } %>
+    <% let i = 0 %>
+    <% while (i < pages) { %>
+        <a href="/games?page=<%= i + 1 %>"><%= i + 1 %></a>
+        <% i++ %>
+    <% } %>
+    <% if (Number(page) !== pages && pages > 1) { %>
+        <a href="/games?page=<%= Number(page) + 1 %>">&#8594;</a>
+    <% } %>    
+</section>
 <%- include(`../partials/footer`) %>
 
-<!-- TODO Create a way to paginate this to 10 games per page with links to move from one page to the next -->
 <!-- TODO Create a way to search the data for a specific game -->

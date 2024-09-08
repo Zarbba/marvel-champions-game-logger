@@ -23,6 +23,14 @@ function generatePlayers(input) {
     }
     return playersArray
 }
+async function paginateGames(page, gamesPerPage) {
+    const games = await Game.find().populate(`owner`).sort({createdAt: `desc`})
+    const first = (page - 1) * gamesPerPage
+    const last = first + gamesPerPage
+    const pages = Math.ceil(games.length / gamesPerPage)
+    console.log(pages)
+    return {games: games.slice(first, last), pages, page}
+}
 
 router.get(`/new`, isLoggedIn, (req, res) => {
     try {
@@ -68,8 +76,7 @@ router.post(`/`, isLoggedIn, async (req, res) => {
 
 router.get(`/`, async (req, res) => {
     try {
-        const games = await Game.find().populate(`owner`).sort({createdAt: `desc`})
-        res.render(`games/index`, {games})    
+        res.render(`games/index`, await paginateGames(req.query.page ? req.query.page : 1, 10))
     } catch(err) {
         console.log(err)
         res.status(500).render(`errors/error-500`)

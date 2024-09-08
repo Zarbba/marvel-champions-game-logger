@@ -41,10 +41,15 @@ app.listen(process.env.PORT,() => {
 //----------------------- Routing
 
 app.get(`/`, async (req, res) =>{
-    const recentGames = (await Game.find().populate(`owner`).sort({createdAt: `desc`})).slice(0, 9)
+    const recentGames = (await Game.find().populate(`owner`).sort({createdAt: `desc`})).slice(0, 10)
     res.render(`home`, {recentGames})
 })
 
-//REVIEW - By convention, where does my generatePlayers function go?
+//REVIEW - By convention, where do my non-routing functions go?
 //REVIEW - By convention, where does my main.js file go?
 //REVIEW - Is there a more elegant way to pass the player count to main.js?
+//REVIEW - Where do we get our GitHub Campus link?
+
+//----------------------- References
+// 
+// Used this resource to assit with the creation of pagination https://www.turing.com/kb/implementing-javascript-pagination

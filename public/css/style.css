@@ -127,6 +127,13 @@ td {
     gap: 0rem;
 }
 
+.pagination {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin: 1rem;
+}
+
 .table-form {
     padding: 0;
     margin: 0 0.4rem 0 0;
