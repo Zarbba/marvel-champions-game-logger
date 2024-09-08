@@ -7,19 +7,19 @@ const Game = require(`../models/Game`)
 require(`dotenv`).config()
 function generatePlayers(input) {
     let playersArray =[]
-    if (typeof input.playerName === Array) {
+    if (input.playerName.constructor === Array) {
         input.playerName.forEach( (player) => {
             playersArray.push({playerName: player})
         })    
     } else {
         playersArray.push({playerName: input.playerName})
     }
-    if (typeof input.playerHero === Array) {
-        input.playerHero.forEach( (player) => {
-            playersArray.push({identity: player})
+    if (input.playerHero.constructor === Array) {
+        input.playerHero.forEach( (player, i) => {
+            playersArray[i].identity = player
         })    
     } else {
-        playersArray.push({identity: input.playerHero})
+        playersArray[0].identity = input.playerHero
     }
     return playersArray
 }
