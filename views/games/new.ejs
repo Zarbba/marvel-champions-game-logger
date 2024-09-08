@@ -13,11 +13,11 @@
     <section class="player-section">
         <% if (locals.game) { %>
             <% game.players.forEach( (player, i) => { %>
-                <label for="player-name<%= i %>">Player Name:</label>
+                <label class="label<%= i %>" for="player-name<%= i %>">Player Name:</label>
                 <input id="player-name<%= i %>" type="text" name="playerName" required value="<%= player.playerName %>">
-                <label for="hero<%= i %>">Hero:</label>
+                <label class="label<%= i %>" for="hero<%= i %>">Hero:</label>
                 <input id="hero<%= i %>" type="text" name="playerHero" required value="<%= player.identity %>">
-                <button type="button" class="player-button remove">Remove Player</button>
+                <button type="button" class="player-button" id="button<%= i %>">Remove Player</button>
             <% }) %>
         <% } %>
     </section>
