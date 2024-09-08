@@ -7,12 +7,20 @@ const Game = require(`../models/Game`)
 require(`dotenv`).config()
 function generatePlayers(input) {
     let playersArray =[]
-    input.playerName.forEach( (player) => {
-        playersArray.push({playerName: player})
-    })
-    input.playerHero.forEach( (player, i) => {
-        playersArray[i].identity = player
-    })
+    if (typeof input.playerName === Array) {
+        input.playerName.forEach( (player) => {
+            playersArray.push({playerName: player})
+        })    
+    } else {
+        playersArray.push({playerName: input.playerName})
+    }
+    if (typeof input.playerHero === Array) {
+        input.playerHero.forEach( (player) => {
+            playersArray.push({identity: player})
+        })    
+    } else {
+        playersArray.push({identity: input.playerHero})
+    }
     return playersArray
 }
 
@@ -46,7 +54,7 @@ router.post(`/`, isLoggedIn, async (req, res) => {
 
 router.get(`/`, async (req, res) => {
     try {
-        const games = await Game.find().sort({createdAt: `desc`})
+        const games = await Game.find().populate(`owner`).sort({createdAt: `desc`})
         res.render(`games/index`, {games})    
     } catch(err) {
         console.log(err)

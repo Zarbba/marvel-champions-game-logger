@@ -14,6 +14,10 @@ a {
     color: inherit;
 }
 
+.body-link {
+    text-decoration: underline;
+}
+
 a:hover {
     color: black;
 }
@@ -82,13 +86,35 @@ button {
     display: none;
 }
 
+
+th, td {
+    padding: 0.5rem;
+}
+
 form {
     display:flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    gap: .1rem;
+    gap: .25rem;
     margin: 1rem;
+}
+
+td {
+    text-align: center;
+    vertical-align: center;
+}
+
+
+.button-cell {
+    display: flex;
+    flex-direction: row;
+    gap: 0rem;
+}
+
+.table-form {
+    padding: 0;
+    margin: 0 0.4rem 0 0;
 }
 
 .player-section {

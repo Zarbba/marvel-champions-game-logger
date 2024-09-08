@@ -24,7 +24,7 @@
             <option value="false" <% if (!game.wonGame) { %> selected <% } %>>Lost</option>
         </select>
     <label for="notes">Notes:</label>
-    <textarea id="notes" type="" name="notes"><%= game.notes %></textarea>
+    <textarea id="notes" type="" name="notes" rows="6" cols="40"><%= game.notes %></textarea>
     <button>Update Game Log</button>
 </form>
 <div class="hidden counter"><%= game.players.length %></div>

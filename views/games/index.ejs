@@ -1,16 +1,27 @@
 <%- include(`../partials/header`) %>
 <h2>All Games</h2>
-<ul>
-    <% games.forEach((game) => { %>
-        <li>
-            <a href="/games/<%= game.id %>"><%= game.gameName %></a> <%= game.owner.userName %> <%= game.createdAt.toDateString() %>
+<table>
+    <% if (games.length > 0) { %>
+        <tr>
+            <th>Game Name</th> <th>Author</th> <th>Date Published</th>
+        </tr>
+        <% games.forEach((game) => { %>
+            <tr>
+                <td><a class="body-link" href="/games/<%= game.id %>"><%= game.gameName %></a></td> <td><%= game.owner.userName %></td> <td><%= game.createdAt.toDateString() %></td>
             <% if (user !== null && user._id == game.owner._id) {%>
-                <a class="body-link" href="/games/<%= game.id %>/edit">Update</a>
-                <a class="body-link" href="/games/<%= game.id %>/delete">Delete</a>
+                <td class ="button-cell">
+                    <form class="table-form" action="/games/<%= game._id %>/edit">
+                        <button>Edit</button>
+                    </form>
+                    <form class="table-form" action="/games/<%= game._id %>/delete">
+                        <button>Delete</button>
+                    </form>
+                </td>
             <% } %>
-        </li>
+        </tr>
     <% }) %>
-</ul>
+<% } %>
+</table>
 <%- include(`../partials/footer`) %>
 
 <!-- TODO Create a way to paginate this to 10 games per page with links to move from one page to the next -->
