@@ -35,13 +35,14 @@ router.get(`/new`, isLoggedIn, (req, res) => {
 
 router.post(`/`, isLoggedIn, async (req, res) => {
     try {
-        const nameInDatabase = await Game.find({gameName: req.body.gameName})
+        const nameInDatabase = await Game.findOne({gameName: req.body.gameName})
+        const players = req.body.playerName ? generatePlayers(req.body) : []
         if(nameInDatabase !== null) {
             const game = {
                 gameName: req.body.gameName,
                 datePlayed: req.body.datePlayed,
                 scenario: req.body.scenario,
-                players: generatePlayers(req.body),
+                players,
                 wonGame: req.body.wonGame,
                 notes: req.body.notes,
                 owner: req.session.user    
@@ -53,7 +54,7 @@ router.post(`/`, isLoggedIn, async (req, res) => {
             gameName: req.body.gameName,
             datePlayed: req.body.datePlayed,
             scenario: req.body.scenario,
-            players: generatePlayers(req.body),
+            players,
             wonGame: req.body.wonGame,
             notes: req.body.notes,
             owner: req.session.user
@@ -105,14 +106,15 @@ router.get(`/:gameId/edit`, isLoggedIn, isGameOwner, async (req, res) => {
 
 router.put(`/:gameId`, isLoggedIn, isGameOwner, async (req, res) => {
     try {
-        const nameInDatabase = await Game.find({gameName: req.body.gameName})
+        const nameInDatabase = await Game.findOne({gameName: req.body.gameName})
         const targetGame = await Game.findById(req.params.gameId)
-        if (nameInDatabase._id !== targetGame._id) {
+        const players = req.body.playerName ? generatePlayers(req.body) : []
+        if (nameInDatabase && nameInDatabase.id !== targetGame.id) {
             const game = {
                 gameName: req.body.gameName,
                 datePlayed: req.body.datePlayed,
                 scenario: req.body.scenario,
-                players: generatePlayers(req.body),
+                players,
                 wonGame: req.body.wonGame,
                 notes: req.body.notes,
                 owner: req.session.user    
@@ -126,7 +128,7 @@ router.put(`/:gameId`, isLoggedIn, isGameOwner, async (req, res) => {
                 gameName: req.body.gameName,
                 datePlayed: req.body.datePlayed,
                 scenario: req.body.scenario,
-                players: generatePlayers(req.body),
+                players,
                 wonGame: req.body.wonGame,
                 notes: req.body.notes,
                 owner: req.session.user    
@@ -156,11 +158,6 @@ router.get(`/:gameId/delete`, isLoggedIn, isGameOwner, async (req, res) => {
 
 router.delete(`/:gameId`, isLoggedIn, isGameOwner, async (req, res) => {
     try {
-        const game = await Game.findById(req.params.gameId)
-        if (game.owner != req.session.user._id) {
-            res.status(403).render(`errors/error-403`)
-            return
-        }
         const deletedGame = await Game.findOneAndDelete({_id: req.params.gameId})
         res.redirect(`/games`)    
     } catch(err) {

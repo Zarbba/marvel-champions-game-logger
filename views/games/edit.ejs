@@ -7,7 +7,7 @@
     <label for="game-name">Game Name:</label>
     <input id="game-name" type="text" name="gameName" required value="<%= game.gameName %>">
     <label for="date-played">Date Played:</label>
-    <input id="date-played" type="date" name="datePlayed" required value="<%= game.htmlDate %>">
+    <input id="date-played" type="date" name="datePlayed" required value="<%= game.htmlDate ? game.htmlDate : game.datePlayed %>">
     <label for="scenario">Scenario:</label>
     <input id="scenario" type="text" name="scenario" required value="<%= game.scenario %>">
     <section class="player-section">
