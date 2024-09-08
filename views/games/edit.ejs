@@ -1,5 +1,8 @@
 <%- include(`../partials/header`) %>
 <h2>Update <%= game.gameName %></h2>
+<div class="message">
+    <% if(locals.message) {%> <%= message %><% } %>
+</div>
 <form action="/games/<%= game._id %>?_method=put" method="post">
     <label for="game-name">Game Name:</label>
     <input id="game-name" type="text" name="gameName" required value="<%= game.gameName %>">
@@ -8,17 +11,16 @@
     <label for="scenario">Scenario:</label>
     <input id="scenario" type="text" name="scenario" required value="<%= game.scenario %>">
     <section class="player-section">
-        
         <% game.players.forEach( (player, i) => { %>
             <label for="player-name<%= i %>">Player Name:</label>
             <input id="player-name<%= i %>" type="text" name="playerName" required value="<%= player.playerName %>">
-
             <label for="hero<%= i %>">Hero:</label>
             <input id="hero<%= i %>" type="text" name="playerHero" required value="<%= player.identity %>">
-        <% }) %>
+            <button type="button" class="player-button remove">Remove Player</button>
+            <% }) %>
 </section>
-<button type="button" class="add-player">Add a player</button>
-    <label for="won-game">The players:</label>
+<button type="button" class="player-button add">Add a player</button>
+<label for="won-game">The players:</label>
         <select id="won-game" name="wonGame">
             <option value="true" <% if (game.wonGame) { %> selected <% } %>>Won</option>
             <option value="false" <% if (!game.wonGame) { %> selected <% } %>>Lost</option>
