@@ -122,4 +122,3 @@ router.get(`/logout`, isLoggedIn, (req, res) => {
 
 
 module.exports = router
-//TODO - Implement error-404 handling

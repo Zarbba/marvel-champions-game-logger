@@ -78,6 +78,10 @@ router.get(`/`, async (req, res) => {
 router.get(`/:gameId`, async (req, res) => {
     try {
         const game = await Game.findById(req.params.gameId)
+        if (!game) {
+            res.status(404).render(`errors/error-404`)
+            return
+        }
         res.render(`games/show`, {game})
     } catch(err) {
         console.log(err)
@@ -88,6 +92,10 @@ router.get(`/:gameId`, async (req, res) => {
 router.get(`/:gameId/edit`, isLoggedIn, isGameOwner, async (req, res) => {
     try {
         const game = await Game.findById(req.params.gameId)
+        if (!game) {
+            res.status(404).render(`errors/error-404`)
+            return
+        }
         res.render(`games/edit`, {game})
     } catch(err) {
         console.log(err)
@@ -135,6 +143,10 @@ router.put(`/:gameId`, isLoggedIn, isGameOwner, async (req, res) => {
 router.get(`/:gameId/delete`, isLoggedIn, isGameOwner, async (req, res) => {
     try {
         const game = await Game.findById(req.params.gameId)
+        if (!game) {
+            res.status(404).render(`errors/error-404`)
+            return
+        }
         res.render(`games/delete`, {game})
     } catch(err) {
         console.log(err)
@@ -158,5 +170,3 @@ router.delete(`/:gameId`, isLoggedIn, isGameOwner, async (req, res) => {
 })
 
 module.exports = router
-
-//TODO - Implement error-404 handling

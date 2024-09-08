@@ -45,7 +45,6 @@ app.get(`/`, async (req, res) =>{
     res.render(`home`, {recentGames})
 })
 
-//TODO - Implement error-404 handling
 //REVIEW - By convention, where does my generatePlayers function go?
 //REVIEW - By convention, where does my main.js file go?
 //REVIEW - Is there a more elegant way to pass the player count to main.js?
