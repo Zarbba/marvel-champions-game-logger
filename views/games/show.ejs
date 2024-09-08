@@ -1,18 +1,24 @@
 <%- include(`../partials/header`) %>
 <h2><%= game.gameName %></h2>
-<p>
-    Date played: <%= game.datePlayed.toDateString() %>
-    Players:
+<section class="game-show-section">
+    <p><span>Date played:</span> <%= game.datePlayed.toDateString() %></p>
+    <h3>Players:</h3>
     <% game.players.forEach( (player) => { %>
-        Player Name: <%= player.playerName %>
-        Hero: <%= player.identity %>
+        <p>Player Name: <%= player.playerName %> Hero: <%= player.identity %></p>
     <% }) %>
-    Scenario: <%= game.scenario %>
-    The players <%= game.wonGame ? `won` : `lost` %> this game.
-    Notes: <%= game.notes %>
-</p>
-<% if (user !== null && user._id == game.owner._id) {%>
-    <a class="body-link" href="/games/<%= game.id %>/edit">Update</a>
-    <a class="body-link" href="/games/<%= game.id %>/delete">Delete</a>
-<% } %>
+    <p><span>Scenario:</span> <%= game.scenario %></p>
+    <p><span>Outcome:</span> The players <%= game.wonGame ? `won` : `lost` %> this game.</p>
+    <h3>Notes:</h3>
+    <p><%= game.notes %></p>
+    <% if (user !== null && user._id == game.owner._id) {%>
+        <section class="button-section">
+            <form action="/games/<%= game._id %>/edit">
+                <button>Edit</button>
+            </form>
+            <form action="/games/<%= game._id %>/delete">
+                <button>Delete</button>
+            </form>
+        </section>
+<% } %>        
+</section>
 <%- include(`../partials/footer`) %>

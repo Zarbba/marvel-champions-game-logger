@@ -14,7 +14,7 @@ a {
     color: inherit;
 }
 
-.body-link {
+.body-link, .footer-link {
     text-decoration: underline;
 }
 
@@ -44,6 +44,12 @@ h2 {
     font-size: 2.5rem;
 }
 
+h3, span {
+    font-weight: bold;
+    font-size: 1.3rem;
+    display: inline;
+}
+
 body {
     background-image: linear-gradient(90deg, rgba(0, 0, 255, 1), rgba(0, 0, 255, .2));
     background-size: cover;
@@ -55,6 +61,20 @@ main {
     align-items: center;
     flex-direction: column;
     padding: 0.5rem 1rem;
+}
+
+.intro-text {
+    font-size: 2rem;
+    margin: 1rem 0 5rem 0;
+}
+
+.game-show-section {
+    max-width: 15rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .75rem;
+    margin: 1rem 0 0 0;
 }
 
 footer {
@@ -71,6 +91,7 @@ nav {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    font-size: 1.5rem;
     gap: 2rem;
 }
 
@@ -81,11 +102,6 @@ button {
     border-radius: 5px;
     margin: 0.5rem 0;
 }
-
-.hidden {
-    display: none;
-}
-
 
 th, td {
     padding: 0.5rem;
@@ -105,8 +121,7 @@ td {
     vertical-align: center;
 }
 
-
-.button-cell {
+.button-cell, .button-section {
     display: flex;
     flex-direction: row;
     gap: 0rem;
@@ -124,3 +139,6 @@ td {
     gap: 0.5rem;
 }
 
+.hidden {
+    display: none;
+}
