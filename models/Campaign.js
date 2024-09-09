@@ -20,10 +20,10 @@ const campaignSchema = new mongoose.Schema ({
         type: String,
         required: true
     },
-    owners: [{
+    owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: `User`
-    }],
+    },
     players: [playerSchema],
     campaignType: {
         type: String,
