@@ -28,6 +28,10 @@ const gameSchema = new mongoose.Schema ({
     },
     wonGame: Boolean,
     notes: String,
+    campaign: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `Campaign`
+    },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: `User`
