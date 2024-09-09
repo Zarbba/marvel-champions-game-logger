@@ -55,3 +55,4 @@ app.get(`/`, async (req, res) =>{
 // As always: https://stackoverflow.co/ , https://developer.mozilla.org/en-US/ , https://www.w3schools.com/
 // Used this SO article to understand how to check if a value is an array https://stackoverflow.com/questions/767486/how-do-i-check-if-a-variable-is-an-array-in-javascript
 // Used this resource to assit with the creation of pagination https://www.turing.com/kb/implementing-javascript-pagination
+// Used this to understand how to implement enums in Mongoose https://masteringjs.io/tutorials/mongoose/enum
