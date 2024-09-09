@@ -36,26 +36,27 @@ function addPlayer() {
 function removePlayer() {
     try {
         if (playerCounter > 0) {
-        playerCounter--
-        const targetEls = []
-        targetEls.push(document.querySelector(`#player-name${playerCounter}`))
-        targetEls.push(document.querySelector(`#hero${playerCounter}`))
-        targetEls.push(document.querySelector(`#button${playerCounter}`))
-        const labelEls = document.querySelectorAll(`.label${playerCounter}`)
-        labelEls.forEach((labelEl) => {
-            targetEls.push(labelEl)
-        })
-        console.log(targetEls)
-        targetEls.forEach((targetEl) => {
-            playerSectionEl.removeChild(targetEl)
-        })
-        if (playerCounter <= 3) {
-            addPlayerEl.classList.remove(`hidden`)
+            playerCounter--
+            const targetEls = []
+            targetEls.push(document.querySelector(`#player-name${playerCounter}`))
+            targetEls.push(document.querySelector(`#hero${playerCounter}`))
+            targetEls.push(document.querySelector(`#button${playerCounter}`))
+            const labelEls = document.querySelectorAll(`.label${playerCounter}`)
+            labelEls.forEach((labelEl) => {
+                targetEls.push(labelEl)
+            })
+            console.log(targetEls)
+            targetEls.forEach((targetEl) => {
+                playerSectionEl.removeChild(targetEl)
+            })
+            if (playerCounter <= 3) {
+                addPlayerEl.classList.remove(`hidden`)
+            }
         }
-        }    
     } catch(err) {
         playerCounter ++
         console.log(err)
         return
     }
 }
+//TODO - Clean this up so that it's working off one parent HTML tag instead of like 4 tags like some kind of mad scientist

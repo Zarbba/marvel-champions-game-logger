@@ -143,7 +143,7 @@ async function seedGames() {
             ],
             scenario: `Rhino`,
             wonGame: false,
-            notes: `Luna did really like the game. I guess I shoulda known ^.^;`,
+            notes: `Luna didn't really like the game. I guess I shoulda known ^.^;`,
             owner: zarbba
         },
         {

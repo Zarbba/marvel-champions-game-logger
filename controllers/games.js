@@ -2,34 +2,10 @@ const express = require(`express`)
 const router = express.Router()
 const isLoggedIn = require(`../middleware/isLoggedIn`)
 const isGameOwner = require(`../middleware/isGameOwner`)
+const utilities = require(`../lib/game-utilities.js`)
 const User = require(`../models/User`)
 const Game = require(`../models/Game`)
 require(`dotenv`).config()
-function generatePlayers(input) {
-    let playersArray =[]
-    if (input.playerName.constructor === Array) {
-        input.playerName.forEach( (player) => {
-            playersArray.push({playerName: player})
-        })    
-    } else {
-        playersArray.push({playerName: input.playerName})
-    }
-    if (input.playerHero.constructor === Array) {
-        input.playerHero.forEach( (player, i) => {
-            playersArray[i].identity = player
-        })    
-    } else {
-        playersArray[0].identity = input.playerHero
-    }
-    return playersArray
-}
-async function paginateGames(page, gamesPerPage) {
-    const games = await Game.find().populate(`owner`).sort({createdAt: `desc`})
-    const first = (page - 1) * gamesPerPage
-    const last = first + gamesPerPage
-    const pages = Math.ceil(games.length / gamesPerPage)
-    return {games: games.slice(first, last), pages, page}
-}
 
 router.get(`/new`, isLoggedIn, (req, res) => {
     try {
@@ -43,7 +19,7 @@ router.get(`/new`, isLoggedIn, (req, res) => {
 router.post(`/`, isLoggedIn, async (req, res) => {
     try {
         const nameInDatabase = await Game.findOne({gameName: req.body.gameName})
-        const players = req.body.playerName ? generatePlayers(req.body) : []
+        const players = req.body.playerName ? utilities.generatePlayers(req.body) : []
         if(nameInDatabase !== null) {
             const game = {
                 gameName: req.body.gameName,
@@ -75,7 +51,7 @@ router.post(`/`, isLoggedIn, async (req, res) => {
 
 router.get(`/`, async (req, res) => {
     try {
-        res.render(`games/index`, await paginateGames(req.query.page ? req.query.page : 1, 10))
+        res.render(`games/index`, await utilities.paginateGames(req.query.page ? req.query.page : 1, 10))
     } catch(err) {
         console.log(err)
         res.status(500).render(`errors/error-500`)
@@ -114,7 +90,7 @@ router.put(`/:gameId`, isLoggedIn, isGameOwner, async (req, res) => {
     try {
         const nameInDatabase = await Game.findOne({gameName: req.body.gameName})
         const targetGame = await Game.findById(req.params.gameId)
-        const players = req.body.playerName ? generatePlayers(req.body) : []
+        const players = req.body.playerName ? utilities.generatePlayers(req.body) : []
         if (nameInDatabase && nameInDatabase.id !== targetGame.id) {
             const game = {
                 gameName: req.body.gameName,

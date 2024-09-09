@@ -45,11 +45,7 @@ app.get(`/`, async (req, res) =>{
     res.render(`home`, {recentGames})
 })
 
-//REVIEW - By convention, where do my non-routing functions go?
-//REVIEW - By convention, where does my main.js file go?
-//REVIEW - Is there a more elegant way to pass the player count to main.js?
 //REVIEW - Is there a way to make 404 trigger on more than just a bad hex?
-//REVIEW - Where do we get our GitHub Campus link?
 
 //----------------------- References
 // As always: https://stackoverflow.co/ , https://developer.mozilla.org/en-US/ , https://www.w3schools.com/
