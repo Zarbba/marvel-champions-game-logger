@@ -12,11 +12,17 @@
     <input id="scenario" type="text" name="scenario" required value="<%= game.scenario %>">
     <section class="player-section">
         <% game.players.forEach( (player, i) => { %>
-            <label class="label<%= i %>" for="player-name<%= i + 1 %>">Player Name:</label>
-            <input id="player-name<%= i %>" type="text" name="playerName" required value="<%= player.playerName %>">
-            <label class="label<%= i %>" for="hero<%= i + 1 %>">Hero:</label>
-            <input id="hero<%= i %>" type="text" name="playerHero" required value="<%= player.identity %>">
-            <button type="button" class="player-button" id="button<%= i %>">Remove Player</button>
+            <fieldset class="player-widget player<%= i %>">
+                <label class="player-element">
+                    Player Name:
+                    <input type="text" name="playerName" required value="<%= player.playerName %>">
+                </label>
+                <label class="hero-element">
+                    Hero:
+                    <input type="text" name="playerHero" required value="<%= player.identity %>">
+                </label>
+                <button type="button" class="player-button">Remove Player</button>
+            </fieldset>
             <% }) %>
 </section>
 <button type="button" class="player-button add">Add a player</button>
@@ -29,5 +35,4 @@
     <textarea id="notes" type="" name="notes" rows="6" cols="40"><%= game.notes %></textarea>
     <button>Update Game Log</button>
 </form>
-<div class="hidden counter"><%= game.players.length %></div>
 <%- include(`../partials/footer`) %>
