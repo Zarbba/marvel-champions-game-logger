@@ -5,12 +5,17 @@ const bcrypt = require(`bcrypt`)
 
 const User = require(`./User`)
 const Game = require(`./Game`)
+const Player = require(`./Player`)
+const Campaign = require(`./Campaign`)
+
 
 mongoose.connect(process.env.MONGODB_URI)
 
 mongoose.connection.on(`open`, async () => {
     await seedUsers()
+    await seedPlayers()
     await seedGames()
+    await seedCampaigns()
     process.exit(0)
 })
 
@@ -22,18 +27,32 @@ async function seedUsers() {
     ])
 }
 
+async function seedPlayers() {
+    const deletedPlayers = await Player.deleteMany()
+    const createdUsers = await Player.create([
+        {playerName: `Josh`, owner: await User.findOne({userName: `Zarbba`})},
+        {playerName: `Henry`, owner: await User.findOne({userName: `Hnro`})},
+        {playerName: `Daniel`},
+        {playerName: `Luna`},
+    ])
+}
+
+
 async function seedGames() {
     const zarbba = await User.findOne({userName: `Zarbba`})
     const hnro = await User.findOne({userName: `Hnro`})
+    const josh = await Player.findOne({playerName: `Josh`})
+    const daniel = await Player.findOne({playerName:`Daniel`})
+    const luna = await Player.findOne({playerName: `Luna`})
     const deletedGames = await Game.deleteMany()
     const createdGames = await Game.create([
         {
             gameName: `Peni vs Crossbones Solo Game`,
             datePlayed: new Date(`2024-08-23`),
             players:[
-                {playerName: `Josh`,
+                {
+                    player: josh,
                     identity: `Sp//dr`,
-                    owner: zarbba
                 }
             ],
             scenario: `Crossbones`,
@@ -45,11 +64,11 @@ async function seedGames() {
             gameName: `X and Cap vs Venom 2-Player Game`,
             datePlayed: new Date(`2024-09-06`),
             players:[
-                {playerName: `Josh`,
+                {
                     identity: `Captain America`,
-                    owner: zarbba
                 },
-                {playerName: `Henry`,
+                {
+                    player: henry,
                     identity: `X-23`,
                     owner: hnro
                 }
@@ -63,12 +82,13 @@ async function seedGames() {
             gameName: `Teaching Daniel`,
             datePlayed: new Date(`2024-07-31`),
             players:[
-                {playerName: `Daniel`,
+                {
+                    player: daniel,
                     identity: `Dr. Strange`,
                 },
-                {playerName: `Zarbba`,
+                {
+                    player: josh,
                     identity: `Sp//dr`,
-                    owner: zarbba
                 }
             ],
             scenario: `Rhino`,
@@ -80,15 +100,17 @@ async function seedGames() {
             gameName: `Strange, Cap and Magneto vs Red Skull 3-Player Game`,
             datePlayed: new Date(`2024-08-06`),
             players:[
-                {playerName: `Josh`,
+                {
+                    player: josh,
                     identity: `Captain America`,
-                    owner: zarbba
                 },
-                {playerName: `Henry`,
+                {
+                    player: henry,
                     identity: `Magneto`,
                     owner: hnro
                 },
-                {playerName: `Daniel`,
+                {
+                    player: daniel,
                     identity: `Dr. Strange`,
                 },
             ],
@@ -101,7 +123,8 @@ async function seedGames() {
             gameName: `Rogue vs Mojo Solo Game`,
             datePlayed: new Date(`2024-09-13`),
             players:[
-                {playerName: `Henry`,
+                {
+                    player: henry,
                     identity: `Rogue`,
                     owner: hnro
                 }
@@ -115,11 +138,12 @@ async function seedGames() {
             gameName: `Sp//dr and Rogue vs Mysterio 2-Player Sinister Motives Campaign Game`,
             datePlayed: new Date(`2024-09-06`),
             players:[
-                {playerName: `Josh`,
+                {
+                    player: josh,
                     identity: `Sp//dr`,
-                    owner: zarbba
                 },
-                {playerName: `Henry`,
+                {
+                    player: henry,
                     identity: `Rogue`,
                     owner: hnro
                 }
@@ -133,11 +157,12 @@ async function seedGames() {
             gameName: `Teaching Luna`,
             datePlayed: new Date(`2024-09-08`),
             players:[
-                {playerName: `Josh`,
+                {
+                    player: josh,
                     identity: `Ms Marvel`,
-                    owner: zarbba
                 },
-                {playerName: `Luna`,
+                {
+                    player: luna,
                     identity: `Ghost Spider`,
                 }
             ],
@@ -150,9 +175,9 @@ async function seedGames() {
             gameName: `Iron Man vs Ultron Solo Game`,
             datePlayed: new Date(`2024-09-08`),
             players:[
-                {playerName: `Josh`,
+                {
+                    player: josh,
                     identity: `Iron Man`,
-                    owner: zarbba
                 }
             ],
             scenario: `Ultron`,
@@ -164,13 +189,14 @@ async function seedGames() {
             gameName: `Nightcrawler and Magneto vs MaGog`,
             datePlayed: new Date(`2024-10-25`),
             players:[
-                {playerName: `Henry`,
+                {
+                    player: henry,
                     identity: `Magneto`,
                     owner: hnro
                 },
-                {playerName: `Josh`,
+                {
+                    player: josh,
                     identity: `Nightcrawler`,
-                    owner: zarbba
                 }
             ],
             scenario: `MaGog`,
@@ -182,11 +208,12 @@ async function seedGames() {
             gameName: `Cyclops and X-23 vs Sabretooth 2-Player Mutant Genesis Campaign Game`,
             datePlayed: new Date(`2024-12-02`),
             players:[
-                {playerName: `Josh`,
+                {
+                    player: josh,
                     identity: `Cyclops`,
-                    owner: zarbba
                 },
-                {playerName: `Henry`,
+                {
+                    player: henry,
                     identity: `X-23`,
                     owner: hnro
                 }
@@ -200,7 +227,8 @@ async function seedGames() {
             gameName: `Pheonix vs Unus Solo Game`,
             datePlayed: new Date(`2025-01-01`),
             players:[
-                {playerName: `Henry`,
+                {
+                    player: henry,
                     identity: `Pheonix`,
                     owner: hnro
                 }
