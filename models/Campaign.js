@@ -11,6 +11,71 @@ const modesSchema = new mongoose.Schema ({
         },
 })
 
+function validateCampaignType() {
+    if (this.campaignType === `Sinister Motives`) {
+        return sinisterMotivesSchema
+    }
+    // TODO - Implement more campaigns and add them to this function.
+}
+
+const sinisterMotivesSchema = new mongoose.Schema ({
+    currentReputation: {
+        type: Number,
+        required: true
+    },
+    osbornTechCards: [
+        {
+            type: String,
+            enum: [`Arm Cannon`, `Ionic Boots`, `Kinetic Armor`, `Neocarbon Scales`, `Spiked Gauntlet`, `Tracking Display`]
+        }
+    ],
+    completedCommunityServices: [
+        {
+            type: String,
+            enum: [`Back Alley Burglary`, `Cat in a Tree`, `Henchmen heist`, `Off the Rails`, `Rubble Rescue`]
+        }
+    ],
+    completedWakingNightmare: {
+        type: Boolean,
+        required: true,
+    },
+    completedLastOneStanding: {
+        type: Boolean,
+        required: true,
+    },
+    shieldTechCards: [
+        {
+            card: {
+                type: String,
+                enum: [`Compact Darts`, `Impact-Dampening Suit`, `Laser Goggles`, `Propulsion Gauntlet`, `Retinal Display`, `Shock Knuckles`, `Wave Bracers`, `Wrist-Navigator`]
+            },
+            assignedTo: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: `Player`
+            }
+        }
+    ],
+    aspectAdvantageCards: [
+        {
+            card: String,
+            assignedTo: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: `Player`
+            }
+        }
+    ],
+    planningAheadCards: [
+        {
+            card: String,
+            assignedTo: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: `Player`
+            }
+        }
+    ], 
+    remainingHitPoints: Number         
+})
+
 const campaignSchema = new mongoose.Schema ({
     campaignName: {
         type: String,
@@ -39,41 +104,11 @@ const campaignSchema = new mongoose.Schema ({
     modes: {
         type: modesSchema,
         required: true
-    },    
+    },
+    campaignInformation: validateCampaignType(),
     notes: String,
 }, {timestamps: true, virtuals: true})
 
 const Campaign = mongoose.model(`Campaign`, campaignSchema)
 
 module.exports = Campaign
-
-/*
------ Things specific to Sinister Motives Campaigns:
-currentReputation: {
-    type: Number,
-    required: true
-},
-osbornTechCards: [
-    {
-        type: String,
-        enum: [``, ``, ``, ``, ``, ``]
-    }
-],
-completedCommunityServices: [
-    {
-        type: String
-        enum: [``, ``, ``, ``, ``]
-    }
-],
-completedWakingNightmare: Boolean,
-completedLastOneStanding: Boolean
-
------ Things specific to Sinister Motives Players:
-shieldTech: {
-    type: String,
-    enum: [``, ``, ``, ``, ``, ``, ``, ``]
-}
-aspectAdvantage: String
-planningAhead: String
-remainingHitPoints: Number
-*/
