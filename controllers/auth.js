@@ -66,13 +66,14 @@ router.post(`/signup`, alreadyLoggedIn, async (req, res) => {
 
 router.get(`/login`, alreadyLoggedIn, (req, res) => {
     try{
+        let message = ``
         if (req.query.redirect === `1`) {
             message = `You must be logged in to perform that action. Please login and try again.`
         }
         res.render(`auth/login`, {message})
     } catch(err) {
         console.log(err)
-        res.status(500).render(`error-500`)
+        res.status(500).render(`errors/error-500`)
     }
 })    
 
