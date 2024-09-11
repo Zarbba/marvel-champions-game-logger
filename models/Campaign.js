@@ -1,9 +1,5 @@
 const mongoose = require(`mongoose`)
 
-const playerSchema = new mongoose.Schema ({
-
-})
-
 const modesSchema = new mongoose.Schema ({
     expert: {
         type: Boolean,
@@ -24,7 +20,13 @@ const campaignSchema = new mongoose.Schema ({
         type: mongoose.Schema.Types.ObjectId,
         ref: `User`
     },
-    players: [playerSchema],
+    players: [{
+        player: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `Players`
+        },
+        identity: String
+    }],
     campaignType: {
         type: String,
         required: true,
@@ -39,7 +41,7 @@ const campaignSchema = new mongoose.Schema ({
         required: true
     },    
     notes: String,
-})
+}, {timestamps: true, virtuals: true})
 
 const Campaign = mongoose.model(`Campaign`, campaignSchema)
 
