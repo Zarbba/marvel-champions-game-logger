@@ -92,4 +92,3 @@ function hideDeleteModal() {
     deleteModalEl.classList.add(`hidden`)
     deleteModalEl.innerHTML = ``
 }
-//TODO - Clean this up so that it's working off one parent HTML tag instead of like 4 tags like some kind of mad scientist
