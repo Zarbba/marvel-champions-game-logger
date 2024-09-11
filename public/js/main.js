@@ -3,10 +3,10 @@
 // -----Cached DOM Elements-----
 const addPlayerEl = document.querySelector(`.add`)
 const playerSectionEl = document.querySelector(`.player-section`)
-const coutnerEl = document.querySelector(`.counter`)
+const coutnerEl = document.querySelectorAll(`.player-widget`)
 
 // -----Variables-----
-let playerCounter = coutnerEl ? Number(coutnerEl.textContent) : 0
+let playerCounter = coutnerEl.length
 
 // -----Event Listeners-----
 document.addEventListener(`click`, (e) => {
@@ -21,14 +21,28 @@ function handleClick(e) {
 
 function addPlayer() {
     if (playerCounter < 4) {
-        playerSectionEl.innerHTML +=`<label class="label${playerCounter} for="player-name${playerCounter}">Player Name:</label>
-        <input id="player-name${playerCounter}" type="text" name="playerName" required>
-        <label class="label${playerCounter} for="hero${playerCounter}">Hero:</label>
-        <input id="hero${playerCounter}" type="text" name="playerHero" required>
-        <button type="button" class="player-button" id="button${playerCounter}">Remove Player</button>`
+        const newPlayerEl = document.createElement(`fieldset`)
+        newPlayerEl.classList.add(`player-widget`)
+        newPlayerEl.classList.add(`player${playerCounter}`)
+        newPlayerEl.innerHTML = 
+        `<label class="player-element">
+            Player Name:
+            <input type="text" name="playerName" required">
+        </label>
+        <label class="hero-element">
+            Hero:
+            <input type="text" name="playerHero" required">
+        </label>
+        <button type="button" class="player-button">Remove Player</button>`
+        playerSectionEl.appendChild(newPlayerEl)
         playerCounter++
-        if (playerCounter >= 4) {
+        console.log("🚀 ~ addPlayer ~ playerCounter:", playerCounter)
+        if (playerCounter === 4) {
             addPlayerEl.classList.add(`hidden`)
+            const maxPlayerMessageEl = document.createElement(`p`)
+            maxPlayerMessageEl.classList.add(`player-message`)
+            maxPlayerMessageEl.textContent = `Maximum player count reached.`
+            playerSectionEl.appendChild(maxPlayerMessageEl)
         }
     }
 }
@@ -37,20 +51,14 @@ function removePlayer() {
     try {
         if (playerCounter > 0) {
             playerCounter--
-            const targetEls = []
-            targetEls.push(document.querySelector(`#player-name${playerCounter}`))
-            targetEls.push(document.querySelector(`#hero${playerCounter}`))
-            targetEls.push(document.querySelector(`#button${playerCounter}`))
-            const labelEls = document.querySelectorAll(`.label${playerCounter}`)
-            labelEls.forEach((labelEl) => {
-                targetEls.push(labelEl)
-            })
-            console.log(targetEls)
-            targetEls.forEach((targetEl) => {
-                playerSectionEl.removeChild(targetEl)
-            })
-            if (playerCounter <= 3) {
+            console.log("🚀 ~ removePlayer ~ playerCounter:", playerCounter)
+            const removePlayerEl = document.querySelector(`.player${playerCounter}`)
+            removePlayerEl.remove()
+            if (playerCounter === 3) {
                 addPlayerEl.classList.remove(`hidden`)
+                const maxPlayerMessageEl = document.querySelector(`.player-message`)
+                console.log("🚀 ~ removePlayer ~ maxPlayerMessageEl:", maxPlayerMessageEl)
+                maxPlayerMessageEl.remove()
             }
         }
     } catch(err) {
@@ -59,4 +67,3 @@ function removePlayer() {
         return
     }
 }
-//TODO - Clean this up so that it's working off one parent HTML tag instead of like 4 tags like some kind of mad scientist

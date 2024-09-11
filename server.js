@@ -45,8 +45,6 @@ app.get(`/`, async (req, res) =>{
     res.render(`home`, {recentGames})
 })
 
-//REVIEW - Is there a way to make 404 trigger on more than just a bad hex?
-
 //----------------------- References
 // As always: https://stackoverflow.co/ , https://developer.mozilla.org/en-US/ , https://www.w3schools.com/
 // Used this SO article to understand how to check if a value is an array https://stackoverflow.com/questions/767486/how-do-i-check-if-a-variable-is-an-array-in-javascript
