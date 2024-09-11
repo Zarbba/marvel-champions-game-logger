@@ -66,10 +66,6 @@ router.post(`/signup`, alreadyLoggedIn, async (req, res) => {
 
 router.get(`/login`, alreadyLoggedIn, (req, res) => {
     try{
-        if (req.session.user) {
-
-        }
-        let message
         if (req.query.redirect === `1`) {
             message = `You must be logged in to perform that action. Please login and try again.`
         }
@@ -90,7 +86,7 @@ router.post(`/login`, alreadyLoggedIn, async (req, res) => {
         })
         return
     }
-    if(bcrypt.compareSync(req.body.password, userInDatabase.password) === false) {
+    if (bcrypt.compareSync(req.body.password, userInDatabase.password) === false) {
         res.render(`auth/login`, {
             message: `That password is incorrect.`,
             userName: req.body.userName
@@ -120,5 +116,7 @@ router.get(`/logout`, isLoggedIn, (req, res) => {
     }
 })
 
+
+//TODO - Implement a change password feature.
 
 module.exports = router

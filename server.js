@@ -13,7 +13,7 @@ const app = express()
 const Game = require(`./models/Game`)
 const User = require(`./models/User`)
 const authController = require(`./controllers/auth`)
-const gameController = require(`./controllers/games`)
+const gamesController = require(`./controllers/games`)
 
 //----------------------- Server Config
 app.use(morgan(`dev`))
@@ -33,7 +33,7 @@ app.use((req, res, next) => {
     next()
 })
 app.use(`/auth`, authController)
-app.use(`/games`, gameController)
+app.use(`/games`, gamesController)
 app.listen(process.env.PORT,() => {
     console.log(`Server listening at http://localhost:${process.env.PORT}/`)
 })
@@ -44,12 +44,6 @@ app.get(`/`, async (req, res) =>{
     const recentGames = (await Game.find().populate(`owner`).sort({createdAt: `desc`})).slice(0, 10)
     res.render(`home`, {recentGames})
 })
-
-//REVIEW - By convention, where do my non-routing functions go?
-//REVIEW - By convention, where does my main.js file go?
-//REVIEW - Is there a more elegant way to pass the player count to main.js?
-//REVIEW - Is there a way to make 404 trigger on more than just a bad hex?
-//REVIEW - Where do we get our GitHub Campus link?
 
 //----------------------- References
 // As always: https://stackoverflow.co/ , https://developer.mozilla.org/en-US/ , https://www.w3schools.com/
