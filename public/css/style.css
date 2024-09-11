@@ -196,4 +196,4 @@ td {
 }
 
 /* TODO - Responsive design!!! */
-/* FIXME - Fix bug with text area resizing */
+/* FIXME - Fix bug with text area size causing submit buttons to be pushed below footer in certain cases. */
