@@ -14,6 +14,7 @@ const Game = require(`./models/Game`)
 const User = require(`./models/User`)
 const authController = require(`./controllers/auth`)
 const gamesController = require(`./controllers/games`)
+const usersController = require(`./controllers/users`)
 
 //----------------------- Server Config
 app.use(morgan(`dev`))
@@ -34,6 +35,7 @@ app.use((req, res, next) => {
 })
 app.use(`/auth`, authController)
 app.use(`/games`, gamesController)
+app.use(`/users`, usersController)
 app.listen(process.env.PORT,() => {
     console.log(`Server listening at http://localhost:${process.env.PORT}/`)
 })

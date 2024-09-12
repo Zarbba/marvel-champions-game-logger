@@ -1,0 +1,26 @@
+<%- include(`../partials/header`) %>
+<h2><%= user.userName %>'s Profile</h2>
+<div class="message">
+    <% if(locals.message) {%> <%= message %><% } %>
+</div>
+<form action="/users/<%= user._id %>?_method=put" method="post">
+    <label for="update-password">
+        Update Password
+    </label> 
+    <fieldset class="profile-widget" id="update-password">
+    <label class="update-password-element">
+        Old Password:
+        <input type="password" name="password">
+    </label>
+    <label class="update-password-element">
+        New Password:
+        <input type="password" name="newPassword">
+    </label>
+    <label class="update-password-element">
+        Confirm New Password:
+        <input type="password" name="confirm">
+    </label>
+    <button>Update</button>
+</fieldset>
+</form>
+<%- include(`../partials/footer`) %>

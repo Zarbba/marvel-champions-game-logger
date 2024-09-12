@@ -167,11 +167,19 @@ td {
     justify-content: center;
 }
 
-.player-widget {
+.player-widget, .profile-widget {
     display: flex;
     align-items: center;
     justify-content: center;
     border: none;
+}
+
+.update-password-element {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 1rem;
+    margin-left: 1rem;
 }
 
 .player-element {
