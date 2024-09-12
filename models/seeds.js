@@ -37,11 +37,11 @@ async function seedPlayers() {
     ])
 }
 
-
 async function seedGames() {
     const zarbba = await User.findOne({userName: `Zarbba`})
     const hnro = await User.findOne({userName: `Hnro`})
     const josh = await Player.findOne({playerName: `Josh`})
+    const henry = await Player.findOne({playerName: `Henry`})
     const daniel = await Player.findOne({playerName:`Daniel`})
     const luna = await Player.findOne({playerName: `Luna`})
     const deletedGames = await Game.deleteMany()
@@ -242,6 +242,67 @@ async function seedGames() {
     const allGames = await Game.find()
     console.log(allGames)
     await addOwners(zarbba, hnro)
+}
+
+async function seedCampaigns() {
+    const zarbba = await User.findOne({userName: `Zarbba`})
+    const hnro = await User.findOne({userName: `Hnro`})
+    const josh = await Player.findOne({playerName: `Josh`})
+    const henry = await Player.findOne({playerName: `Henry`})
+    const daniel = await Player.findOne({playerName:`Daniel`})
+    const luna = await Player.findOne({playerName: `Luna`})
+    const deletedCampaigns = await Campaign.deleteMany()
+    const createdCampaigns = await Campaign.create({
+        campaignName: `Josh and Henry Get Sinister`,
+        owner: zarbba,
+        players: [
+            {
+                player: josh,
+                identity: `Sp//dr`
+            },
+            {
+                player: henry,
+                identity: `Rogue`
+            }
+        ],
+        campaignType: `Sinister Motives`,
+        games: [ 
+            await Game.findOne({gameName: `Sp//dr and Rogue vs Mysterio 2-Player Sinister Motives Campaign Game`})
+        ],
+        modes: {
+            expert: false,
+        },
+        campaignInformation: {
+            currentReputation: 12,
+            osbornTechCards: [`Ionic Boots`],
+            completedCommunityServices: [],
+            completedWakingNightmare: false,
+            completedLastOneStanding: false,
+            shieldTechCards: [
+                {
+                    card: `Wave Bracers`,
+                    assingnedTo: josh
+                },
+                {
+                    card: `Shock Knuckles`,
+                    assingnedTo: henry
+                }
+            ],
+            aspectAdvantageCards: [
+                {
+                    card: `Make the Call`,
+                    assingnedTo: josh
+                },
+                {
+                    card: `Hawkeye/Clint Barton`,
+                    assingnedTo: henry
+                }
+            ]
+        },
+        notes: `Mysterio is crushing us. Might need more or better ways to deal with encounter cards.`
+    })
+    const allCampaigns = await Campaign.find()
+    console.log(allCampaigns)
 }
 
 async function addOwners(u1, u2) {
