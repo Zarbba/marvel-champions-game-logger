@@ -5,6 +5,7 @@ const isGameOwner = require(`../middleware/isGameOwner`)
 const utilities = require(`../lib/game-utilities.js`)
 const User = require(`../models/User`)
 const Game = require(`../models/Game`)
+const Campaign = require(`../models/Campaign`)
 require(`dotenv`).config()
 
 router.get(`/new`, isLoggedIn, (req, res) => {
