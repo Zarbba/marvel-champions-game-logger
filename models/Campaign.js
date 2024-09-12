@@ -11,13 +11,6 @@ const modesSchema = new mongoose.Schema ({
         },
 })
 
-function validateCampaignType() {
-    if (this.campaignType === `Sinister Motives`) {
-        return sinisterMotivesSchema
-    }
-    // TODO - Implement more campaigns and add them to this function.
-}
-
 const sinisterMotivesSchema = new mongoose.Schema ({
     currentReputation: {
         type: Number,
@@ -105,7 +98,7 @@ const campaignSchema = new mongoose.Schema ({
         type: modesSchema,
         required: true
     },
-    campaignInformation: validateCampaignType(),
+    campaignInformation: sinisterMotivesSchema, //TODO - Find out how to make this dynamic based on campaignType.
     notes: String,
 }, {timestamps: true, virtuals: true})
 
