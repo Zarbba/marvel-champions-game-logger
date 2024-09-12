@@ -61,6 +61,7 @@ main {
     align-items: center;
     flex-direction: column;
     padding: 0.5rem 1rem;
+    margin-bottom: 4rem;
 }
 
 .intro-text {
@@ -79,6 +80,7 @@ main {
 
 footer {
     position: fixed;
+    height: 4rem;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -196,4 +198,3 @@ td {
 }
 
 /* TODO - Responsive design!!! */
-/* FIXME - Fix bug with text area size causing submit buttons to be pushed below footer in certain cases. */
