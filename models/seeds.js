@@ -106,7 +106,6 @@ async function seedGames() {
                 {
                     player: henry,
                     identity: `Magneto`,
-                    owner: hnro
                 },
                 {
                     player: daniel,
