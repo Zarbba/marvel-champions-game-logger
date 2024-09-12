@@ -12,7 +12,7 @@ const gameSchema = new mongoose.Schema ({
     players: [{
         player: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: `Players`
+        ref: `Player`
         },
         identity: String
     }],

@@ -5,6 +5,7 @@ const isGameOwner = require(`../middleware/isGameOwner`)
 const utilities = require(`../lib/game-utilities`)
 const User = require(`../models/User`)
 const Game = require(`../models/Game`)
+const Player = require(`../models/Player`)
 const Campaign = require(`../models/Campaign`)
 require(`dotenv`).config()
 
@@ -77,7 +78,8 @@ router.get(`/:gameId`, async (req, res) => {
 
 router.get(`/:gameId/edit`, isLoggedIn, isGameOwner, async (req, res) => {
     try {
-        const game = await Game.findById(req.params.gameId)
+        const game = await Game.findById(req.params.gameId).populate(`players.player`)
+        await game.populate(`players.player.owner`)
         if (!game) {
             res.status(404).render(`errors/error-404`)
             return
