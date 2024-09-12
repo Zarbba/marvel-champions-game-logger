@@ -47,6 +47,10 @@ app.get(`/`, async (req, res) =>{
     res.render(`home`, {recentGames})
 })
 
+app.get(`/*`, (req, res) => {
+    res.status(404).render(`errors/error-404`)
+})
+
 //----------------------- References
 // As always: https://stackoverflow.co/ , https://developer.mozilla.org/en-US/ , https://www.w3schools.com/, https://mongoosejs.com/docs/guide.html
 // Used this SO article to understand how to check if a value is an array https://stackoverflow.com/questions/767486/how-do-i-check-if-a-variable-is-an-array-in-javascript
