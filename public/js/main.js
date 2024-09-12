@@ -33,10 +33,13 @@ function addPlayer() {
             Hero:
             <input type="text" name="playerHero" required">
         </label>
+        <label class="owner-element">
+            Owner:
+            <input type="text" name="playerOwner">
+        </label>
         <button type="button" class="player-button">Remove Player</button>`
         playerSectionEl.appendChild(newPlayerEl)
         playerCounter++
-        console.log("🚀 ~ addPlayer ~ playerCounter:", playerCounter)
         if (playerCounter === 4) {
             addPlayerEl.classList.add(`hidden`)
             const maxPlayerMessageEl = document.createElement(`p`)
@@ -51,13 +54,11 @@ function removePlayer() {
     try {
         if (playerCounter > 0) {
             playerCounter--
-            console.log("🚀 ~ removePlayer ~ playerCounter:", playerCounter)
             const removePlayerEl = document.querySelector(`.player${playerCounter}`)
             removePlayerEl.remove()
             if (playerCounter === 3) {
                 addPlayerEl.classList.remove(`hidden`)
                 const maxPlayerMessageEl = document.querySelector(`.player-message`)
-                console.log("🚀 ~ removePlayer ~ maxPlayerMessageEl:", maxPlayerMessageEl)
                 maxPlayerMessageEl.remove()
             }
         }

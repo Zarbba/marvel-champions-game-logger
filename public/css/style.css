@@ -161,7 +161,7 @@ td {
     align-items: center;
 }
 
-.hero-element {
+.hero-element, .owner-element {
     display: grid;
     grid-template-columns: 0.5fr 2fr;
     margin: .75rem;

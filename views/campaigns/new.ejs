@@ -49,7 +49,7 @@
                     </label>
                     <label class="owner-element">
                         Owner:
-                        <input type="text" name="owner" value="<%= player.player.owner %>">
+                        <input type="text" name="playerOwner" value="<%= player.player.owner %>">
                     </label>
                     <button type="button" class="player-button">Remove Player</button>
                 </fieldset>
@@ -58,19 +58,19 @@
     </section>
     <button type="button" class="player-button add">Add a player</button>
     <label for="campaign-info">Campaign Information</label>
-    <%- include(`./partials/${campaign.campaignType}/new`) %>
+    <%- //include(`./partials/${campaign.campaignType}/new`) %>
     <label for="expert-mode">Campaign Difficulty:</label>
     <select id="expert-mode" name="expertMode">
-        <option value="false">Standard</option>
-        <option value="true">Expert</option>
+        <option value="false" <% if (!locals.campaign || locals.campaign.modes.expert === false) { %> selected <% } %>>Standard</option>
+        <option value="true" <% if (locals.campaign && campaign.campaign.modes.expert === true) { %> selected <% } %>>Expert</option>
     </select>
     <label for="heroic-mode">Heroic Mode Modifier:</label>
     <select id="heroic-mode">
-        <option value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
+        <option value="0" <% if (!locals.campaign || locals.campaign.modes.heroic === 0) { %> selected <% } %>>0</option>
+        <option value="1" <% if (locals.campaign && locals.campaign.modes.heroic === 1) { %> selected <% } %>>1</option>
+        <option value="2" <% if (locals.campaign && locals.campaign.modes.heroic === 2) { %> selected <% } %>>2</option>
+        <option value="3" <% if (locals.campaign && locals.campaign.modes.heroic === 3) { %> selected <% } %>>3</option>
+        <option value="4" <% if (locals.campaign && locals.campaign.modes.heroic === 4) { %> selected <% } %>>4</option>
     </select>
     <label for="notes">Notes:</label>
     <textarea id="notes" type="" name="notes" rows="6" cols="40"><% if (locals.game) { %><%=game.notes%><% } %></textarea>

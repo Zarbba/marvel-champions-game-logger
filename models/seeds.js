@@ -64,13 +64,12 @@ async function seedGames() {
             gameName: `X and Cap vs Venom 2-Player Game`,
             datePlayed: new Date(`2024-09-06`),
             players:[
-                {
+                {   player: josh,
                     identity: `Captain America`,
                 },
                 {
                     player: henry,
                     identity: `X-23`,
-                    owner: hnro
                 }
             ],
             scenario: `Venom`,
@@ -126,7 +125,6 @@ async function seedGames() {
                 {
                     player: henry,
                     identity: `Rogue`,
-                    owner: hnro
                 }
             ],
             scenario: `Mojo`,
@@ -145,7 +143,6 @@ async function seedGames() {
                 {
                     player: henry,
                     identity: `Rogue`,
-                    owner: hnro
                 }
             ],
             scenario: `Mysterio`,
@@ -192,7 +189,6 @@ async function seedGames() {
                 {
                     player: henry,
                     identity: `Magneto`,
-                    owner: hnro
                 },
                 {
                     player: josh,
@@ -215,7 +211,6 @@ async function seedGames() {
                 {
                     player: henry,
                     identity: `X-23`,
-                    owner: hnro
                 }
             ],
             scenario: `Sabretooth`,
@@ -230,7 +225,6 @@ async function seedGames() {
                 {
                     player: henry,
                     identity: `Pheonix`,
-                    owner: hnro
                 }
             ],
             scenario: `Unus`,
