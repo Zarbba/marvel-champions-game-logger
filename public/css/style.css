@@ -90,11 +90,30 @@ footer {
 }
 
 nav {
+    width: 100vw;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     font-size: 1.5rem;
     gap: 2rem;
+}
+
+.main-nav {
+    width: 63vw;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2rem;
+    margin: 0 2rem 0 2rem;
+}
+
+.profile-nav {
+    width: 37vw;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2rem;
+    margin: 0 2rem 0 2rem;
 }
 
 button {
