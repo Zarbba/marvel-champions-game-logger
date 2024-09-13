@@ -19,7 +19,7 @@ router.get(`/new`, isLoggedIn, (req, res) => {
 router.post(`/`, isLoggedIn, async (req, res) => {
     try {
         const nameInDatabase = await Game.findOne({gameName: req.body.gameName})
-        const players = req.body.playerName ? utilities.generatePlayers(req.body) : []
+        const players = req.body.playerName ? utilities.formatPlayersForDatabase(req.body) : []
         if(nameInDatabase !== null) {
             const game = {
                 gameName: req.body.gameName,
@@ -90,7 +90,7 @@ router.put(`/:gameId`, isLoggedIn, isGameOwner, async (req, res) => {
     try {
         const nameInDatabase = await Game.findOne({gameName: req.body.gameName})
         const targetGame = await Game.findById(req.params.gameId)
-        const players = req.body.playerName ? utilities.generatePlayers(req.body) : []
+        const players = req.body.playerName ? utilities.formatPlayersForDatabase(req.body) : []
         if (nameInDatabase && nameInDatabase.id !== targetGame.id) {
             const game = {
                 gameName: req.body.gameName,
