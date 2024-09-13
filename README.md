@@ -31,6 +31,7 @@ For more information regarding Marvel Champions: The Card Game please visit the 
 
 ### Game Logs
 * Game modes including both standard/expert and heroic mode
+* Game state tracking such as remaining hitpoints at end game
 
 ### Campaign Logs
 * Tracking of campaigns and the capacity to assign games to campaigns
@@ -47,4 +48,5 @@ For more information regarding Marvel Champions: The Card Game please visit the 
 * Implement search functionality for logs and users
 * Improve design to be more readable on smaller devices
 * Move pagination and utility from JS logic to mongoDB for efficiency
+* Make delete confirmation a modal instead of a full page
 
