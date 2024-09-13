@@ -2,11 +2,11 @@ const express = require(`express`)
 const router = express.Router()
 const bcrypt = require(`bcrypt`)
 const User = require(`../models/User`)
-const alreadyLoggedIn = require(`../middleware/alreadyLoggedIn`)
+const isAlreadyLoggedIn = require(`../middleware/isAlreadyLoggedIn`)
 const isLoggedIn = require("../middleware/isLoggedIn")
 require(`dotenv`).config()
 
-router.get(`/signup`, alreadyLoggedIn, (req, res) => {
+router.get(`/signup`, isAlreadyLoggedIn, (req, res) => {
     try {
         res.render(`auth/signup`)
     } catch(err) {
@@ -15,7 +15,7 @@ router.get(`/signup`, alreadyLoggedIn, (req, res) => {
     }
 })
 
-router.post(`/signup`, alreadyLoggedIn, async (req, res) => {
+router.post(`/signup`, isAlreadyLoggedIn, async (req, res) => {
     try {
         const userInDatabase = await User.findOne({userName: req.body.userName})
         if (userInDatabase !== null) {
@@ -64,7 +64,7 @@ router.post(`/signup`, alreadyLoggedIn, async (req, res) => {
     }
 })
 
-router.get(`/login`, alreadyLoggedIn, (req, res) => {
+router.get(`/login`, isAlreadyLoggedIn, (req, res) => {
     try{
         let message = ``
         if (req.query.redirect === `1`) {
@@ -77,7 +77,7 @@ router.get(`/login`, alreadyLoggedIn, (req, res) => {
     }
 })    
 
-router.post(`/login`, alreadyLoggedIn, async (req, res) => {
+router.post(`/login`, isAlreadyLoggedIn, async (req, res) => {
     try {
         const userInDatabase = await User.findOne({userName: req.body.userName})
         if (userInDatabase === null) {

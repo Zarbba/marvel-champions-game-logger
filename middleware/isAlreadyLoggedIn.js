@@ -1,4 +1,4 @@
-function alreadyLoggedIn(req, res, next) {
+function isAlreadyLoggedIn(req, res, next) {
     if (!req.session.user) {
         next()
     } else {
@@ -7,4 +7,4 @@ function alreadyLoggedIn(req, res, next) {
     }  
 }
 
-module.exports = alreadyLoggedIn
+module.exports = isAlreadyLoggedIn
