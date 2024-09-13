@@ -31,8 +31,7 @@
     <label for="won-game">The players:</label>
         <select id="won-game" name="wonGame">
             <option value="true" <% if (locals.game && game.wonGame) { %> selected <% } %>>Won</option>
-            <option value="false" <% if (locals.game && !game.wonGame) { %> selected <% } %>>Lost</option>
-            <option class="hidden" value="" <% if (!locals.game) { %> selected <% } %>></option>
+            <option value="false" <% if (!game.wonGame) { %> selected <% } %>>Lost</option>
         </select>
     <label for="notes">Notes:</label>
     <textarea id="notes" type="" name="notes" rows="6" cols="40"><% if (locals.game) { %><%=game.notes%><% } %></textarea>
