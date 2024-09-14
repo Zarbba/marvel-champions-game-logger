@@ -43,7 +43,7 @@ app.listen(process.env.PORT,() => {
 //----------------------- Routing
 
 app.get(`/`, async (req, res) =>{
-    const recentGames = (await Game.find({}, null, {limit: 10}).populate(`owner`).sort({createdAt: `desc`}))
+    const recentGames = await Game.find({}, null, {limit: 10}).populate(`owner`).sort({createdAt: `desc`})
     res.render(`home`, {recentGames})
 })
 

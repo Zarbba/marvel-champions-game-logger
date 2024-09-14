@@ -140,6 +140,10 @@ router.get(`/:gameId/delete`, isLoggedIn, isGameOwner, async (req, res) => {
 
 router.delete(`/:gameId`, isLoggedIn, isGameOwner, async (req, res) => {
     try {
+        const user = await User.findById(req.session.user._id).populate(`ownedGames`)
+        const targetGame = await Game.findById(req.params.gameId).populate(`owner`)
+        user.ownedGames.pull(targetGame._id)
+        await user.save()
         const deletedGame = await Game.findOneAndDelete({_id: req.params.gameId})
         res.redirect(`/games`)    
     } catch(err) {
