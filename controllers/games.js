@@ -57,6 +57,7 @@ router.get(`/`, async (req, res) => {
         res.status(500).render(`errors/error-500`)
     }
 })
+//TODO - Add sorting options to allow for sorting by - date played, game name, author
 
 router.get(`/:gameId`, async (req, res) => {
     try {
