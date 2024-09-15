@@ -12,10 +12,10 @@
     <p><%= game.notes %></p>
     <% if (user !== null && user._id == game.owner._id) {%>
         <section class="button-section">
-            <form action="/games/<%= game._id %>/edit">
+            <form class="button-element" action="/games/<%= game._id %>/edit">
                 <button>Edit</button>
             </form>
-            <form action="/games/<%= game._id %>/delete">
+            <form class="button-element" action="/games/<%= game._id %>/delete">
                 <button>Delete</button>
             </form>
         </section>

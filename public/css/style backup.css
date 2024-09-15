@@ -1,5 +1,4 @@
 * {
-    box-sizing: border-box;
     margin: 0;
 }
 
@@ -10,53 +9,47 @@ html {
     color: white;
 }
 
+header {
+    background-color: rgb(221, 18, 18);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0 1rem 0;
+}
+
+footer {
+    position: fixed;
+    height: 4rem;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(221, 18, 18);
+    color: white;
+    padding: .5rem 1rem;
+}
+
 body {
     background-image: linear-gradient(90deg, rgba(0, 0, 255, 1), rgba(0, 0, 255, .2));
     background-size: cover;
 }
 
 main {
-    max-width: 1200px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     padding: 0.5rem 1rem;
-    margin-bottom: 5rem;
-}
-
-header {
-    background-color: rgb(221, 18, 18);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    gap: .4rem;
-    padding: .5rem 1rem;
-}
-
-footer {
-    position: fixed;
-    height: 5rem;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: rgb(221, 18, 18);
-    color: white;
-}
-
-.footer-text {
-    padding: .25rem;
-    font-size: .75rem;
+    margin-bottom: 4rem;
 }
 
 h1 {
-    font-size: 2.5rem;
-    margin: .25rem 0;
-} 
+    font-size: 4rem;
+}
 
 h2 {
-    font-size: 1.75rem;
+    font-size: 2.5rem;
 }
 
 h3, span {
@@ -70,7 +63,7 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     gap: 2rem;
 }
 
@@ -92,10 +85,12 @@ button {
 }
 
 form {
-    display: flex;
+    display:flex;
     flex-direction: column;
     align-items: center;
-    gap: .25rem
+    justify-content: flex-start;
+    gap: .25rem;
+    margin: 1rem;
 }
 
 th, td {
@@ -112,8 +107,8 @@ td {
 }
 
 .intro-text {
-    font-size: 1.25rem;
-    margin: .5rem 0 .5rem 1.75rem;
+    font-size: 2rem;
+    margin: 1rem 0 3rem 0;
 }
 
 .game-show-section {
@@ -146,9 +141,7 @@ td {
 .button-cell, .button-section {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: .4rem;
+    gap: 0rem;
 }
 
 .pagination {
@@ -172,7 +165,6 @@ td {
 
 .player-widget, .profile-widget {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     border: none;
@@ -180,28 +172,26 @@ td {
 
 .update-password-element {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    gap: .25rem;
-    margin-top: .4rem;
+    gap: 1rem;
+    margin-left: 1rem;
 }
 
 .player-element {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    margin: .75rem;
+    gap: 0.5rem;
     align-items: center;
-    gap: 0.25rem;
 }
 
 .hero-element {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 0.5fr 2fr;
     margin: .75rem;
-    gap: 0.25rem;
+    gap: 0.5rem;
+    align-items: center;
 }
 
 .message, .player-message {
@@ -213,14 +203,13 @@ td {
 }
 
 .error, .delete {
-    margin-top: 9rem;
     font-weight: bolder;
-    text-align: center;
+    margin: 7rem;
     display: flex;
     flex-direction: column;
+    gap: 3rem;
     justify-content: center;
     align-items: center;
-    gap: 3rem;
 }
 
 .error-text, .delete-text {
@@ -234,3 +223,5 @@ a:hover {
 .hidden {
     display: none;
 }
+
+/* TODO - Responsive design!!! */

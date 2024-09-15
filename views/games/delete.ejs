@@ -3,10 +3,10 @@
     <h2>Delete <%= game.gameName  %></h2>
     <p class="delete-text">Are you sure you wish to delete this game log?</p>
     <section class="button-section">
-        <form action="/games/<%= game._id %>?_method=delete" method="post">
+        <form class="button-element" action="/games/<%= game._id %>?_method=delete" method="post">
             <button>Delete</button>
         </form>
-        <form  action="/games">
+        <form class="button-element"  action="/games">
             <button>Cancel</button>
         </form>    
     </section>    
