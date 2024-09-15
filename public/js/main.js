@@ -16,7 +16,7 @@ document.addEventListener(`click`, (e) => {
 
 // -----Functions-----
 function handleClick(e) {
-    e.target.classList.contains(`add`) ? addPlayer() : removePlayer()
+    e.target.classList.contains(`add`) ? addPlayer() : removePlayer(e)
 }
 
 function addPlayer() {
@@ -46,10 +46,10 @@ function addPlayer() {
     }
 }
 
-function removePlayer() {
+function removePlayer(e) {
     if (playerCounter > 0) {
         playerCounter--
-        const removePlayerEl = document.querySelector(`.player${playerCounter}`)
+        const removePlayerEl = e.target.parentNode
         removePlayerEl.remove()
         if (playerCounter === 3) {
             addPlayerEl.classList.remove(`hidden`)
