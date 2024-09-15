@@ -8,7 +8,7 @@
         </tr>
         <% recentGames.forEach((game) => { %>
             <tr>
-                <td><a class="body-link" href="/games/<%= game._id %>"><%= game.gameName %></a></td> <td><%= game.owner.userName %></td> <td><%= game.createdAt.toDateString() %></td>
+                <td><a class="game-link" href="/games/<%= game._id %>"><%= game.gameName %></a></td> <td><%= game.owner.userName %></td> <td><%= game.createdAt.toDateString() %></td>
             <% if (user !== null && user._id == game.owner._id) {%>
                 <td class ="button-cell">
                     <form class="table-form" action="/games/<%= game._id %>/edit">

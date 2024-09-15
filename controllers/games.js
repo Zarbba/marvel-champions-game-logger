@@ -51,13 +51,13 @@ router.post(`/`, isLoggedIn, async (req, res) => {
 
 router.get(`/`, async (req, res) => {
     try {
-        res.render(`games/index`, await utilities.paginateGames(req.query.page ? req.query.page : 1, 10))
+        let order = req.query.order ? utilities.reverseOrder(req.query.order) : `asc`
+        res.render(`games/index`, await utilities.paginateGames(req.query.page ? req.query.page : 1, 10, req.query.sorting, order))
     } catch(err) {
         console.log(err)
         res.status(500).render(`errors/error-500`)
     }
 })
-//TODO - Add sorting options to allow for sorting by - date played, game name, author
 //TODO - Create a way to search the data for a specific game
 
 router.get(`/:gameId`, async (req, res) => {

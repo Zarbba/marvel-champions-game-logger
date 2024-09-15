@@ -3,11 +3,11 @@
 <table>
     <% if (games.length > 0) { %>
         <tr>
-            <th>Game Name</th> <th>Author</th> <th>Date Published</th>
+            <th><a href="/games?sorting=gameName&order=<%= order %>">Name</a></th> <th><a href="/games?sorting=owner&order=<%= order %>">Author</a></th> <th><a href="/games?sorting=datePlayed&order=<%= order %>">Date Played</a></th> <th><a href="/games?sorting=createdAt&order=<%= order %>">Date Published</a></th>
         </tr>
         <% games.forEach((game) => { %>
             <tr>
-                <td><a class="body-link" href="/games/<%= game.id %>"><%= game.gameName %></a></td> <td><%= game.owner.userName %></td> <td><%= game.createdAt.toDateString() %></td>
+                <td><a class="game-link" href="/games/<%= game.id %>"><%= game.gameName %></a></td> <td><%= game.owner.userName %></td> <td><%= game.datePlayed.toDateString() %></td> <td><%= game.createdAt.toDateString() %></td>
             <% if (user !== null && user._id == game.owner._id) {%>
                 <td class ="button-cell">
                     <form class="table-form" action="/games/<%= game._id %>/edit">
