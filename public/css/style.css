@@ -16,7 +16,6 @@ body {
 }
 
 main {
-    max-width: 1200px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -234,3 +233,5 @@ a:hover {
 .hidden {
     display: none;
 }
+
+/* TODO - Add some media queries to make padding/margins better at higher res */

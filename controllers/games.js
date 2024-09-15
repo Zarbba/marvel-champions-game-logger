@@ -58,6 +58,7 @@ router.get(`/`, async (req, res) => {
     }
 })
 //TODO - Add sorting options to allow for sorting by - date played, game name, author
+//TODO - Create a way to search the data for a specific game
 
 router.get(`/:gameId`, async (req, res) => {
     try {
