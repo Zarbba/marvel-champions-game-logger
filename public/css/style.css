@@ -52,10 +52,12 @@ footer {
 h1 {
     font-size: 2.5rem;
     margin: .25rem 0;
+    text-align: center;
 } 
 
 h2 {
     font-size: 1.75rem;
+    text-align: center;
 }
 
 h3, span {
@@ -211,7 +213,7 @@ td {
     margin: .5rem;
 }
 
-.error, .delete {
+.error {
     margin-top: 9rem;
     font-weight: bolder;
     text-align: center;
@@ -220,6 +222,15 @@ td {
     justify-content: center;
     align-items: center;
     gap: 3rem;
+}
+
+.delete-modal {
+    position: absolute;
+    text-align: center;
+    max-width: 80%;
+    background-color: rgba(0, 0, 0, .8);
+    padding: 1rem;
+    border-radius: 2%;
 }
 
 .error-text, .delete-text {

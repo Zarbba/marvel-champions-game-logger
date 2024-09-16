@@ -14,13 +14,12 @@
                     <form class="table-form" action="/games/<%= game._id %>/edit">
                         <button>Edit</button>
                     </form>
-                    <form class="table-form" action="/games/<%= game._id %>/delete">
-                        <button>Delete</button>
-                    </form>
+                    <button class="button delete <%= game._id %>" type="button">Delete<span class="hidden"><%= game.gameName %></span></button>
                 </td>
             <% } %>
         </tr>
     <% }) %>
 <% } %>
 </table>
+<%- include(`./partials/delete`) %>
 <%- include(`./partials/footer`) %>
