@@ -76,7 +76,6 @@ function removePlayerWidget(e) {
 }
 
 function revealDeleteModal(e) {
-    console.log(e.target.classList)
     deleteModalEl.innerHTML =
     // REVIEW - There's gotta be a better way to pass these variables through...
 `<p class="delete-text">Are you sure you want to delete ${e.target.childNodes[1].textContent}?</p>

@@ -233,16 +233,37 @@ td {
     border-radius: 2%;
 }
 
-.error-text, .delete-text {
+.error-text {
     font-size: 1.5rem;
+}
+
+.delete-text {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 a:hover {
     color: black;
 }
 
+@media (min-width: 1400px) {
+    main {
+        margin: 2rem auto 4rem auto;
+    }
+    
+    .intro-text {
+        margin-bottom: 3rem;
+    }
+
+    footer {
+        height: 4rem;
+    }
+
+    .footer-text {
+        font-size: 1rem;
+    }
+}
+
 .hidden {
     display: none;
 }
-
-/* TODO - Add some media queries to make padding/margins better at higher res */
