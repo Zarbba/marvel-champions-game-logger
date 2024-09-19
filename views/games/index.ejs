@@ -14,7 +14,6 @@
                         <button class="button edit">Edit</button>
                     </form>
                     <button class="button delete <%= game._id %>" type="button">Delete<span class="hidden"><%= game.gameName %></span></button>
-                    <!--  -->
                 </td>
             <% } %>
         </tr>
@@ -34,5 +33,5 @@
         <a href="/games?page=<%= Number(currentPage) + 1 %>">&#8594;</a>
     <% } %>    
 </section>
-<%- include(`../partials/delete`) %>
+<%- include(`../partials/modal`) %>
 <%- include(`../partials/footer`) %>

@@ -8,33 +8,45 @@
     <input id="campaign-name" type="text" name="campaignName" required <% if (locals.campaign) { %> value="<%= campaign.campaignName %>" <% } %>>
     <label for="campaign-type">Campaign:</label>
         <select id="campaign-type" name="campaignType">
-            <option value="The Rise of Red Skull" <% if (locals.campaign && campaign.campaignType === `The Rise of Red Skull`) { %> selected <% } %>>The Rise of Red Skull</option>
-            <option value="The Galaxy's Most Wanted" <% if (locals.campaign && campaign.campaignType === `The Galaxy's Most Wanted`) { %> selected <% } %>>The Galaxy's Most Wanted</option>
-            <option value="The Mad Titan's Shadow" <% if (locals.campaign && campaign.campaignType === `The Mad Titan's Shadow`) { %> selected <% } %>>The Mad Titan's Shadow</option>
-            <option value="Sinister Motives" <% if (locals.campaign && campaign.campaignType === `Sinister Motives`) { %> selected <% } %>>Sinister Motives</option>
-            <option value="Mutant Genesis" <% if (locals.campaign && campaign.campaignType === `Mutant Genesis`) { %> selected <% } %>>Mutant Genesis</option>
-            <option value="NeXt Evolution" <% if (locals.campaign && campaign.campaignType === `NeXt Evolution`) { %> selected <% } %>>NeXt Evolution</option>
-            <option value="Age of Apocalypse" <% if (locals.campaign && campaign.campaignType === `Age of Apocalypse`) { %> selected <% } %>>Age of Apocalypse</option>
+            <option value="TheRiseOfRedSkull" <% if (locals.campaign && campaign.campaignType === `The Rise of Red Skull`) { %> selected <% } %>>The Rise of Red Skull</option>
+            <option value="TheGalaxysMostWanted" <% if (locals.campaign && campaign.campaignType === `The Galaxy's Most Wanted`) { %> selected <% } %>>The Galaxy's Most Wanted</option>
+            <option value="TheMadTitansShadow" <% if (locals.campaign && campaign.campaignType === `The Mad Titan's Shadow`) { %> selected <% } %>>The Mad Titan's Shadow</option>
+            <option value="SinisterMotives" <% if (locals.campaign && campaign.campaignType === `Sinister Motives`) { %> selected <% } %>>Sinister Motives</option>
+            <option value="MutantGenesis" <% if (locals.campaign && campaign.campaignType === `Mutant Genesis`) { %> selected <% } %>>Mutant Genesis</option>
+            <option value="NeXtEvolution" <% if (locals.campaign && campaign.campaignType === `NeXt Evolution`) { %> selected <% } %>>NeXt Evolution</option>
+            <option value="AgeOfApocalypse" <% if (locals.campaign && campaign.campaignType === `Age of Apocalypse`) { %> selected <% } %>>Age of Apocalypse</option>
             <option class="hidden" value="" <% if (!locals.campaign) { %> selected <% } %>></option>
         </select>
     <section class="game-section">
         <% if (locals.campaign) { %>
-            <% campaign.games.forEach( (game, i) => { %>
-                <fieldset class="game-widget game<%= i %>">
+            <% campaign.games.forEach( (game) => { %>
+                <fieldset class="game-widget">
                     <label>
                         Select a game to add:
                         <select name="games">
                             <% ownedGames.forEach( (ownedGame) => { %>
-                                <option value="<%= game._id %>"><%= game.gameName %></option>
+                                <option value="<%= ownedGame._id %>" <%= ownedGame._id === game._id && selected %>><%= ownedGame.gameName %></option>
                             <% }) %>
                         </select>
                     </label>
-                    <button type="button" class="game-button">Remove Game</button>
+                    <button type="button" class="game-button button remove">Remove Game</button>
                 </fieldset>
                 <% }) %>
         <% } %>
+        <fieldset class="game-widget hidde">
+            <label>
+                Select a game to add:
+                <select name="games">
+                    <% ownedGames.forEach( (ownedGame) => { %>
+                        <option value="<%= ownedGame._id %>"><%= ownedGame.gameName %></option>
+                    <% }) %>
+                    <option class="hidden" value="" selected></option>
+                </select>
+            </label>
+            <button type="button" class="game-button button remove">Remove Game</button>
+        </fieldset>
     </section>
-    <button type="button" class="game-button add">Add a game</button>
+    <button type="button" class="game-button button add">Add a game</button>
     <section class="player-section">
         <% if (locals.campaign) { %>
             <% campaign.players.forEach( (player, i) => { %>
@@ -51,14 +63,13 @@
                         Owner:
                         <input type="text" name="playerOwner" value="<%= player.player.owner %>">
                     </label>
-                    <button type="button" class="player-button">Remove Player</button>
+                    <button type="button" class="player-button button remove">Remove Player</button>
                 </fieldset>
                 <% }) %>
         <% } %>
     </section>
-    <button type="button" class="player-button add">Add a player</button>
+    <button type="button" class="player-button button add">Add a player</button>
     <label for="campaign-info">Campaign Information</label>
-    <%- //include(`./partials/${campaign.campaignType}/new`) %>
     <label for="expert-mode">Campaign Difficulty:</label>
     <select id="expert-mode" name="expertMode">
         <option value="false" <% if (!locals.campaign || locals.campaign.modes.expert === false) { %> selected <% } %>>Standard</option>

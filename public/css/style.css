@@ -172,7 +172,7 @@ td {
     justify-content: center;
 }
 
-.player-widget, .profile-widget {
+.player-widget, .profile-widget, .game-widget {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -225,7 +225,7 @@ td {
     gap: 3rem;
 }
 
-.delete-modal {
+.modal {
     position: absolute;
     text-align: center;
     max-width: 80%;
@@ -268,3 +268,5 @@ a:hover {
 .hidden {
     display: none;
 }
+
+/* TODO - Style nav bar so it fits correctly on mobile 480px */

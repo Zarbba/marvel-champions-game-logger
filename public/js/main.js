@@ -1,13 +1,15 @@
 // -----Constants-----
 
 // -----Cached DOM Elements-----
-const deleteModalEl = document.querySelector(`.delete-modal`)
+const modalEl = document.querySelector(`.modal`)
 const addPlayerEl = document.querySelector(`.add`)
 const playerSectionEl = document.querySelector(`.player-section`)
-const coutnerEl = document.querySelectorAll(`.player-widget`)
+const playerCounterEls = document.querySelectorAll(`.player-widget`)
+const gameCounterEls = document.querySelectorAll(`.game-widget`)
 
 // -----Variables-----
-let playerCounter = coutnerEl.length
+let playerCounter = playerCounterEls.length
+let gameCounter = gameCounterEls.length
 
 // -----Event Listeners-----
 document.addEventListener(`click`, (e) => {
@@ -17,20 +19,32 @@ document.addEventListener(`click`, (e) => {
 
 // -----Functions-----
 function handleClick(e) {
-    if (e.target.classList.contains(`add`)) {
-        addPlayerWidget()
-        return
+    if (e.target.classList.contains(`player-button`)) {
+        if (e.target.classList.contains(`add`)) {
+            addPlayerWidget()
+            return
+        }
+        if (e.target.classList.contains(`remove`)) {
+            removePlayerWidget(e)
+            return
+        }
     }
-    if (e.target.classList.contains(`remove`)) {
-        removePlayerWidget(e)
-        return
+    if (e.target.classList.contains(`game-button`)) {
+        if (e.target.classList.contains(`add`)) {
+            addGameWidget()
+            return
+        }
+        if (e.target.classList.contains(`remove`)) {
+            removeGameWidget(e)
+            return
+        }
     }
     if (e.target.classList.contains(`delete`)) {
         revealDeleteModal(e)
         return
     }
     if (e.target.classList.contains(`cancel`)) {
-        hideDeleteModal()
+        hideModal()
         return
     }
 }
@@ -76,7 +90,7 @@ function removePlayerWidget(e) {
 }
 
 function revealDeleteModal(e) {
-    deleteModalEl.innerHTML =
+    modalEl.innerHTML =
     // REVIEW - There's gotta be a better way to pass these variables through...
 `<p class="delete-text">Are you sure you want to delete ${e.target.childNodes[1].textContent}?</p>
     <section class="button-section">
@@ -85,10 +99,10 @@ function revealDeleteModal(e) {
         </form>
         <button class="button-element button cancel" type="button">Cancel</button>
     </section>`
-    deleteModalEl.classList.remove(`hidden`)
+    modalEl.classList.remove(`hidden`)
 }
 
-function hideDeleteModal() {
-    deleteModalEl.classList.add(`hidden`)
-    deleteModalEl.innerHTML = ``
+function hideModal() {
+    modalEl.classList.add(`hidden`)
+    modalEl.innerHTML = ``
 }
