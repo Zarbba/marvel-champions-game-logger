@@ -100,11 +100,12 @@ form {
 }
 
 th, td {
+    text-align: left;
     padding: 0.5rem;
 }
 
 td {
-    text-align: center;
+    text-align: left;
     vertical-align: center;
 }
 
