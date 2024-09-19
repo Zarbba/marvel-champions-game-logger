@@ -11,64 +11,6 @@ const modesSchema = new mongoose.Schema ({
         },
 })
 
-const sinisterMotivesSchema = new mongoose.Schema ({
-    currentReputation: {
-        type: Number,
-        required: true
-    },
-    osbornTechCards: [
-        {
-            type: String,
-            enum: [`Arm Cannon`, `Ionic Boots`, `Kinetic Armor`, `Neocarbon Scales`, `Spiked Gauntlet`, `Tracking Display`]
-        }
-    ],
-    completedCommunityServices: [
-        {
-            type: String,
-            enum: [`Back Alley Burglary`, `Cat in a Tree`, `Henchmen heist`, `Off the Rails`, `Rubble Rescue`]
-        }
-    ],
-    completedWakingNightmare: {
-        type: Boolean,
-        required: true,
-    },
-    completedLastOneStanding: {
-        type: Boolean,
-        required: true,
-    },
-    shieldTechCards: [
-        {
-            card: {
-                type: String,
-                enum: [`Compact Darts`, `Impact-Dampening Suit`, `Laser Goggles`, `Propulsion Gauntlet`, `Retinal Display`, `Shock Knuckles`, `Wave Bracers`, `Wrist-Navigator`]
-            },
-            assignedTo: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: `Player`
-            }
-        }
-    ],
-    aspectAdvantageCards: [
-        {
-            card: String,
-            assignedTo: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: `Player`
-            }
-        }
-    ],
-    planningAheadCards: [
-        {
-            card: String,
-            assignedTo: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: `Player`
-            }
-        }
-    ], 
-    remainingHitPoints: Number         
-})
-
 const campaignSchema = new mongoose.Schema ({
     campaignName: {
         type: String,
@@ -85,10 +27,15 @@ const campaignSchema = new mongoose.Schema ({
         },
         identity: String
     }],
+    campaignInformation: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        refPath:`campaignType`
+    },
     campaignType: {
         type: String,
         required: true,
-        enum: [`The Rise of Red Skull`, `The Galaxy's Most Wanted`, `The Mad Titan's Shadow`, `Sinister Motives`, `Mutant Genesis`, `NeXt Evolution`, `Age of Apocalypse`]
+        enum: [`TheRiseofRedSkull`, `TheGalaxysMostWanted`, `TheMadTitansShadow`, `SinisterMotives`, `MutantGenesis`, `NeXtEvolution`, `AgeOfApocalypse`]
     },
     games: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -98,7 +45,6 @@ const campaignSchema = new mongoose.Schema ({
         type: modesSchema,
         required: true
     },
-    campaignInformation: sinisterMotivesSchema, //TODO - Find out how to make this dynamic based on campaignType.
     notes: String,
 }, {timestamps: true, virtuals: true})
 
