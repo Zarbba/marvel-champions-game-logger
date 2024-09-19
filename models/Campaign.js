@@ -11,6 +11,22 @@ const modesSchema = new mongoose.Schema ({
         },
 })
 
+const playerSchema = new mongoose.Schema ({
+    playerName: {
+        type: String,
+        required: true
+    }, 
+    identity: String,
+    campaignRef: {
+        type: Number,
+        required: true
+    },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `User`
+    }
+})
+
 const campaignSchema = new mongoose.Schema ({
     campaignName: {
         type: String,
@@ -20,13 +36,7 @@ const campaignSchema = new mongoose.Schema ({
         type: mongoose.Schema.Types.ObjectId,
         ref: `User`
     },
-    players: [{
-        player: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: `Players`
-        },
-        identity: String
-    }],
+    players: [playerSchema],
     campaignInformation: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,

@@ -1,5 +1,21 @@
 const mongoose = require(`mongoose`)
 
+const playerSchema = new mongoose.Schema ({
+    playerName: {
+        type: String,
+        required: true
+    }, 
+    identity: String,
+    campaignRef: {
+        type: Number,
+        required: true
+    },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `User`
+    }
+})
+
 const gameSchema = new mongoose.Schema ({
     gameName: {
         type: String,
@@ -9,13 +25,7 @@ const gameSchema = new mongoose.Schema ({
         type: Date,
         required: true
     },
-    players: [{
-        player: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: `Player`
-        },
-        identity: String
-    }],
+    players: [playerSchema],
     scenario: {
         type: String,
         required: true

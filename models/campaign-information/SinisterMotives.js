@@ -32,8 +32,8 @@ const sinisterMotivesSchema = new mongoose.Schema ({
                 enum: [`Compact Darts`, `Impact-Dampening Suit`, `Laser Goggles`, `Propulsion Gauntlet`, `Retinal Display`, `Shock Knuckles`, `Wave Bracers`, `Wrist-Navigator`]
             },
             assignedTo: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: `Player`
+                type: Number,
+                required: true
             }
         }
     ],
@@ -41,8 +41,8 @@ const sinisterMotivesSchema = new mongoose.Schema ({
         {
             card: String,
             assignedTo: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: `Player`
+                type: Number,
+                required: true
             }
         }
     ],
@@ -50,13 +50,13 @@ const sinisterMotivesSchema = new mongoose.Schema ({
         {
             card: String,
             assignedTo: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: `Player`
+                type: Number,
+                required: true
             }
         }
     ], 
     remainingHitPoints: Number         
-})
+}, {timestamps: true})
 
 const SinisterMotives = mongoose.model(`SinisterMotives`, sinisterMotivesSchema)
 

@@ -5,7 +5,6 @@ const isGameOwner = require(`../middleware/isGameOwner`)
 const utilities = require(`../lib/game-utilities`)
 const User = require(`../models/User`)
 const Game = require(`../models/Game`)
-const Player = require(`../models/Player`)
 const Campaign = require(`../models/Campaign`)
 require(`dotenv`).config()
 
@@ -21,7 +20,7 @@ router.get(`/new`, isLoggedIn, (req, res) => {
 router.post(`/`, isLoggedIn, async (req, res) => {
     try {
         const nameInDatabase = await Game.findOne({gameName: req.body.gameName})
-        const players = req.body.playerName ? utilities.formatPlayersForDatabase(req.body) : []
+        const players = req.body.playerName ? utilities.processPlayerFormData(req.body) : []
         if(nameInDatabase !== null) {
             const game = {
                 gameName: req.body.gameName,
@@ -50,6 +49,7 @@ router.post(`/`, isLoggedIn, async (req, res) => {
         res.status(500).render(`errors/error-500`)
     }
 })
+//TODO - Add functionality to attach a game to a campaign at creation.
 
 router.get(`/`, async (req, res) => {
     try {
@@ -78,8 +78,8 @@ router.get(`/:gameId`, async (req, res) => {
 
 router.get(`/:gameId/edit`, isLoggedIn, isGameOwner, async (req, res) => {
     try {
-        const game = await Game.findById(req.params.gameId).populate(`players.player`)
-        await game.populate(`players.player.owner`)
+        const game = await Game.findById(req.params.gameId)
+        await game.populate
         if (!game) {
             res.status(404).render(`errors/error-404`)
             return
@@ -95,7 +95,7 @@ router.put(`/:gameId`, isLoggedIn, isGameOwner, async (req, res) => {
     try {
         const nameInDatabase = await Game.findOne({gameName: req.body.gameName})
         const targetGame = await Game.findById(req.params.gameId)
-        const players = req.body.playerName ? utilities.formatPlayersForDatabase(req.body) : []
+        const players = req.body.playerName ? utilities.processPlayerFormData(req.body) : []
         if (nameInDatabase && nameInDatabase.id !== targetGame.id) {
             const game = {
                 gameName: req.body.gameName,
