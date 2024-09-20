@@ -18,4 +18,10 @@ router.get(`/new`, isLoggedIn, async (req, res) => {
     }
 })
 
+//TODO - Add post for /new
+//TODO - Add get for /
+//TODO - Add get for /edit
+//TODO - Add put for /edit
+//TODO - Add delete for /delete
+
 module.exports = router

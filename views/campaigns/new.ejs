@@ -17,6 +17,8 @@
             <option value="AgeOfApocalypse" <% if (locals.campaign && campaign.campaignType === `Age of Apocalypse`) { %> selected <% } %>>Age of Apocalypse</option>
             <option class="hidden" value="" <% if (!locals.campaign) { %> selected <% } %>></option>
         </select>
+    <h3>Campaign Information:</h3>
+    <%- include(`./partials/sinister-motives/new`) %>
     <section class="game-section">
         <% if (locals.campaign) { %>
             <% campaign.games.forEach( (game) => { %>
@@ -69,7 +71,6 @@
         <% } %>
     </section>
     <button type="button" class="player-button button add">Add a player</button>
-    <label for="campaign-info">Campaign Information</label>
     <label for="expert-mode">Campaign Difficulty:</label>
     <select id="expert-mode" name="expertMode">
         <option value="false" <% if (!locals.campaign || locals.campaign.modes.expert === false) { %> selected <% } %>>Standard</option>

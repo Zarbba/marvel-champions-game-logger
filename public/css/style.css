@@ -180,6 +180,15 @@ td {
     border: none;
 }
 
+.campaign-widget.checkboxes {
+    display: grid;
+    grid-template-columns: 1fr .4fr 1fr .4fr 1fr .4fr;
+    row-gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
 .update-password-element {
     display: flex;
     flex-direction: column;

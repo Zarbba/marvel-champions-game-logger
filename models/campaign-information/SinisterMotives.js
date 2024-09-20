@@ -14,7 +14,7 @@ const sinisterMotivesSchema = new mongoose.Schema ({
     completedCommunityServices: [
         {
             type: String,
-            enum: [`Back Alley Burglary`, `Cat in a Tree`, `Henchmen heist`, `Off the Rails`, `Rubble Rescue`]
+            enum: [`Back Alley Burglary`, `Cat in a Tree`, `Henchmen Heist`, `Off the Rails`, `Rubble Rescue`]
         }
     ],
     wakingNightmares: {

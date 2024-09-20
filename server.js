@@ -48,6 +48,7 @@ app.get(`/`, async (req, res) =>{
     const recentGames = await Game.find({}, null, {limit: 10}).populate(`owner`).sort({createdAt: `desc`})
     res.render(`home`, {recentGames})
 })
+//TODO - Add recent campaigns to this page. Limit to 5 for both.
 
 app.get(`/*`, (req, res) => {
     res.status(404).render(`errors/error-404`)

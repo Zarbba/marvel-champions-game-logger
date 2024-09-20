@@ -40,4 +40,7 @@ router.put(`/:userId`, isLoggedIn, isCurrentUser, async (req, res) => {
     }
 })
 
+//TODO - Add change username feature
+//TODO - Add profile view for users
+
 module.exports = router

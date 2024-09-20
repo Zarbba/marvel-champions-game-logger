@@ -13,11 +13,12 @@ let playerCounter = playerCounterEls.length
 // -----Event Listeners-----
 document.addEventListener(`click`, (e) => {
     if (e.target.classList.contains(`button`))
-    handleClick(e)
+    handleButtonClick(e)
 })
+//TODO - Move Nav links into sub menus and add logic to expand and contract menus
 
 // -----Functions-----
-function handleClick(e) {
+function handleButtonClick(e) {
     if (e.target.classList.contains(`player-button`)) {
         if (e.target.classList.contains(`add`)) {
             addPlayerWidget()
@@ -39,7 +40,7 @@ function handleClick(e) {
         }
     }
     if (e.target.classList.contains(`delete`)) {
-        revealDeleteModal(e)
+        revealDeleteGameModal(e)
         return
     }
     if (e.target.classList.contains(`cancel`)) {
@@ -66,12 +67,7 @@ function addPlayerWidget() {
         playerSectionEl.appendChild(newPlayerEl)
         playerCounter++
         if (playerCounter === 4) {
-        if (playerCounter === 4) {
             addPlayerEl.classList.add(`hidden`)
-            const maxPlayerMessageEl = document.createElement(`p`)
-            maxPlayerMessageEl.classList.add(`player-message`)
-            maxPlayerMessageEl.textContent = `Maximum player count reached.`
-            playerSectionEl.appendChild(maxPlayerMessageEl)
             const maxPlayerMessageEl = document.createElement(`p`)
             maxPlayerMessageEl.classList.add(`player-message`)
             maxPlayerMessageEl.textContent = `Maximum player count reached.`
@@ -112,7 +108,7 @@ function removeGameWidget(e) {
     }
 }
 
-function revealDeleteModal(e) {
+function revealDeleteGameModal(e) {
     modalEl.innerHTML =
     // REVIEW - There's gotta be a better way to pass these variables through...
 `<p class="delete-text">Are you sure you want to delete ${e.target.childNodes[1].textContent}?</p>
@@ -124,6 +120,9 @@ function revealDeleteModal(e) {
     </section>`
     modalEl.classList.remove(`hidden`)
 }
+
+//TODO - Add revealDeleteCampaignModal()
+//TODO - Add confirmGameAttachmentModal()
 
 function hideModal() {
     modalEl.classList.add(`hidden`)

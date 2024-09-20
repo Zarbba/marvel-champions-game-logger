@@ -117,7 +117,4 @@ router.get(`/logout`, isLoggedIn, (req, res) => {
     }
 })
 
-
-//TODO - Implement a change password feature.
-
 module.exports = router
