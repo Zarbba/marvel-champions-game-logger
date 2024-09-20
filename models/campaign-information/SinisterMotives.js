@@ -17,14 +17,16 @@ const sinisterMotivesSchema = new mongoose.Schema ({
             enum: [`Back Alley Burglary`, `Cat in a Tree`, `Henchmen heist`, `Off the Rails`, `Rubble Rescue`]
         }
     ],
-    completedWakingNightmare: {
-        type: Boolean,
+    wakingNightmares: {
+        type: Number,
         required: true,
     },
-    completedLastOneStanding: {
-        type: Boolean,
-        required: true,
-    },
+    lastOnesStanding: [
+        {
+            type: String,
+            enum: [`Doctor Octopus`, `Electro`, `Hobgoblin`, `Kraven the Hunter`, `Scorpion`, `Vulture`]    
+        }
+    ],
     shieldTechCards: [
         {
             card: {

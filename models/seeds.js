@@ -12,7 +12,6 @@ mongoose.connect(process.env.MONGODB_URI)
 
 mongoose.connection.on(`open`, async () => {
     await seedUsers()
-    await seedPlayers()
     await seedGames()
     await seedCampaignInformation()
     await seedCampaigns()
@@ -27,23 +26,9 @@ async function seedUsers() {
     ])
 }
 
-async function seedPlayers() {
-    const deletedPlayers = await Player.deleteMany()
-    const createdUsers = await Player.create([
-        {playerName: `Josh`, owner: await User.findOne({userName: `Zarbba`})},
-        {playerName: `Henry`, owner: await User.findOne({userName: `Hnro`})},
-        {playerName: `Daniel`},
-        {playerName: `Luna`},
-    ])
-}
-
 async function seedGames() {
     const zarbba = await User.findOne({userName: `Zarbba`})
     const hnro = await User.findOne({userName: `Hnro`})
-    const josh = await Player.findOne({playerName: `Josh`})
-    const henry = await Player.findOne({playerName: `Henry`})
-    const daniel = await Player.findOne({playerName:`Daniel`})
-    const luna = await Player.findOne({playerName: `Luna`})
     const deletedGames = await Game.deleteMany()
     const createdGames = await Game.create([
         {
@@ -276,11 +261,11 @@ async function seedGames() {
 async function seedCampaignInformation() {
     const deletedInformation = await SinisterMotives.deleteMany()
     const createdInformation = await SinisterMotives.create({
-        currentReputation: 12,
-        osbornTechCards: [`Ionic Boots`],
+        currentReputation: 18,
+        osbornTechCards: [`Ionic Boots`, `Spiked Gauntlet`],
         completedCommunityServices: [],
-        completedWakingNightmare: false,
-        completedLastOneStanding: false,
+        wakingNightmares: 2,
+        lastOnesStanding: [],
         shieldTechCards: [
             {
                 card: `Wave Bracers`,
@@ -301,14 +286,23 @@ async function seedCampaignInformation() {
                 assignedTo: 1
             }
         ],
-        planningAheadCards: []
+        planningAheadCards: [
+            {
+                card: `Host Spider`,
+                assignedTo: 0,
+            },
+            {
+                card: `X-Gene`,
+                assignedTo: 1
+            }
+        ]
     })
 }
 
 async function seedCampaigns() {
     const zarbba = await User.findOne({userName: `Zarbba`})
     const hnro = await User.findOne({userName: `Hnro`})
-    const info = await SinisterMotives.findOne({currentReputation: 12,})
+    const info = await SinisterMotives.findOne({currentReputation: 18,})
     const deletedCampaigns = await Campaign.deleteMany()
     const createdCampaigns = await Campaign.create({
         campaignName: `Josh and Henry Get Sinister`,
@@ -335,7 +329,7 @@ async function seedCampaigns() {
             expert: false,
         },
         campaignInformation: info,
-        notes: `Mysterio is crushing us. Might need more or better ways to deal with encounter cards.`
+        notes: `Finally beat Mysterio. Looks like making Henry's deck cheaper did the trick.`
     })
     const allCampaigns = await Campaign.find()
     console.log(allCampaigns)
