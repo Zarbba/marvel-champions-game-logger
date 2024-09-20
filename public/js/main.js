@@ -66,7 +66,12 @@ function addPlayerWidget() {
         playerSectionEl.appendChild(newPlayerEl)
         playerCounter++
         if (playerCounter === 4) {
+        if (playerCounter === 4) {
             addPlayerEl.classList.add(`hidden`)
+            const maxPlayerMessageEl = document.createElement(`p`)
+            maxPlayerMessageEl.classList.add(`player-message`)
+            maxPlayerMessageEl.textContent = `Maximum player count reached.`
+            playerSectionEl.appendChild(maxPlayerMessageEl)
             const maxPlayerMessageEl = document.createElement(`p`)
             maxPlayerMessageEl.classList.add(`player-message`)
             maxPlayerMessageEl.textContent = `Maximum player count reached.`

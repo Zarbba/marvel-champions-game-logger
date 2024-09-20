@@ -12,6 +12,7 @@ mongoose.connect(process.env.MONGODB_URI)
 
 mongoose.connection.on(`open`, async () => {
     await seedUsers()
+    await seedPlayers()
     await seedGames()
     await seedCampaignInformation()
     await seedCampaigns()
@@ -26,9 +27,23 @@ async function seedUsers() {
     ])
 }
 
+async function seedPlayers() {
+    const deletedPlayers = await Player.deleteMany()
+    const createdUsers = await Player.create([
+        {playerName: `Josh`, owner: await User.findOne({userName: `Zarbba`})},
+        {playerName: `Henry`, owner: await User.findOne({userName: `Hnro`})},
+        {playerName: `Daniel`},
+        {playerName: `Luna`},
+    ])
+}
+
 async function seedGames() {
     const zarbba = await User.findOne({userName: `Zarbba`})
     const hnro = await User.findOne({userName: `Hnro`})
+    const josh = await Player.findOne({playerName: `Josh`})
+    const henry = await Player.findOne({playerName: `Henry`})
+    const daniel = await Player.findOne({playerName:`Daniel`})
+    const luna = await Player.findOne({playerName: `Luna`})
     const deletedGames = await Game.deleteMany()
     const createdGames = await Game.create([
         {
@@ -172,6 +187,7 @@ async function seedGames() {
             ],
             scenario: `Rhino`,
             wonGame: false,
+            notes: `Luna didn't really like the game. I guess I shoulda known ^.^;`,
             notes: `Luna didn't really like the game. I guess I shoulda known ^.^;`,
             owner: zarbba
         },

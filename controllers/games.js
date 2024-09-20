@@ -79,7 +79,6 @@ router.get(`/:gameId`, async (req, res) => {
 router.get(`/:gameId/edit`, isLoggedIn, isGameOwner, async (req, res) => {
     try {
         const game = await Game.findById(req.params.gameId)
-        await game.populate
         if (!game) {
             res.status(404).render(`errors/error-404`)
             return

@@ -25,13 +25,23 @@ const gameSchema = new mongoose.Schema ({
         type: Date,
         required: true
     },
-    players: [playerSchema],
+    players: [{
+        player: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `Player`
+        },
+        identity: String
+    }],
     scenario: {
         type: String,
         required: true
     },
     wonGame: Boolean,
     notes: String,
+    campaign: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `Campaign`
+    },
     campaign: {
         type: mongoose.Schema.Types.ObjectId,
         ref: `Campaign`
