@@ -3,7 +3,7 @@
 <table>
     <% if (games.length > 0) { %>
         <tr>
-            <th><a href="/games?sorting=gameName&order=<%= order %>">Name</a></th> <th><a href="/games?sorting=owner&order=<%= order %>">Author</a></th> <th><a href="/games?sorting=datePlayed&order=<%= order %>">Date Played</a></th> <th><a href="/games?sorting=createdAt&order=<%= order %>">Date Published</a></th>
+            <th><a href="/games?sorting=gameName&order=<%= order %>&page=<%= currentPage %>">Name</a></th> <th><a href="/games?sorting=owner&order=<%= order %>&page=<%= currentPage %>">Author</a></th> <th><a href="/games?sorting=datePlayed&order=<%= order %>&page=<%= currentPage %>">Date Played</a></th> <th><a href="/games?sorting=createdAt&order=<%= order %>&page=<%= currentPage %>">Date Published</a></th>
         </tr>
         <% games.forEach((game, i) => { %>
             <tr>
