@@ -4,12 +4,11 @@
 const modalEl = document.querySelector(`.modal`)
 const addPlayerEl = document.querySelector(`.add`)
 const playerSectionEl = document.querySelector(`.player-section`)
+const gameSectionEl = document.querySelector(`.game-section`)
 const playerCounterEls = document.querySelectorAll(`.player-widget`)
-const gameCounterEls = document.querySelectorAll(`.game-widget`)
-
+const defaultGameWidgetEl = document.querySelector(`#default-widget`)
 // -----Variables-----
 let playerCounter = playerCounterEls.length
-let gameCounter = gameCounterEls.length
 
 // -----Event Listeners-----
 document.addEventListener(`click`, (e) => {
@@ -86,6 +85,25 @@ function removePlayerWidget(e) {
             const maxPlayerMessageEl = document.querySelector(`.player-message`)
             maxPlayerMessageEl.remove()
         }
+    }
+}
+
+function addGameWidget() {
+    if (defaultGameWidgetEl.classList.contains(`hidden`)) {
+        defaultGameWidgetEl.classList.remove(`hidden`)
+    } else {
+        const newGameEl = defaultGameWidgetEl.cloneNode(true)
+        newGameEl.classList.remove(`default-widget`)
+        gameSectionEl.appendChild(newGameEl)    
+    }
+}
+
+function removeGameWidget(e) {
+    if (e.target.classList.contains(`default-widget`)) {
+        defaultGameWidgetEl.classList.add(`hidden`)
+    } else {
+        const removeGameEl = e.target.parentNode
+        removeGameEl.remove()
     }
 }
 
