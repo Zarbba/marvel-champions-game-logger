@@ -117,7 +117,7 @@ router.put(`/:gameId`, isLoggedIn, isGameOwner, async (req, res) => {
                 notes: req.body.notes,
                 owner: req.session.user    
             }, 
-            {new: true}
+            {new: true, runValidators: true}
         )
         res.redirect(`/games`)
     } catch(err) {

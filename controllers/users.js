@@ -39,5 +39,7 @@ router.put(`/:userId`, isLoggedIn, isCurrentUser, async (req, res) => {
         res.status(500).render(`errors/error-500`)
     }
 })
+//TODO - Add validation for empty strings.
+
 
 module.exports = router
