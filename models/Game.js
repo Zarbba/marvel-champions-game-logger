@@ -64,6 +64,8 @@ gameSchema.virtual(`htmlDate`).get(function () {
     return this.datePlayed.toISOString().slice(0,10)
 })
 
+//TODO - Add validation for empty strings
+
 const Game = mongoose.model(`Game`, gameSchema)
 
 module.exports = Game

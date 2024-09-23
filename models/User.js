@@ -23,6 +23,8 @@ const userSchema = new mongoose.Schema ({
     }]
 }, {timestamps: true, virtuals: true})
 
+//TODO - Add validation for empty strings
+
 const User = mongoose.model(`User`, userSchema)
 
 module.exports = User

@@ -39,6 +39,8 @@ router.put(`/:userId`, isLoggedIn, isCurrentUser, async (req, res) => {
         res.status(500).render(`errors/error-500`)
     }
 })
+//TODO - Add validation for empty strings.
+
 
 //TODO - Add change username feature
 //TODO - Add profile view for users
