@@ -77,7 +77,7 @@
         <option value="true" <% if (locals.campaign && campaign.campaign.modes.expert === true) { %> selected <% } %>>Expert</option>
     </select>
     <label for="heroic-mode">Heroic Mode Modifier:</label>
-    <select id="heroic-mode">
+    <select id="heroic-mode" name="heroicMode">
         <option value="0" <% if (!locals.campaign || locals.campaign.modes.heroic === 0) { %> selected <% } %>>0</option>
         <option value="1" <% if (locals.campaign && locals.campaign.modes.heroic === 1) { %> selected <% } %>>1</option>
         <option value="2" <% if (locals.campaign && locals.campaign.modes.heroic === 2) { %> selected <% } %>>2</option>
@@ -86,6 +86,6 @@
     </select>
     <label for="notes">Notes:</label>
     <textarea id="notes" type="" name="notes" rows="6" cols="40"><% if (locals.game) { %><%=game.notes%><% } %></textarea>
-    <button>Log Game</button>
+    <button>Log Campaign</button>
 </form>
 <%- include(`../partials/footer`) %>

@@ -2,6 +2,7 @@ const express = require(`express`)
 const router = express.Router()
 const isLoggedIn = require(`../middleware/isLoggedIn`)
 const isCampaignOwner = require(`../middleware/isCampaignOwner`)
+const utilities = require(`../lib/utilities`)
 const User = require(`../models/User`)
 const Game = require(`../models/Game`)
 const Campaign = require(`../models/Campaign`)
@@ -12,6 +13,27 @@ router.get(`/new`, isLoggedIn, async (req, res) => {
         const user = await User.findById(req.session.user._id).populate(`ownedGames`)
         const ownedGames = user.ownedGames
         res.render(`campaigns/new`, {ownedGames})
+    } catch(err) {
+        console.log(err)
+        res.status(500).render(`errors/error-500`)
+    }
+})
+
+router.post(`/`, isLoggedIn, async (req, res) => {
+    try {
+        const campaignInformation = await utilities.processCampaignInformationFormData(req.body)
+        const players = utilities.processPlayerFormData(req.body)
+        const modes = utilities.processModeFormData(req.body)
+        const newCampaign = await Campaign.create({
+            campaignName: req.body.campaignName,
+            campaignType: req.body.campaignType,
+            campaignInformation,
+            games: req.body.games,
+            players,
+            modes,
+            notes: req.body.notes
+        })
+        res.redirect(`/campaigns`)
     } catch(err) {
         console.log(err)
         res.status(500).render(`errors/error-500`)
