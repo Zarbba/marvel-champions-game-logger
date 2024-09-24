@@ -57,7 +57,6 @@ const sinisterMotivesSchema = new mongoose.Schema ({
             }
         }
     ], 
-    remainingHitPoints: Number         
 }, {timestamps: true})
 
 const SinisterMotives = mongoose.model(`SinisterMotives`, sinisterMotivesSchema)

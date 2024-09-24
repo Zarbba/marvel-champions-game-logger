@@ -49,6 +49,8 @@ function handleButtonClick(e) {
     }
 }
 
+//TODO - Add dynamic generation of campaignInfo segments
+
 function addPlayerWidget() {
     if (playerCounter < 4) {
         const newPlayerEl = document.createElement(`fieldset`)

@@ -55,6 +55,10 @@ const campaignSchema = new mongoose.Schema ({
         type: modesSchema,
         required: true
     },
+    remainingHitPoints: [{
+        hitPoints: Number,
+        assignedTo: Number
+    }],
     notes: String,
 }, {timestamps: true, virtuals: true})
 
