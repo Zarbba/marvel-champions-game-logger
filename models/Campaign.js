@@ -58,6 +58,18 @@ const campaignSchema = new mongoose.Schema ({
     notes: String,
 }, {timestamps: true, virtuals: true})
 
+campaignSchema.virtual(`playerNames`).get(function () {
+    let playerNames = []
+    this.players.forEach( (player) => {
+        playerNames.push(player.playerName)
+    })
+    return playerNames
+})
+
+campaignSchema.virtual(`htmlDate`).get(function () {
+    return this.datePlayed.toISOString().slice(0,10)
+})
+
 const Campaign = mongoose.model(`Campaign`, campaignSchema)
 
 module.exports = Campaign

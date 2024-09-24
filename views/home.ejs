@@ -3,23 +3,49 @@
 <h2>Recently Logged Games</h2>
 <table>
     <% if (recentGames.length > 0) { %>
-        <tr>
+        <thead>
             <th>Game Name</th> <th>Author</th> <th>Date Published</th>
-        </tr>
-        <% recentGames.forEach((game) => { %>
-            <tr>
-                <td><a class="game-link" href="/games/<%= game._id %>"><%= game.gameName %></a></td> <td><%= game.owner.userName %></td> <td><%= game.createdAt.toDateString() %></td>
-            <% if (user !== null && user._id == game.owner._id) {%>
-                <td class ="button-cell">
-                    <form class="table-form" action="/games/<%= game._id %>/edit">
-                        <button>Edit</button>
-                    </form>
-                    <button class="button delete <%= game._id %>" type="button">Delete<span class="hidden"><%= game.gameName %></span></button>
-                </td>
-            <% } %>
-        </tr>
-    <% }) %>
-<% } %>
+        </thead>
+        <tbody>
+            <% recentGames.forEach((game) => { %>
+                <tr>
+                    <td><a class="game-link" href="/games/<%= game._id %>"><%= game.gameName %></a></td> <td><%= game.owner.userName %></td> <td><%= game.createdAt.toDateString() %></td>
+                    <% if (user !== null && user._id == game.owner._id) {%>
+                        <td class ="button-cell">
+                            <form class="table-form" action="/games/<%= game._id %>/edit">
+                                <button>Edit</button>
+                            </form>
+                            <button class="button delete <%= game._id %>" type="button">Delete<span class="hidden"><%= game.gameName %></span></button>
+                        </td>
+                    <% } %>
+                </tr>
+            <% }) %>
+        </tbody>
+    <% } %>    
 </table>
+<h2>Recently Logged Campaigns</h2>
+<table>
+    <% if (recentCampaigns.length > 0) { %>
+        <thead>
+            <th>Campaign Name</th> <th>Author</th> <th>Date Published</th>
+        </thead>
+        <tbody>
+            <% recentCampaigns.forEach((campaign) => { %>
+                <tr>
+                    <td><a class="campaign-link" href="/campaigns/<%= campaign._id %>"><%= campaign.campaignName %></a></td> <td><%= campaign.owner.userName %></td> <td><%= campaign.createdAt.toDateString() %></td>
+                    <% if (user !== null && user._id == campaign.owner._id) {%>
+                        <td class ="button-cell">
+                            <form class="table-form" action="/campaigns/<%= campaign._id %>/edit">
+                                <button>Edit</button>
+                            </form>
+                            <button class="button delete <%= campaign._id %>" type="button">Delete<span class="hidden"><%= campaign.campaignName %></span></button>
+                        </td>
+                    <% } %>
+                </tr>
+            <% }) %>
+        </tbody>
+    <% } %>    
+</table>
+
 <%- include(`./partials/modal`) %>
 <%- include(`./partials/footer`) %>

@@ -42,10 +42,6 @@ const gameSchema = new mongoose.Schema ({
         type: mongoose.Schema.Types.ObjectId,
         ref: `Campaign`
     },
-    campaign: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: `Campaign`
-    },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: `User`

@@ -39,6 +39,9 @@ router.post(`/`, isLoggedIn, async (req, res) => {
         res.status(500).render(`errors/error-500`)
     }
 })
+//TODO - Add player forcing for games attached to a campaign
+//TODO - Add warning for player forcing
+//TODO - Add warning when changing games from one campaign to another
 
 //TODO - Add post for /new
 //TODO - Add get for /
