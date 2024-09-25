@@ -18,7 +18,8 @@
             <option class="hidden" value="" <% if (!locals.campaign) { %> selected <% } %>></option>
         </select>
     <h3>Campaign Information:</h3>
-    <%- include(`./partials/sinister-motives/new`) %>
+    <section class="campaign-info-section">
+    </section>
     <!-- TODO - Add dynamic generation of campaignInfo segments -->
     <section class="game-section">
         <% if (locals.campaign) { %>
