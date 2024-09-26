@@ -6,6 +6,7 @@
     <% game.players.forEach( (player) => { %>
         <p>Player Name: <%= player.playerName %> Hero: <%= player.identity %></p>
     <% }) %>
+    <!-- TODO - Add logic that changes player display depending on if the game is a campaign game or not. -->
     <p><span>Scenario:</span> <%= game.scenario %></p>
     <p><span>Outcome:</span> The players <%= game.wonGame ? `won` : `lost` %> this game.</p>
     <h3>Notes:</h3>

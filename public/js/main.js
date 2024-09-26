@@ -70,7 +70,6 @@ const campaignInformation = {
         edit: ``
     },
 }
-//REVIEW - Find a better way to store the campaignInformation templates or else consider re-implementing this in React
 
 // -----Cached DOM Elements-----
 const modalEl = document.querySelector(`.modal`)
@@ -136,6 +135,7 @@ function insertCampaignInformation(e) {
     let campaignInfoEl = document.getElementById(`campaign-type`)
     campaignInfoSectionEl.innerHTML = chooseCampaignInformation(campaignInfoEl.value)
 }
+//TODO - Change this logic to be reveal/hide style instead of inserting new elements.
 
 function addPlayerWidget() {
     if (playerCounter < 4) {
@@ -163,6 +163,7 @@ function addPlayerWidget() {
         }
     }
 }
+//TODO - Adjust this so that it works for any player widget instead of just the standard game widget.
 
 function removePlayerWidget(e) {
     if (playerCounter > 0) {
@@ -210,7 +211,6 @@ function revealDeleteGameModal(e) {
 }
 
 //TODO - Add revealDeleteCampaignModal()
-//TODO - Add confirmGameAttachmentModal()
 
 function hideModal() {
     modalEl.classList.add(`hidden`)

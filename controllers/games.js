@@ -75,6 +75,7 @@ router.get(`/:gameId`, async (req, res) => {
         res.status(500).render(`errors/error-500`)
     }
 })
+//TODO - Add a fetch for the campaign if game is a campaign game so player informaton can be populated.
 
 router.get(`/:gameId/edit`, isLoggedIn, isGameOwner, async (req, res) => {
     try {
@@ -155,5 +156,6 @@ router.delete(`/:gameId`, isLoggedIn, isGameOwner, async (req, res) => {
         res.status(500).render(`errors/error-500`)
     }
 })
+//TODO - Add logic to remove games from campaigns when games are deleted or else prevent deletes when games are associated with a campaign.
 
 module.exports = router
