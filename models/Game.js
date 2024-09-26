@@ -6,10 +6,6 @@ const playerSchema = new mongoose.Schema ({
         required: true
     }, 
     identity: String,
-    campaignRef: {
-        type: Number,
-        required: true
-    },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: `User`

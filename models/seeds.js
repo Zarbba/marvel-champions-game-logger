@@ -38,7 +38,6 @@ async function seedGames() {
                 {
                     playerName: `Josh`,
                     identity: `Sp//dr`,
-                    campaignRef: 0,
                     owner: zarbba
                 }
             ],
@@ -53,13 +52,11 @@ async function seedGames() {
             players:[
                 {   playerName: `Josh`,
                     identity: `Captain America`,
-                    campaignRef: 0,
                     owner: zarbba
                 },
                 {
                     playerName: `Henry`,
                     identity: `X-23`,
-                    campaignRef: 1,
                     owner: hnro
                 }
             ],
@@ -75,12 +72,10 @@ async function seedGames() {
                 {
                     playerName: `Daniel`,
                     identity: `Dr. Strange`,
-                    campaignRef: 0
                 },
                 {
                     playerName: `Josh`,
                     identity: `Sp//dr`,
-                    campaignRef: 1,
                     owner: zarbba
                 }
             ],
@@ -96,19 +91,16 @@ async function seedGames() {
                 {
                     playerName: `Josh`,
                     identity: `Captain America`,
-                    campaignRef: 0,
                     owner: zarbba
                 },
                 {
                     playerName: `Henry`,
                     identity: `Magneto`,
-                    campaignRef: 1,
                     owner: hnro
                 },
                 {
                     playerName: `Daniel`,
                     identity: `Dr. Strange`,
-                    campaignRef: 2
                 },
             ],
             scenario: `Red Skull`,
@@ -123,7 +115,6 @@ async function seedGames() {
                 {
                     playerName: `Henry`,
                     identity: `Rogue`,
-                    campaignRef: 0,
                     owner: hnro
                 }
             ],
@@ -139,13 +130,11 @@ async function seedGames() {
                 {
                     playerName: `Josh`,
                     identity: `Sp//dr`,
-                    campaignRef: 0,
                     owner: zarbba
                 },
                 {
                     playerName: `Henry`,
                     identity: `Rogue`,
-                    campaignRef: 1,
                     owner: hnro
                 }
             ],
@@ -161,13 +150,11 @@ async function seedGames() {
                 {
                     playerName: `Josh`,
                     identity: `Ms Marvel`,
-                    campaignRef: 0,
                     owner: zarbba
                 },
                 {
                     playerName: `Luna`,
                     identity: `Ghost Spider`,
-                    campaignRef: 1,
                 }
             ],
             scenario: `Rhino`,
@@ -183,7 +170,6 @@ async function seedGames() {
                 {
                     playerName: `Josh`,
                     identity: `Iron Man`,
-                    campaignRef: 0,
                     owner: zarbba
                 }
             ],
@@ -199,13 +185,11 @@ async function seedGames() {
                 {
                     playerName: `Henry`,
                     identity: `Magneto`,
-                    campaignRef: 0,
                     owner: hnro
                 },
                 {
                     playerName: `Josh`,
                     identity: `Nightcrawler`,
-                    campaignRef: 1,
                     owner: zarbba
                 }
             ],
@@ -221,13 +205,11 @@ async function seedGames() {
                 {
                     playerName: `Josh`,
                     identity: `Cyclops`,
-                    campaignRef: 0,
                     owner: zarbba
                 },
                 {
                     playerName: `Henry`,
                     identity: `X-23`,
-                    campaignRef: 1,
                     owner: hnro
                 }
             ],
@@ -243,7 +225,6 @@ async function seedGames() {
                 {
                     playerName: `Henry`,
                     identity: `Pheonix`,
-                    campaignRef: 0,
                     owner: hnro
                 }
             ],
@@ -259,6 +240,8 @@ async function seedGames() {
 }
 
 async function seedCampaignInformation() {
+    const zarbba = await User.findOne({userName: `Zarbba`})
+    const hnro = await User.findOne({userName: `Hnro`})
     const deletedInformation = await SinisterMotives.deleteMany()
     const createdInformation = await SinisterMotives.create({
         currentReputation: 18,
@@ -266,61 +249,35 @@ async function seedCampaignInformation() {
         completedCommunityServices: [],
         wakingNightmares: 2,
         lastOnesStanding: [],
-        shieldTechCards: [
-            {
-                card: `Wave Bracers`,
-                assignedTo: 0
-            },
-            {
-                card: `Shock Knuckles`,
-                assignedTo: 1
-            }
-        ],
-        aspectAdvantageCards: [
-            {
-                card: `Make the Call`,
-                assignedTo: 0
-            },
-            {
-                card: `Hawkeye/Clint Barton`,
-                assignedTo: 1
-            }
-        ],
-        planningAheadCards: [
-            {
-                card: `Host Spider`,
-                assignedTo: 0,
-            },
-            {
-                card: `X-Gene`,
-                assignedTo: 1
-            }
-        ]
-    })
-}
-
-async function seedCampaigns() {
-    const zarbba = await User.findOne({userName: `Zarbba`})
-    const hnro = await User.findOne({userName: `Hnro`})
-    const info = await SinisterMotives.findOne({currentReputation: 18,})
-    const deletedCampaigns = await Campaign.deleteMany()
-    const createdCampaigns = await Campaign.create({
-        campaignName: `Josh and Henry Get Sinister`,
-        owner: zarbba,
         players: [
             {
                 playerName: `Josh`,
                 identity: `Sp//dr`,
-                campaignRef: 0,
+                shiedlTechCard: `Wave Bracers`,
+                aspectAdvantageCard: `Make the Call`,
+                planningAheadCard: `Host Spider`,
                 owner: zarbba
             },
             {
                 playerName: `Henry`,
                 identity: `Rogue`,
-                campaignRef: 1,
+                shiedlTechCard: `Shock Knuckles`,
+                aspectAdvantageCard: `Hawkeye/Clint Barton`,
+                planningAheadCard: `X-Gene`,
                 owner: hnro
             }
         ],
+    })
+}
+
+async function seedCampaigns() {
+    const info = await SinisterMotives.findOne({currentReputation: 18,})
+    const zarbba = await User.findOne({userName: `Zarbba`})
+    const hnro = await User.findOne({userName: `Hnro`})
+    const deletedCampaigns = await Campaign.deleteMany()
+    const createdCampaigns = await Campaign.create({
+        campaignName: `Josh and Henry Get Sinister`,
+        owner: zarbba,
         campaignType: `SinisterMotives`,
         games: [ 
             await Game.findOne({gameName: `Sp//dr and Rogue vs Mysterio 2-Player Sinister Motives Campaign Game`})
