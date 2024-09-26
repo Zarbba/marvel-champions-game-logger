@@ -1,5 +1,25 @@
 const mongoose = require(`mongoose`)
 
+const playerSchema = new mongoose.Schema ({
+    playerName: {
+        type: String,
+        required: true
+    }, 
+    identity: String,
+    remainingHitPoints: Number,
+    shieldTechCard: 
+    {
+        type: String,
+        enum: [`Compact Darts`, `Impact-Dampening Suit`, `Laser Goggles`, `Propulsion Gauntlet`, `Retinal Display`, `Shock Knuckles`, `Wave Bracers`, `Wrist-Navigator`]
+    },
+    aspectAdvantageCard:String,
+    planningAheadCard: String,
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `User`
+    }
+})
+
 const sinisterMotivesSchema = new mongoose.Schema ({
     currentReputation: {
         type: Number,
@@ -27,36 +47,7 @@ const sinisterMotivesSchema = new mongoose.Schema ({
             enum: [`Doctor Octopus`, `Electro`, `Hobgoblin`, `Kraven the Hunter`, `Scorpion`, `Vulture`]    
         }
     ],
-    shieldTechCards: [
-        {
-            card: {
-                type: String,
-                enum: [`Compact Darts`, `Impact-Dampening Suit`, `Laser Goggles`, `Propulsion Gauntlet`, `Retinal Display`, `Shock Knuckles`, `Wave Bracers`, `Wrist-Navigator`]
-            },
-            assignedTo: {
-                type: Number,
-                required: true
-            }
-        }
-    ],
-    aspectAdvantageCards: [
-        {
-            card: String,
-            assignedTo: {
-                type: Number,
-                required: true
-            }
-        }
-    ],
-    planningAheadCards: [
-        {
-            card: String,
-            assignedTo: {
-                type: Number,
-                required: true
-            }
-        }
-    ], 
+    players: [playerSchema] 
 }, {timestamps: true})
 
 const SinisterMotives = mongoose.model(`SinisterMotives`, sinisterMotivesSchema)

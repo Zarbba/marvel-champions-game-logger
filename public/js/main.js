@@ -137,8 +137,6 @@ function insertCampaignInformation(e) {
     campaignInfoSectionEl.innerHTML = chooseCampaignInformation(campaignInfoEl.value)
 }
 
-//TODO - Add dynamic generation of campaignInfo segments
-
 function addPlayerWidget() {
     if (playerCounter < 4) {
         const newPlayerEl = document.createElement(`fieldset`)
