@@ -7,7 +7,7 @@ const modesSchema = new mongoose.Schema ({
     },
     heroic: {
         type: Number,
-        enum: [1, 2, 3, 4]
+        enum: [0, 1, 2, 3, 4]
         },
 })
 
@@ -38,10 +38,6 @@ const campaignSchema = new mongoose.Schema ({
         type: modesSchema,
         required: true
     },
-    remainingHitPoints: [{
-        hitPoints: Number,
-        assignedTo: Number
-    }],
     notes: String,
 }, {timestamps: true, virtuals: true})
 

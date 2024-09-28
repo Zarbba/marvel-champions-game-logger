@@ -21,25 +21,15 @@ router.get(`/new`, isLoggedIn, async (req, res) => {
 
 router.post(`/`, isLoggedIn, async (req, res) => {
     try {
-        const campaignInformation = await utilities.processCampaignInformationFormData(req.body)
-        const players = utilities.processPlayerFormData(req.body)
-        const modes = utilities.processModeFormData(req.body)
-        const newCampaign = await Campaign.create({
-            campaignName: req.body.campaignName,
-            campaignType: req.body.campaignType,
-            campaignInformation,
-            games: req.body.games,
-            players,
-            modes,
-            notes: req.body.notes
-        })
+        const campaignData = await utilities.processCampaignFormData(req.body)
+        const newCampaign = await Campaign.create(campaignData)
+        const updatedGames = await Game.updateMany({_id: {"$in":[newCampaign.games]}}, {"$set":{campaign: newCampaign}})
         res.redirect(`/campaigns`)
     } catch(err) {
         console.log(err)
         res.status(500).render(`errors/error-500`)
     }
 })
-//TODO - Add logic to update games to be campaign games when added to a campaign.
 //TODO - Add warning when changing games from one campaign to another
 
 //TODO - Add post for /new
