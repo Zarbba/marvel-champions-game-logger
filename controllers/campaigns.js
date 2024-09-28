@@ -32,7 +32,6 @@ router.post(`/`, isLoggedIn, async (req, res) => {
 })
 //TODO - Add warning when changing games from one campaign to another
 
-//TODO - Add post for /new
 //TODO - Add get for /
 //TODO - Add get for /edit
 //TODO - Add put for /edit

@@ -236,7 +236,7 @@ async function seedGames() {
     ])
     const allGames = await Game.find()
     console.log(allGames)
-    await addOwners(zarbba, hnro)
+    await addGameOwners(zarbba, hnro)
 }
 
 async function seedCampaignInformation() {
@@ -274,25 +274,25 @@ async function seedCampaigns() {
     const info = await SinisterMotives.findOne({currentReputation: 18,})
     const zarbba = await User.findOne({userName: `Zarbba`})
     const hnro = await User.findOne({userName: `Hnro`})
+    const campaignGame = await Game.findOne({gameName: `Sp//dr and Rogue vs Mysterio 2-Player Sinister Motives Campaign Game`})
     const deletedCampaigns = await Campaign.deleteMany()
     const createdCampaigns = await Campaign.create({
         campaignName: `Josh and Henry Get Sinister`,
         owner: zarbba,
         campaignType: `SinisterMotives`,
-        games: [ 
-            await Game.findOne({gameName: `Sp//dr and Rogue vs Mysterio 2-Player Sinister Motives Campaign Game`})
-        ],
+        games: [campaignGame],
         modes: {
             expert: false,
         },
         campaignInformation: info,
         notes: `Finally beat Mysterio. Looks like making Henry's deck cheaper did the trick.`
     })
+    await Game.findByIdAndUpdate(campaignGame._id, {campaign: createdCampaigns._id})
     const allCampaigns = await Campaign.find()
     console.log(allCampaigns)
 }
 
-async function addOwners(u1, u2) {
+async function addGameOwners(u1, u2) {
     const u1Games = await Game.find({owner: u1})
     const u2Games = await Game.find({owner: u2})
     u1Games.forEach((game) => {

@@ -149,6 +149,11 @@ router.delete(`/:gameId`, isLoggedIn, isGameOwner, async (req, res) => {
         const targetGame = await Game.findById(req.params.gameId).populate(`owner`)
         user.ownedGames.pull(targetGame._id)
         await user.save()
+        if (targetGame.campaign) {
+            const targetCampaign = await Campaign.findById(targetGame.campaign)
+            targetCampaign.games.pull(targetGame._id)
+            await targetCampaign.save()
+        }
         const deletedGame = await Game.findOneAndDelete({_id: req.params.gameId})
         res.redirect(`/games`)    
     } catch(err) {
@@ -156,6 +161,5 @@ router.delete(`/:gameId`, isLoggedIn, isGameOwner, async (req, res) => {
         res.status(500).render(`errors/error-500`)
     }
 })
-//TODO - Add logic to remove games from campaigns when games are deleted or else prevent deletes when games are associated with a campaign.
 
 module.exports = router
