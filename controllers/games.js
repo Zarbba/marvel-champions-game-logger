@@ -64,7 +64,7 @@ router.get(`/`, async (req, res) => {
 
 router.get(`/:gameId`, async (req, res) => {
     try {
-        const game = await Game.findById(req.params.gameId)
+        const game = await Game.findById(req.params.gameId).populate(`campaign`)
         if (!game) {
             res.status(404).render(`errors/error-404`)
             return
@@ -75,11 +75,10 @@ router.get(`/:gameId`, async (req, res) => {
         res.status(500).render(`errors/error-500`)
     }
 })
-//TODO - Add a fetch for the campaign if game is a campaign game so player informaton can be populated.
 
 router.get(`/:gameId/edit`, isLoggedIn, isGameOwner, async (req, res) => {
     try {
-        const game = await Game.findById(req.params.gameId)
+        const game = await Game.findById(req.params.gameId).populate(`campaign`)
         if (!game) {
             res.status(404).render(`errors/error-404`)
             return

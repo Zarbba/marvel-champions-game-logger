@@ -1,0 +1,86 @@
+<section class="campaign-info-section TheRiseOfRedSkull hidden">
+    <h4>Experimental Attachments:</h4>
+    <fieldset class="campaign-widget checkboxes">
+        <input id="laser-rifle" type="checkbox" name="experimentalAttachments" value="Laser Rifle">
+        <label for="laser-rifle">Laser Rifle</label>
+        <input id="energy-shield" type="checkbox" name="experimentalAttachments" value="Energy Shield">
+        <label for="energy-shield">Energy Shield</label>
+        <input id="power-gaunts" type="checkbox" name="experimentalAttachments" value="Power Gauntlets">
+        <label for="power-gaunts">Power Gauntlets</label>
+        <input id="exo-suit" type="checkbox" name="experimentalAttachments" value="Exo-Suit">
+        <label for="exo-suit">Exo-Suit</label>
+    </fieldset>
+    <section class="player-section">
+        <% if (locals.campaign?.campaignInformation) { %>
+            <% campaign.campaignInformation.players.forEach( (player, i) => { %>
+                <fieldset class="player-widget player<%= i %>">
+                    <label class="player-element">
+                        Player Name:
+                        <input type="text" name="playerName" required value="<%= player.playerName %>">
+                    </label>
+                    <label class="hero-element">
+                        Hero:
+                        <input type="text" name="playerHero" required value="<%= player.identity %>">
+                    </label>
+                    <label class="hp-element">
+                        Remaining Hitpoints:
+                        <input type="number" name="remainingHitPoints" value="<%= player.remainingHitPoints %>">
+                    </label>
+                        Tech Card:
+                        <select name="techCard">
+                            <option value="Adrenal Stims" <% if (player.techCard === `Adrenal Stims`) {%> selected <% } %>>Adrenal Stims</option>
+                            <option value="Tactical Scanner" <% if (player.techCard === `Tactical Scanner`) {%> selected <% } %>>Tactical Scanner</option>
+                            <option value="Emergency Teleporter" <% if (player.techCard === `Emergency Teleporter`) {%> selected <% } %>>Emergency Teleporter</option>
+                            <option value="Laser Cannon" <% if (player.techCard === `Laser Cannon`) {%> selected <% } %>>Laser Cannon</option>
+                            <option value="" class="hidden" <% if (!player.techCard) {%> selected <% } %>></option>
+                        </select>
+                    </label>
+                    <fieldset>
+                        </label>
+                            Condition Card:
+                            <select name="conditionCard">
+                                <option value="Basic Thwart Upgrade" <% if (player.conditionCard.card === `Basic Thwart Upgrade`) {%> selected <% } %>>Basic Thwart Upgrade</option>
+                                <option value="Basic Attack Upgrade" <% if (player.conditionCard.card === `Basic Attack Upgrade`) {%> selected <% } %>>Basic Attack Upgrade</option>
+                                <option value="Basic Defence Upgrade" <% if (player.conditionCard.card === `Basic Defence Upgrade`) {%> selected <% } %>>Basic Defence Upgrade</option>
+                                <option value="Basic Recovery Upgrade" <% if (player.conditionCard.card === `Basic Recovery Upgrade`) {%> selected <% } %>>Basic Recovery Upgrade</option>
+                                <option value="" class="hidden" <% if (!player.conditionCard) {%> selected <% } %>></option>
+                            </select>
+                        </label>
+                        <label>
+                            Improved Condition Card:
+                            <input type="checkbox" value="true" <% if (player.conditionCard.improved) { %> checked <% } %>>
+                        </label>
+                    </fieldset>
+                    <h4>Rescued Allies:</h4>
+                    <fieldset class="campaign-widget checkboxes">
+                        <input id="moon-knight" type="checkbox" name="rescuedAllyCards" value="Moon Knight">
+                        <label for="moon-knight">Moon Knight</label>
+                        <input id="shang-chi" type="checkbox" name="rescuedAllyCards" value="Shang-Chi">
+                        <label for="shang-chi">Shang-Chi</label>
+                        <input id="white-tiger" type="checkbox" name="rescuedAllyCards" value="White Tiger">
+                        <label for="white-tiger">White Tiger</label>
+                        <input id="elektra" type="checkbox" name="rescuedAllyCards" value="Elektra">
+                        <label for="elektra">Elektra</label>
+                    </fieldset>
+                    <h4>Obligations:</h4>
+                    <fieldset class="campaign-widget checkboxes">
+                        <input id="zolas-algo" type="checkbox" name="expertObligationCards" value="Zola's Algorithim">
+                        <label for="zolas-algo">Zola's Algorithim</label>
+                        <input id="med-emerg" type="checkbox" name="expertObligationCards" value="Medical Emergency">
+                        <label for="med-emerg">Medical Emergency</label>
+                        <input id="martial-law" type="checkbox" name="expertObligationCards" value="Martial Law">
+                        <label for="martial-law">Martial Law</label>
+                        <input id="anti-hero" type="checkbox" name="expertObligationCards" value="Anti-Hero Propaganda">
+                        <label for="anti-hero">Anti-Hero Propaganda</label>
+                    </fieldset>                
+                    <label>
+                        Was this player engaged with a minion when Zola was defeated?
+                        <input type="checkbox" value="true" <% if (player.wasEngaged) { %> checked <% } %>>
+                    </label>
+                </fieldset>
+                <% }) %>
+        <% } %>
+    </section>
+    <button type="button" class="player-button button add">Add a player</button>
+</section>
+

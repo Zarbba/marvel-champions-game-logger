@@ -1,0 +1,20 @@
+<section class="player-section">
+    <% if (locals.game) { %>
+        <% game.players.forEach( (player, i) => { %>
+            <fieldset class="player-widget player<%= i %>">
+                <label class="player-element">
+                    Player Name:
+                    <input type="text" name="playerName" required value="<%= player.playerName %>">
+                </label>
+                <label class="hero-element">
+                    Hero:
+                    <input type="text" name="playerHero" required value="<%= player.identity %>">
+                </label>
+                <button type="button" class="player-button button remove">Remove Player</button>
+            </fieldset>
+            <% }) %>
+    <% } %>
+    <!-- FIXME - Player Name/ID Front End Validation is failing -->
+</section>
+
+<!-- TODO - Complete this file -->

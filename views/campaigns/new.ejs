@@ -8,19 +8,25 @@
     <input id="campaign-name" type="text" name="campaignName" required <% if (locals.campaign) { %> value="<%= campaign.campaignName %>" <% } %>>
     <label for="campaign-type">Campaign:</label>
         <select id="campaign-type" name="campaignType">
-            <option value="TheRiseOfRedSkull" <% if (locals.campaign && campaign.campaignType === `The Rise of Red Skull`) { %> selected <% } %>>The Rise of Red Skull</option>
-            <option value="TheGalaxysMostWanted" <% if (locals.campaign && campaign.campaignType === `The Galaxy's Most Wanted`) { %> selected <% } %>>The Galaxy's Most Wanted</option>
-            <option value="TheMadTitansShadow" <% if (locals.campaign && campaign.campaignType === `The Mad Titan's Shadow`) { %> selected <% } %>>The Mad Titan's Shadow</option>
-            <option value="SinisterMotives" <% if (locals.campaign && campaign.campaignType === `Sinister Motives`) { %> selected <% } %>>Sinister Motives</option>
-            <option value="MutantGenesis" <% if (locals.campaign && campaign.campaignType === `Mutant Genesis`) { %> selected <% } %>>Mutant Genesis</option>
-            <option value="NeXtEvolution" <% if (locals.campaign && campaign.campaignType === `NeXt Evolution`) { %> selected <% } %>>NeXt Evolution</option>
-            <option value="AgeOfApocalypse" <% if (locals.campaign && campaign.campaignType === `Age of Apocalypse`) { %> selected <% } %>>Age of Apocalypse</option>
+            <option value="TheRiseOfRedSkull" <% if (locals.campaign && campaign.campaignType === `TheRiseOfRedSkull`) { %> selected <% } %>>The Rise of Red Skull</option>
+            <option value="TheGalaxysMostWanted" <% if (locals.campaign && campaign.campaignType === `TheGalaxysMostWanted`) { %> selected <% } %> class="hidden">The Galaxy's Most Wanted</option>
+            <option value="TheMadTitansShadow" <% if (locals.campaign && campaign.campaignType === `TheMadTitansShadow`) { %> selected <% } %> class="hidden">The Mad Titan's Shadow</option>
+            <option value="SinisterMotives" <% if (locals.campaign && campaign.campaignType === `SinisterMotives`) { %> selected <% } %>>Sinister Motives</option>
+            <option value="MutantGenesis" <% if (locals.campaign && campaign.campaignType === `MutantGenesis`) { %> selected <% } %> class="hidden">Mutant Genesis</option>
+            <option value="NeXtEvolution" <% if (locals.campaign && campaign.campaignType === `NeXtEvolution`) { %> selected <% } %> class="hidden">NeXt Evolution</option>
+            <option value="AgeOfApocalypse" <% if (locals.campaign && campaign.campaignType === `AgeOfApocalypse`) { %> selected <% } %> class="hidden">Age of Apocalypse</option>
+            <option value="AgentsOfSHIELD" <% if (locals.campaign && campaign.campaignType === `AgentsOfSHIELD`) { %> selected <% } %>>Agents Of S.H.I.E.L.D.</option>
             <option class="hidden" value="" <% if (!locals.campaign) { %> selected <% } %>></option>
         </select>
     <h3>Campaign Information:</h3>
-    <section class="campaign-info-section">
-    </section>
-    <!-- TODO - Refactor this to work with hide/reveal style instead of inserting templates. -->
+    <%- include(`./partials/TheRiseOfRedSkull/new`) %>
+    <%- //include(`./partials/TheGalacysMostWanted/new`) %>
+    <%- //include(`./partials/TheMadTitansShadow/new`) %>
+    <%- include(`./partials/SinisterMotives/new`) %>
+    <%- //include(`./partials/MutantGenesis/new`) %>
+    <%- //include(`./partials/NeXtEvolution/new`) %>
+    <%- //include(`./partials/AgeOfApocalypse/new`) %>
+    <%- //include(`./partials/AgentsOfSHIELD/new`) %>
     <section class="game-section">
         <% if (locals.campaign) { %>
             <% campaign.games.forEach( (game) => { %>
@@ -51,28 +57,6 @@
         </fieldset>
     </section>
     <button type="button" class="game-button button add">Add a game</button>
-    <section class="player-section">
-        <% if (locals.campaign) { %>
-            <% campaign.players.forEach( (player, i) => { %>
-                <fieldset class="player-widget player<%= i %>">
-                    <label class="player-element">
-                        Player Name:
-                        <input type="text" name="playerName" required value="<%= player.player.playerName %>">
-                    </label>
-                    <label class="hero-element">
-                        Hero:
-                        <input type="text" name="playerHero" required value="<%= player.identity %>">
-                    </label>
-                    <label class="owner-element">
-                        Owner:
-                        <input type="text" name="playerOwner" value="<%= player.player.owner %>">
-                    </label>
-                    <button type="button" class="player-button button remove">Remove Player</button>
-                </fieldset>
-                <% }) %>
-        <% } %>
-    </section>
-    <button type="button" class="player-button button add">Add a player</button>
     <label for="expert-mode">Campaign Difficulty:</label>
     <select id="expert-mode" name="expertMode">
         <option value="false" <% if (!locals.campaign || locals.campaign.modes.expert === false) { %> selected <% } %>>Standard</option>

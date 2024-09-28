@@ -28,7 +28,7 @@ const campaignSchema = new mongoose.Schema ({
     campaignType: {
         type: String,
         required: true,
-        enum: [`TheRiseofRedSkull`, `TheGalaxysMostWanted`, `TheMadTitansShadow`, `SinisterMotives`, `MutantGenesis`, `NeXtEvolution`, `AgeOfApocalypse`]
+        enum: [`TheRiseofRedSkull`, `TheGalaxysMostWanted`, `TheMadTitansShadow`, `SinisterMotives`, `MutantGenesis`, `NeXtEvolution`, `AgeOfApocalypse`, `AgentsOfSHIELD`]
     },
     games: [{
         type: mongoose.Schema.Types.ObjectId,

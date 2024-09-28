@@ -1,75 +1,4 @@
 // -----Constants-----
-const campaignInformation = {
-    TheRiseOfRedSkull: {
-        new: `
-        <h4>Experimental Attachments:</h4>
-        <fieldset class="campaign-widget checkboxes">
-            <input id="laser-rifle" type="checkbox" name="experimentalAttachments" value="Laser Rifle">
-            <label for="laser-rifle">Laser Rifle</label>
-            <input id="energy-shield" type="checkbox" name="experimentalAttachments" value="Energy Shield">
-            <label for="energy-shield">Energy Shield</label>
-            <input id="power-gaunts" type="checkbox" name="experimentalAttachments" value="Power Gauntlets">
-            <label for="power-gaunts">Power Gauntlets</label>
-            <input id="exo-suit" type="checkbox" name="experimentalAttachments" value="Exo-Suit">
-            <label for="exo-suit">Exo-Suit</label>
-        </fieldset>`,
-        edit: ``
-    },
-    SinisterMotives: {
-        new: `
-        <label>
-            Current Reputation
-            <input type="number" name="currentReputation">
-        </label>
-        <h4>Osborn Tech:</h4>
-        <fieldset class="campaign-widget checkboxes">
-            <input type="checkbox" name="osbornTechCards" value="Arm Cannon">Arm Cannon</input>
-            <input id="ion-boots" type="checkbox" name="osbornTechCards" value="Ionic Boots">
-            <label for="ion-boots">Ionic Boots</label>
-            <input id="kin-armor" type="checkbox" name="osbornTechCards" value="Kinetic Armor">
-            <label for="kin-armor">Kinetic Armor</label>
-            <input id="neo-scales" type="checkbox" name="osbornTechCards" value="Neocarbon Scales">
-            <label for="neo-scales">Neocarbon Scales</label>
-            <input id="spiked" type="checkbox" name="osbornTechCards" value="Spiked Gauntlet">
-            <label for="spiked">Spiked Gauntlet</label>
-            <input id="tracking" type="checkbox" name="osbornTechCards" value="Tracking Display">
-            <label for="tracking">Tracking Display</label>
-        </fieldset>
-        <h4>Community Service:</h4>
-        <fieldset class="campaign-widget checkboxes">
-            <input id="burglary" type="checkbox" name="completedCommunityServices" value="Back Alley Burglary">
-            <label for="burglary">Back Alley Burglary</label>
-            <input id="ciat" type="checkbox" name="completedCommunityServices" value="Cat in a Tree">
-            <label for="ciat">Cat in a Tree</label>
-            <input id="heist" type="checkbox" name="completedCommunityServices" value="Henchmen Heist">
-            <label for="heist">Henchmen Heist</label>
-            <input id="rails" type="checkbox" name="completedCommunityServices" value="Off the Rails">
-            <label for="rails">Off the Rails</label>
-            <input id="rubble" type="checkbox" name="completedCommunityServices" value="Rubble Rescue">
-            <label for="rubble">Rubble Rescue</label>
-        </fieldset>
-        <label>
-            Waking Nightmares:
-            <input type="number" name="wakingNightmares">
-        </label>
-        <h4>Last Ones Standing:</h4>
-        <fieldset class="campaign-widget checkboxes">
-            <input id="doc-oc" type="checkbox" name="lastOnesStanding" value="Doctor Octopus">
-            <label for="doc-oc">Doctor Octopus</label>
-            <input id="electro" type="checkbox" name="lastOnesStanding" value="Electro">
-            <label for="electro">Electro</label>
-            <input id="hobgob" type="checkbox" name="lastOnesStanding" value="Hobgoblin">
-            <label for="hobgob">Hobgoblin</label>
-            <input id="kraven" type="checkbox" name="lastOnesStanding" value="Kraven the Hunter">
-            <label for="kraven">Kraven the Hunter</label>
-            <input id="scorpion" type="checkbox" name="lastOnesStanding" value="Scorpion">
-            <label for="scorpion">Scorpion</label>
-            <input id="vulture" type="checkbox" name="lastOnesStanding" value="Vulture"> 
-            <label for="vulture">Vulture</label>
-        </fieldset>`,
-        edit: ``
-    },
-}
 
 // -----Cached DOM Elements-----
 const modalEl = document.querySelector(`.modal`)
@@ -90,12 +19,13 @@ document.addEventListener(`click`, (e) => {
 
 document.addEventListener(`change`, (e) => {
     if (e.target.id === `campaign-type`) {
-        insertCampaignInformation(e)
+        renderCampaignInformation(e)
     }
 })
 //TODO - Move Nav links into sub menus and add logic to expand and contract menus
 
 // -----Functions-----
+
 function handleButtonClick(e) {
     if (e.target.classList.contains(`player-button`)) {
         if (e.target.classList.contains(`add`)) {
@@ -131,11 +61,16 @@ function chooseCampaignInformation(string) {
     return campaignInformation[string].new
 }
 
-function insertCampaignInformation(e) {
-    let campaignInfoEl = document.getElementById(`campaign-type`)
-    campaignInfoSectionEl.innerHTML = chooseCampaignInformation(campaignInfoEl.value)
+function renderCampaignInformation(e) {
+    let oldCampaignInfoEl = document.querySelector(`.current-campaign`)
+    let newCampaignInfoEl = document.querySelector(`.${e.target.value}`)
+    newCampaignInfoEl.classList.toggle(`hidden`)
+    newCampaignInfoEl.classList.toggle(`current-campaign`)
+    if (oldCampaignInfoEl) {
+        oldCampaignInfoEl.classList.toggle(`hidden`)
+        oldCampaignInfoEl.classList.toggle(`current-campaign`)
+    }
 }
-//TODO - Change this logic to be reveal/hide style instead of inserting new elements.
 
 function addPlayerWidget() {
     if (playerCounter < 4) {
@@ -209,7 +144,6 @@ function revealDeleteGameModal(e) {
     </section>`
     modalEl.classList.remove(`hidden`)
 }
-
 //TODO - Add revealDeleteCampaignModal()
 
 function hideModal() {
