@@ -3,7 +3,6 @@
 // -----Cached DOM Elements-----
 const modalEl = document.querySelector(`.modal`)
 const addPlayerEl = document.querySelector(`.add`)
-const playerSectionEl = document.querySelector(`.player-section`)
 const gameSectionEl = document.querySelector(`.game-section`)
 const campaignInfoSectionEl = document.querySelector(`.campaign-info-section`)
 const playerCounterEls = document.querySelectorAll(`.player-widget`)
@@ -28,8 +27,16 @@ document.addEventListener(`change`, (e) => {
 
 function handleButtonClick(e) {
     if (e.target.classList.contains(`player-button`)) {
+        if(e.target.classList.contains(`add`) && e.target.classList.contains(`red-skull`) ) {
+            addRedSkullPlayerWidget()
+            return
+        }
+        if (e.target.classList.contains(`add`) && e.target.classList.contains(`sin-mot`)) {
+            addSinisterMotivesPlayerWidget()
+            return
+        } 
         if (e.target.classList.contains(`add`)) {
-            addPlayerWidget()
+            addDefaultPlayerWidget()
             return
         }
         if (e.target.classList.contains(`remove`)) {
@@ -72,8 +79,146 @@ function renderCampaignInformation(e) {
     }
 }
 
-function addPlayerWidget() {
+function addRedSkullPlayerWidget() {
     if (playerCounter < 4) {
+        const playerSectionEl = document.getElementById(`red-skull-player-section`)
+        const newPlayerEl = document.createElement(`fieldset`)
+        newPlayerEl.classList.add(`player-widget`)
+        newPlayerEl.classList.add(`player${playerCounter}`)
+        newPlayerEl.innerHTML =
+        `<label class="player-element">
+                Player Name:
+                <input type="text" name="playerName" required value="">
+            </label>
+            <label class="hero-element">
+                Hero:
+                <input type="text" name="playerHero" required value="">
+            </label>
+            <label class="hp-element">
+                Remaining Hitpoints:
+                <input type="number" name="remainingHitPoints" value="">
+            </label>
+                Tech Card:
+                <select name="techCard">
+                    <option value="Adrenal Stims">Adrenal Stims</option>
+                    <option value="Tactical Scanner">Tactical Scanner</option>
+                    <option value="Emergency Teleporter">Emergency Teleporter</option>
+                    <option value="Laser Cannon">Laser Cannon</option>
+                    <option value="" class="hidden" selected></option>
+                </select>
+            </label>
+            <fieldset>
+                <label>
+                    Condition Card:
+                    <select name="conditionCard">
+                        <option value="Basic Thwart Upgrade">Basic Thwart Upgrade</option>
+                        <option value="Basic Attack Upgrade">Basic Attack Upgrade</option>
+                        <option value="Basic Defence Upgrade">Basic Defence Upgrade</option>
+                        <option value="Basic Recovery Upgrade">Basic Recovery Upgrade</option>
+                        <option value="" class="hidden" selected></option>
+                    </select>
+                </label>
+                <label>
+                    Improved Condition Card:
+                    <input type="checkbox" value="true">
+                </label>
+            </fieldset>
+            <h4>Rescued Allies:</h4>
+            <fieldset class="campaign-widget checkboxes">
+                <input id="moon-knight" type="checkbox" name="rescuedAllyCards" value="Moon Knight">
+                <label for="moon-knight">Moon Knight</label>
+                <input id="shang-chi" type="checkbox" name="rescuedAllyCards" value="Shang-Chi">
+                <label for="shang-chi">Shang-Chi</label>
+                <input id="white-tiger" type="checkbox" name="rescuedAllyCards" value="White Tiger">
+                <label for="white-tiger">White Tiger</label>
+                <input id="elektra" type="checkbox" name="rescuedAllyCards" value="Elektra">
+                <label for="elektra">Elektra</label>
+            </fieldset>
+            <h4>Obligations:</h4>
+            <fieldset class="campaign-widget checkboxes">
+                <input id="zolas-algo" type="checkbox" name="expertObligationCards" value="Zola's Algorithim">
+                <label for="zolas-algo">Zola's Algorithim</label>
+                <input id="med-emerg" type="checkbox" name="expertObligationCards" value="Medical Emergency">
+                <label for="med-emerg">Medical Emergency</label>
+                <input id="martial-law" type="checkbox" name="expertObligationCards" value="Martial Law">
+                <label for="martial-law">Martial Law</label>
+                <input id="anti-hero" type="checkbox" name="expertObligationCards" value="Anti-Hero Propaganda">
+                <label for="anti-hero">Anti-Hero Propaganda</label>
+            </fieldset>                
+            <label>
+                Was this player engaged with a minion when Zola was defeated?
+                <input type="checkbox" value="true">
+            </label>
+            <button type="button" class="player-button button remove">Remove Player</button>`
+        playerSectionEl.appendChild(newPlayerEl)
+        playerCounter++
+        if (playerCounter === 4) {
+            addPlayerEl.classList.add(`hidden`)
+            const maxPlayerMessageEl = document.createElement(`p`)
+            maxPlayerMessageEl.classList.add(`player-message`)
+            maxPlayerMessageEl.textContent = `Maximum player count reached.`
+            playerSectionEl.appendChild(maxPlayerMessageEl)
+        }
+    }
+}
+
+function addSinisterMotivesPlayerWidget() {
+    if (playerCounter < 4) {
+        const playerSectionEl = document.getElementById(`sin-mot-player-section`)
+        const newPlayerEl = document.createElement(`fieldset`)
+        newPlayerEl.classList.add(`player-widget`)
+        newPlayerEl.classList.add(`player${playerCounter}`)
+        newPlayerEl.innerHTML =
+        `<label class="player-element">
+            Player Name:
+            <input type="text" name="playerName" required value="">
+        </label>
+        <label class="hero-element">
+            Hero:
+            <input type="text" name="playerHero" required value="">
+        </label>
+        <label class="hp-element">
+            Remaining Hitpoints:
+            <input type="number" name="remainingHitPoints" value="">
+        </label>
+        <label class="shield-tech-element">
+            Shield Tech Card:
+            <select name="shieldTechCard">
+                <option value="Compact Darts">
+                <option value="Impact-Dampening Suit">
+                <option value="Laser Goggles">
+                <option value="Propulsion Gauntlet">
+                <option value="Retinal Display">
+                <option value="Shock Knuckles">
+                <option value="Wave Bracers">
+                <option value="Wrist-Navigator">
+                <option value="" class="hidden" selected>
+            </select>
+        </label>
+        <label class="aspect-adv-element">
+            Aspect Advantage Card:
+            <input type="text" name="aspectAdvantageCard" value="">
+        </label>
+        <label class="plan-ahead-element">
+            Planning Ahead Card:
+            <input type="text" name="planningAheadCard" value="">
+        </label>
+        <button type="button" class="player-button button remove">Remove Player</button>`
+        playerSectionEl.appendChild(newPlayerEl)
+        playerCounter++
+        if (playerCounter === 4) {
+            addPlayerEl.classList.add(`hidden`)
+            const maxPlayerMessageEl = document.createElement(`p`)
+            maxPlayerMessageEl.classList.add(`player-message`)
+            maxPlayerMessageEl.textContent = `Maximum player count reached.`
+            playerSectionEl.appendChild(maxPlayerMessageEl)
+        }
+    }
+}
+
+function addDefaultPlayerWidget() {
+    if (playerCounter < 4) {
+        const playerSectionEl = document.querySelector(`.player-section`)
         const newPlayerEl = document.createElement(`fieldset`)
         newPlayerEl.classList.add(`player-widget`)
         newPlayerEl.classList.add(`player${playerCounter}`)
@@ -98,7 +243,6 @@ function addPlayerWidget() {
         }
     }
 }
-//TODO - Adjust this so that it works for any player widget instead of just the standard game widget.
 
 function removePlayerWidget(e) {
     if (playerCounter > 0) {
