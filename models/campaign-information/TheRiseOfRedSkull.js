@@ -58,4 +58,3 @@ const redSkullSchema = new mongoose.Schema ({
 const TheRiseOfRedSkull = mongoose.model(`TheRiseOfRedSkull`, redSkullSchema)
 
 module.exports = TheRiseOfRedSkull
-//REVIEW - Remove empty string enums and apply ternaries in appropriate places

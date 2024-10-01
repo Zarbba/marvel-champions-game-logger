@@ -84,7 +84,6 @@ function addRedSkullPlayerWidget() {
         const playerSectionEl = document.getElementById(`red-skull-player-section`)
         const newPlayerEl = document.createElement(`fieldset`)
         newPlayerEl.classList.add(`player-widget`)
-        newPlayerEl.classList.add(`player${playerCounter}`)
         newPlayerEl.innerHTML =
         `<label class="player-element">
                 Player Name:
@@ -129,24 +128,24 @@ function addRedSkullPlayerWidget() {
             </fieldset>
             <h4>Rescued Allies:</h4>
             <fieldset class="campaign-widget checkboxes">
-                <input id="moon-knight" type="checkbox" name="rescuedAllyCards" value="Moon Knight">
+                <input id="moon-knight" type="checkbox" name="rescuedAllyCards${playerCounter}" value="Moon Knight">
                 <label for="moon-knight">Moon Knight</label>
-                <input id="shang-chi" type="checkbox" name="rescuedAllyCards" value="Shang-Chi">
+                <input id="shang-chi" type="checkbox" name="rescuedAllyCards${playerCounter}" value="Shang-Chi">
                 <label for="shang-chi">Shang-Chi</label>
-                <input id="white-tiger" type="checkbox" name="rescuedAllyCards" value="White Tiger">
+                <input id="white-tiger" type="checkbox" name="rescuedAllyCards${playerCounter}" value="White Tiger">
                 <label for="white-tiger">White Tiger</label>
-                <input id="elektra" type="checkbox" name="rescuedAllyCards" value="Elektra">
+                <input id="elektra" type="checkbox" name="rescuedAllyCards${playerCounter}" value="Elektra">
                 <label for="elektra">Elektra</label>
             </fieldset>
             <h4>Obligations:</h4>
             <fieldset class="campaign-widget checkboxes">
-                <input id="zolas-algo" type="checkbox" name="expertObligationCards" value="Zola's Algorithim">
+                <input id="zolas-algo" type="checkbox" name="expertObligationCards${playerCounter}" value="Zola's Algorithim">
                 <label for="zolas-algo">Zola's Algorithim</label>
-                <input id="med-emerg" type="checkbox" name="expertObligationCards" value="Medical Emergency">
+                <input id="med-emerg" type="checkbox" name="expertObligationCards${playerCounter}" value="Medical Emergency">
                 <label for="med-emerg">Medical Emergency</label>
-                <input id="martial-law" type="checkbox" name="expertObligationCards" value="Martial Law">
+                <input id="martial-law" type="checkbox" name="expertObligationCards${playerCounter}" value="Martial Law">
                 <label for="martial-law">Martial Law</label>
-                <input id="anti-hero" type="checkbox" name="expertObligationCards" value="Anti-Hero Propaganda">
+                <input id="anti-hero" type="checkbox" name="expertObligationCards${playerCounter}" value="Anti-Hero Propaganda">
                 <label for="anti-hero">Anti-Hero Propaganda</label>
             </fieldset>                
             <label>
@@ -171,7 +170,6 @@ function addSinisterMotivesPlayerWidget() {
         const playerSectionEl = document.getElementById(`sin-mot-player-section`)
         const newPlayerEl = document.createElement(`fieldset`)
         newPlayerEl.classList.add(`player-widget`)
-        newPlayerEl.classList.add(`player${playerCounter}`)
         newPlayerEl.innerHTML =
         `<label class="player-element">
             Player Name:
@@ -225,7 +223,6 @@ function addDefaultPlayerWidget() {
         const playerSectionEl = document.querySelector(`.player-section`)
         const newPlayerEl = document.createElement(`fieldset`)
         newPlayerEl.classList.add(`player-widget`)
-        newPlayerEl.classList.add(`player${playerCounter}`)
         newPlayerEl.innerHTML = 
         `<label class="player-element">
             Player Name:

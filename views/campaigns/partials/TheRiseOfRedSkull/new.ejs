@@ -17,7 +17,7 @@
     <section class="player-section" id="red-skull-player-section">
         <% if (locals.campaign?.campaignInformation) { %>
             <% campaign.campaignInformation.players.forEach( (player, i) => { %>
-                <fieldset class="player-widget player<%= i %>">
+                <fieldset class="player-widget">
                     <label class="player-element">
                         Player Name:
                         <input type="text" name="playerName" required value="<%= player.playerName %>">
@@ -61,24 +61,24 @@
                     </fieldset>
                     <h4>Rescued Allies:</h4>
                     <fieldset class="campaign-widget checkboxes">
-                        <input id="moon-knight" type="checkbox" name="rescuedAllyCards" value="Moon Knight">
+                        <input id="moon-knight" type="checkbox" name="rescuedAllyCards<%= i %>" value="Moon Knight">
                         <label for="moon-knight">Moon Knight</label>
-                        <input id="shang-chi" type="checkbox" name="rescuedAllyCards" value="Shang-Chi">
+                        <input id="shang-chi" type="checkbox" name="rescuedAllyCards<%= i %>" value="Shang-Chi">
                         <label for="shang-chi">Shang-Chi</label>
-                        <input id="white-tiger" type="checkbox" name="rescuedAllyCards" value="White Tiger">
+                        <input id="white-tiger" type="checkbox" name="rescuedAllyCards<%= i %>" value="White Tiger">
                         <label for="white-tiger">White Tiger</label>
-                        <input id="elektra" type="checkbox" name="rescuedAllyCards" value="Elektra">
+                        <input id="elektra" type="checkbox" name="rescuedAllyCards<%= i %>" value="Elektra">
                         <label for="elektra">Elektra</label>
                     </fieldset>
                     <h4>Obligations:</h4>
                     <fieldset class="campaign-widget checkboxes">
-                        <input id="zolas-algo" type="checkbox" name="expertObligationCards" value="Zola's Algorithim">
+                        <input id="zolas-algo" type="checkbox" name="expertObligationCards<%= i %>" value="Zola's Algorithim">
                         <label for="zolas-algo">Zola's Algorithim</label>
-                        <input id="med-emerg" type="checkbox" name="expertObligationCards" value="Medical Emergency">
+                        <input id="med-emerg" type="checkbox" name="expertObligationCards<%= i %>" value="Medical Emergency">
                         <label for="med-emerg">Medical Emergency</label>
-                        <input id="martial-law" type="checkbox" name="expertObligationCards" value="Martial Law">
+                        <input id="martial-law" type="checkbox" name="expertObligationCards<%= i %>" value="Martial Law">
                         <label for="martial-law">Martial Law</label>
-                        <input id="anti-hero" type="checkbox" name="expertObligationCards" value="Anti-Hero Propaganda">
+                        <input id="anti-hero" type="checkbox" name="expertObligationCards<%= i %>" value="Anti-Hero Propaganda">
                         <label for="anti-hero">Anti-Hero Propaganda</label>
                     </fieldset>                
                     <label>

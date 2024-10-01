@@ -22,6 +22,7 @@ router.get(`/new`, isLoggedIn, async (req, res) => {
 router.post(`/`, isLoggedIn, async (req, res) => {
     try {
         const campaignData = await utilities.processCampaignFormData(req.body)
+        campaignData.owner = req.session.user._id
         const newCampaign = await Campaign.create(campaignData)
         const updatedGames = await Game.updateMany({_id: {"$in":[newCampaign.games]}}, {"$set":{campaign: newCampaign}})
         res.redirect(`/campaigns`)

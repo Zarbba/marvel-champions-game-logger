@@ -12,8 +12,8 @@
     <input id="scenario" type="text" name="scenario" required <% if (locals.game) { %> value="<%= game.scenario %>" <% } %>>
     <section class="player-section">
         <% if (locals.game) { %>
-            <% game.players.forEach( (player, i) => { %>
-                <fieldset class="player-widget player<%= i %>">
+            <% game.players.forEach( (player) => { %>
+                <fieldset class="player-widget">
                     <label class="player-element">
                         Player Name:
                         <input type="text" name="playerName" required value="<%= player.playerName %>">

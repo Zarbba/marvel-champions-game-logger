@@ -53,7 +53,7 @@
     <section class="player-section" id="sin-mot-player-section">
         <% if (locals.campaign?.campaignInformation) { %>
             <% campaign.campaignInformation.players.forEach( (player, i) => { %>
-                <fieldset class="player-widget player<%= i %>">
+                <fieldset class="player-widget">
                     <label class="player-element">
                         Player Name:
                         <input type="text" name="playerName" required value="<%= player.playerName %>">
