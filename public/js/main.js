@@ -111,16 +111,20 @@ function addRedSkullPlayerWidget() {
                 <label>
                     Condition Card:
                     <select name="conditionCard">
-                        <option value="Basic Thwart Upgrade">Basic Thwart Upgrade</option>
-                        <option value="Basic Attack Upgrade">Basic Attack Upgrade</option>
-                        <option value="Basic Defence Upgrade">Basic Defence Upgrade</option>
-                        <option value="Basic Recovery Upgrade">Basic Recovery Upgrade</option>
+                        <option value="Thwart Upgrade">Thwart Upgrade</option>
+                        <option value="Attack Upgrade">Attack Upgrade</option>
+                        <option value="Defence Upgrade">Defence Upgrade</option>
+                        <option value="Recovery Upgrade">Recovery Upgrade</option>
                         <option value="" class="hidden" selected></option>
                     </select>
                 </label>
                 <label>
-                    Improved Condition Card:
-                    <input type="checkbox" value="true">
+                    Basic
+                    <input type="radio" value="basic" name="improvedConditionCard" checked>
+                </label>
+                <label>
+                    Improved
+                    <input type="radio" value="improved" name="improvedConditionCard">
                 </label>
             </fieldset>
             <h4>Rescued Allies:</h4>
@@ -184,15 +188,15 @@ function addSinisterMotivesPlayerWidget() {
         <label class="shield-tech-element">
             Shield Tech Card:
             <select name="shieldTechCard">
-                <option value="Compact Darts">
-                <option value="Impact-Dampening Suit">
-                <option value="Laser Goggles">
-                <option value="Propulsion Gauntlet">
-                <option value="Retinal Display">
-                <option value="Shock Knuckles">
-                <option value="Wave Bracers">
-                <option value="Wrist-Navigator">
-                <option value="" class="hidden" selected>
+                <option value="Compact Darts">Compact Darts</option>
+                <option value="Impact-Dampening Suit">Impact-Dampening Suit</option>
+                <option value="Laser Goggles">Laser Goggles</option>
+                <option value="Propulsion Gauntlet">Propulsion Gauntlet</option>
+                <option value="Retinal Display">Retinal Display</option>
+                <option value="Shock Knuckles">Shock Knuckles</option>
+                <option value="Wave Bracers">Wave Bracers</option>
+                <option value="Wrist-Navigator">Wrist-Navigator</option>
+                <option value="" class="hidden" selected></option>
             </select>
         </label>
         <label class="aspect-adv-element">

@@ -1,4 +1,8 @@
 <section class="campaign-info-section TheRiseOfRedSkull hidden">
+    <label>
+        Delay Counters:
+        <input type="number" name="delayCounters" value="">
+    </label>
     <h4>Experimental Attachments:</h4>
     <fieldset class="campaign-widget checkboxes">
         <input id="laser-rifle" type="checkbox" name="experimentalAttachments" value="Laser Rifle">
@@ -39,16 +43,20 @@
                         </label>
                             Condition Card:
                             <select name="conditionCard">
-                                <option value="Basic Thwart Upgrade" <% if (player.conditionCard.card === `Basic Thwart Upgrade`) {%> selected <% } %>>Basic Thwart Upgrade</option>
-                                <option value="Basic Attack Upgrade" <% if (player.conditionCard.card === `Basic Attack Upgrade`) {%> selected <% } %>>Basic Attack Upgrade</option>
-                                <option value="Basic Defence Upgrade" <% if (player.conditionCard.card === `Basic Defence Upgrade`) {%> selected <% } %>>Basic Defence Upgrade</option>
-                                <option value="Basic Recovery Upgrade" <% if (player.conditionCard.card === `Basic Recovery Upgrade`) {%> selected <% } %>>Basic Recovery Upgrade</option>
+                                <option value="Thwart Upgrade" <% if (player.conditionCard.card === `Thwart Upgrade`) {%> selected <% } %>>Thwart Upgrade</option>
+                                <option value="Attack Upgrade" <% if (player.conditionCard.card === `Attack Upgrade`) {%> selected <% } %>>Attack Upgrade</option>
+                                <option value="Defence Upgrade" <% if (player.conditionCard.card === `Defence Upgrade`) {%> selected <% } %>>Defence Upgrade</option>
+                                <option value="Recovery Upgrade" <% if (player.conditionCard.card === `Recovery Upgrade`) {%> selected <% } %>>Recovery Upgrade</option>
                                 <option value="" class="hidden" <% if (!player.conditionCard) {%> selected <% } %>></option>
                             </select>
                         </label>
                         <label>
-                            Improved Condition Card:
-                            <input type="checkbox" value="true" <% if (player.conditionCard.improved) { %> checked <% } %>>
+                            Basic
+                            <input type="radio" value="basic" name="improvedConditionCard"<% if (!player.conditionCard.improved) { %> checked <% } %>>
+                        </label>
+                        <label>
+                            Improved
+                            <input type="radio" value="improved" name="improvedConditionCard"<% if (player.conditionCard.improved) { %> checked <% } %>>
                         </label>
                     </fieldset>
                     <h4>Rescued Allies:</h4>

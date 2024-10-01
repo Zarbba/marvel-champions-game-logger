@@ -10,7 +10,7 @@ const playerSchema = new mongoose.Schema ({
     shieldTechCard: 
     {
         type: String,
-        enum: [`Compact Darts`, `Impact-Dampening Suit`, `Laser Goggles`, `Propulsion Gauntlet`, `Retinal Display`, `Shock Knuckles`, `Wave Bracers`, `Wrist-Navigator`]
+        enum: [`Compact Darts`, `Impact-Dampening Suit`, `Laser Goggles`, `Propulsion Gauntlet`, `Retinal Display`, `Shock Knuckles`, `Wave Bracers`, `Wrist-Navigator`, ``]
     },
     aspectAdvantageCard:String,
     planningAheadCard: String,
@@ -53,3 +53,4 @@ const sinisterMotivesSchema = new mongoose.Schema ({
 const SinisterMotives = mongoose.model(`SinisterMotives`, sinisterMotivesSchema)
 
 module.exports = SinisterMotives
+//REVIEW - Remove empty string enums and apply ternaries in appropriate places

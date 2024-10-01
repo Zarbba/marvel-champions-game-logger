@@ -7,6 +7,7 @@ const User = require(`./User`)
 const Game = require(`./Game`)
 const Campaign = require(`./Campaign`)
 const SinisterMotives = require(`./campaign-information/SinisterMotives`)
+const TheRiseOfRedSkull = require("./campaign-information/TheRiseOfRedSkull")
 
 mongoose.connect(process.env.MONGODB_URI)
 
@@ -242,8 +243,9 @@ async function seedGames() {
 async function seedCampaignInformation() {
     const zarbba = await User.findOne({userName: `Zarbba`})
     const hnro = await User.findOne({userName: `Hnro`})
-    const deletedInformation = await SinisterMotives.deleteMany()
-    const createdInformation = await SinisterMotives.create({
+    const deletedRedSkullInformation = await TheRiseOfRedSkull.deleteMany()
+    const deletedSinisterMotivesInformation = await SinisterMotives.deleteMany()
+    const createdSinisterMotivesInformation = await SinisterMotives.create({
         currentReputation: 18,
         osbornTechCards: [`Ionic Boots`, `Spiked Gauntlet`],
         completedCommunityServices: [],

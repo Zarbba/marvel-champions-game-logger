@@ -10,12 +10,12 @@ const playerSchema = new mongoose.Schema ({
     techCard:
         {
             type: String,
-            enum: [`Adrenal Stims`,`Tactical Scanner`, `Emergency Teleporter`, `Laser Cannon`]
+            enum: [`Adrenal Stims`,`Tactical Scanner`, `Emergency Teleporter`, `Laser Cannon`, ``]
         },
     conditionCard: {
         card: {
             type: String,
-            enum: [`Basic Thwart Upgrade`, `Basic Attack Upgrade`, `Basic Defence Upgrade`, `Basic Recovery Upgrade`]
+            enum: [`Thwart Upgrade`, `Attack Upgrade`, `Defence Upgrade`, `Recovery Upgrade`, ``]
         },
         improved: {
             type: Boolean,
@@ -49,7 +49,7 @@ const redSkullSchema = new mongoose.Schema ({
     experimentalAttachments: [
         {
             type: String,
-            enum: [`Laser Rifle`, `Energy Shield`, `Power Gauntlets`, `Exo-Suit`]    
+            enum: [`Laser Rifle`, `Energy Shield`, `Power Gauntlets`, `Exo-Suit`, ``]    
         }
     ],
     players: [playerSchema]
@@ -58,3 +58,4 @@ const redSkullSchema = new mongoose.Schema ({
 const TheRiseOfRedSkull = mongoose.model(`TheRiseOfRedSkull`, redSkullSchema)
 
 module.exports = TheRiseOfRedSkull
+//REVIEW - Remove empty string enums and apply ternaries in appropriate places
