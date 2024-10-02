@@ -5,13 +5,13 @@
     </label>
     <h4>Experimental Attachments:</h4>
     <fieldset class="campaign-widget checkboxes">
-        <input id="laser-rifle" type="checkbox" name="experimentalAttachments" value="Laser Rifle">
+        <input id="laser-rifle" type="checkbox" name="experimentalAttachments" value="Laser Rifle" <% if (locals.campaign?.campaignInformation?.experimentalAttachments?.contains(`Laser Rifle`)) { %> checked <% } %>>
         <label for="laser-rifle">Laser Rifle</label>
-        <input id="energy-shield" type="checkbox" name="experimentalAttachments" value="Energy Shield">
+        <input id="energy-shield" type="checkbox" name="experimentalAttachments" value="Energy Shield" <% if (locals.campaign?.campaignInformation?.experimentalAttachments?.contains(`Energy Shield`)) { %> checked <% } %>>
         <label for="energy-shield">Energy Shield</label>
-        <input id="power-gaunts" type="checkbox" name="experimentalAttachments" value="Power Gauntlets">
+        <input id="power-gaunts" type="checkbox" name="experimentalAttachments" value="Power Gauntlets" <% if (locals.campaign?.campaignInformation?.experimentalAttachments?.contains(`Power Gauntlets`)) { %> checked <% } %>>
         <label for="power-gaunts">Power Gauntlets</label>
-        <input id="exo-suit" type="checkbox" name="experimentalAttachments" value="Exo-Suit">
+        <input id="exo-suit" type="checkbox" name="experimentalAttachments" value="Exo-Suit <% if (locals.campaign?.campaignInformation?.experimentalAttachments?.contains(`Exo-Suit`)) { %> checked <% } %>>
         <label for="exo-suit">Exo-Suit</label>
     </fieldset>
     <section class="player-section" id="red-skull-player-section">
@@ -52,33 +52,33 @@
                         </label>
                         <label>
                             Basic
-                            <input type="radio" value="basic" name="improvedConditionCard"<% if (!player.conditionCard.improved) { %> checked <% } %>>
+                            <input type="radio" value="basic" name="improvedConditionCard" <% if (!player.conditionCard.improved) { %> checked <% } %>>
                         </label>
                         <label>
                             Improved
-                            <input type="radio" value="improved" name="improvedConditionCard"<% if (player.conditionCard.improved) { %> checked <% } %>>
+                            <input type="radio" value="improved" name="improvedConditionCard" <% if (player.conditionCard.improved) { %> checked <% } %>>
                         </label>
                     </fieldset>
                     <h4>Rescued Allies:</h4>
                     <fieldset class="campaign-widget checkboxes">
-                        <input id="moon-knight" type="checkbox" name="rescuedAllyCards<%= i %>" value="Moon Knight">
+                        <input id="moon-knight" type="checkbox" name="rescuedAllyCards<%= i %>" value="Moon Knight" <% if (player.rescuedAllyCards?.includes(`Moon Knight`)) { %> checked <% } %>>
                         <label for="moon-knight">Moon Knight</label>
-                        <input id="shang-chi" type="checkbox" name="rescuedAllyCards<%= i %>" value="Shang-Chi">
+                        <input id="shang-chi" type="checkbox" name="rescuedAllyCards<%= i %>" value="Shang-Chi" <% if (player.rescuedAllyCards?.includes(`Shang-Chi`)) { %> checked <% } %>>
                         <label for="shang-chi">Shang-Chi</label>
-                        <input id="white-tiger" type="checkbox" name="rescuedAllyCards<%= i %>" value="White Tiger">
+                        <input id="white-tiger" type="checkbox" name="rescuedAllyCards<%= i %>" value="White Tiger" <% if (player.rescuedAllyCards?.includes(`White Tiger`)) { %> checked <% } %>>
                         <label for="white-tiger">White Tiger</label>
-                        <input id="elektra" type="checkbox" name="rescuedAllyCards<%= i %>" value="Elektra">
+                        <input id="elektra" type="checkbox" name="rescuedAllyCards<%= i %>" value="Elektra" <% if (player.rescuedAllyCards?.includes(`Elektra`)) { %> checked <% } %>>
                         <label for="elektra">Elektra</label>
                     </fieldset>
                     <h4>Obligations:</h4>
                     <fieldset class="campaign-widget checkboxes">
-                        <input id="zolas-algo" type="checkbox" name="expertObligationCards<%= i %>" value="Zola's Algorithim">
+                        <input id="zolas-algo" type="checkbox" name="expertObligationCards<%= i %>" value="Zola's Algorithim" <% if (player.expertObligationCards?.includes(`Zola's Algorithim`)) { %> checked <% } %>>
                         <label for="zolas-algo">Zola's Algorithim</label>
-                        <input id="med-emerg" type="checkbox" name="expertObligationCards<%= i %>" value="Medical Emergency">
+                        <input id="med-emerg" type="checkbox" name="expertObligationCards<%= i %>" value="Medical Emergency" <% if (player.expertObligationCards?.includes(`Medical Emergency`)) { %> checked <% } %>>
                         <label for="med-emerg">Medical Emergency</label>
-                        <input id="martial-law" type="checkbox" name="expertObligationCards<%= i %>" value="Martial Law">
+                        <input id="martial-law" type="checkbox" name="expertObligationCards<%= i %>" value="Martial Law" <% if (player.expertObligationCards?.includes(`Martial Law`)) { %> checked <% } %>>
                         <label for="martial-law">Martial Law</label>
-                        <input id="anti-hero" type="checkbox" name="expertObligationCards<%= i %>" value="Anti-Hero Propaganda">
+                        <input id="anti-hero" type="checkbox" name="expertObligationCards<%= i %>" value="Anti-Hero Propaganda" <% if (player.expertObligationCards?.includes(`Anti-Hero Propaganda`)) { %> checked <% } %>>
                         <label for="anti-hero">Anti-Hero Propaganda</label>
                     </fieldset>                
                     <label>
