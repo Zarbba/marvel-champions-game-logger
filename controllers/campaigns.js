@@ -21,7 +21,7 @@ router.get(`/new`, isLoggedIn, async (req, res) => {
 
 router.post(`/`, isLoggedIn, async (req, res) => {
     try {
-        const campaign = await utilities.processCampaignFormData(req.body)
+        const campaign = utilities.processCampaignFormData(req.body)
         const nameInDatabase = await Campaign.findOne({campaignName: campaign.campaignName})
         if (nameInDatabase !== null) {
             const user = await User.findById(req.session.user._id).populate(`ownedGames`)
@@ -30,6 +30,7 @@ router.post(`/`, isLoggedIn, async (req, res) => {
             return
         }
         campaign.owner = req.session.user._id
+        await utilities.createCampaignInformation(campaign)
         const newCampaign = await Campaign.create(campaign)
         const updatedGames = await Game.updateMany({_id: {"$in":[newCampaign.games]}}, {"$set":{campaign: newCampaign}})
         res.redirect(`/campaigns`)

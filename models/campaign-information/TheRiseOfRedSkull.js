@@ -44,7 +44,6 @@ const playerSchema = new mongoose.Schema ({
 const redSkullSchema = new mongoose.Schema ({
     delayCounters: {
         type: Number,
-        required: true,
     },
     experimentalAttachments: [
         {

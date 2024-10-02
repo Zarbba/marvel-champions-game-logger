@@ -5,17 +5,17 @@
     </label>
     <h4>Experimental Attachments:</h4>
     <fieldset class="campaign-widget checkboxes">
-        <input id="laser-rifle" type="checkbox" name="experimentalAttachments" value="Laser Rifle" <% if (locals.campaign?.campaignInformation?.experimentalAttachments?.contains(`Laser Rifle`)) { %> checked <% } %>>
+        <input id="laser-rifle" type="checkbox" name="experimentalAttachments" value="Laser Rifle" <% if (locals.campaign?.campaignInformation?.experimentalAttachments?.includes(`Laser Rifle`)) { %> checked <% } %>>
         <label for="laser-rifle">Laser Rifle</label>
-        <input id="energy-shield" type="checkbox" name="experimentalAttachments" value="Energy Shield" <% if (locals.campaign?.campaignInformation?.experimentalAttachments?.contains(`Energy Shield`)) { %> checked <% } %>>
+        <input id="energy-shield" type="checkbox" name="experimentalAttachments" value="Energy Shield" <% if (locals.campaign?.campaignInformation?.experimentalAttachments?.includes(`Energy Shield`)) { %> checked <% } %>>
         <label for="energy-shield">Energy Shield</label>
-        <input id="power-gaunts" type="checkbox" name="experimentalAttachments" value="Power Gauntlets" <% if (locals.campaign?.campaignInformation?.experimentalAttachments?.contains(`Power Gauntlets`)) { %> checked <% } %>>
+        <input id="power-gaunts" type="checkbox" name="experimentalAttachments" value="Power Gauntlets" <% if (locals.campaign?.campaignInformation?.experimentalAttachments?.includes(`Power Gauntlets`)) { %> checked <% } %>>
         <label for="power-gaunts">Power Gauntlets</label>
-        <input id="exo-suit" type="checkbox" name="experimentalAttachments" value="Exo-Suit" <% if (locals.campaign?.campaignInformation?.experimentalAttachments?.contains(`Exo-Suit`)) { %> checked <% } %>>
+        <input id="exo-suit" type="checkbox" name="experimentalAttachments" value="Exo-Suit" <% if (locals.campaign?.campaignInformation?.experimentalAttachments?.includes(`Exo-Suit`)) { %> checked <% } %>>
         <label for="exo-suit">Exo-Suit</label>
     </fieldset>
     <section class="player-section" id="red-skull-player-section">
-        <% if (locals.campaign?.campaignInformation) { %>
+        <% if (locals.campaign?.campaignInformation && campaign.campaignType === `TheRiseOfRedSkull`) { %>
             <% campaign.campaignInformation.players.forEach( (player, i) => { %>
                 <fieldset class="player-widget">
                     <label class="player-element">

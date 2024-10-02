@@ -51,7 +51,7 @@
         <label for="vulture">Vulture</label>
     </fieldset>
     <section class="player-section" id="sin-mot-player-section">
-        <% if (locals.campaign?.campaignInformation) { %>
+        <% if (locals.campaign?.campaignInformation && campaign.campaignType === `SinisterMotives`) { %>
             <% campaign.campaignInformation.players.forEach( (player, i) => { %>
                 <fieldset class="player-widget">
                     <label class="player-element">
