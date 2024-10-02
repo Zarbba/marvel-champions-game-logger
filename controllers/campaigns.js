@@ -21,9 +21,16 @@ router.get(`/new`, isLoggedIn, async (req, res) => {
 
 router.post(`/`, isLoggedIn, async (req, res) => {
     try {
-        const campaignData = await utilities.processCampaignFormData(req.body)
-        campaignData.owner = req.session.user._id
-        const newCampaign = await Campaign.create(campaignData)
+        const campaign = await utilities.processCampaignFormData(req.body)
+        const nameInDatabase = await Campaign.findOne({campaignName: campaign.campaignName})
+        if (nameInDatabase !== null) {
+            const user = await User.findById(req.session.user._id).populate(`ownedGames`)
+            const ownedGames = user.ownedGames
+            res.render(`campaigns/new`, {campaign, ownedGames, message: `A campaign log already exists with that name.`})
+            return
+        }
+        campaign.owner = req.session.user._id
+        const newCampaign = await Campaign.create(campaign)
         const updatedGames = await Game.updateMany({_id: {"$in":[newCampaign.games]}}, {"$set":{campaign: newCampaign}})
         res.redirect(`/campaigns`)
     } catch(err) {

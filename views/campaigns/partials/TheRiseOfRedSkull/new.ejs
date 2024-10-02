@@ -1,4 +1,4 @@
-<section class="campaign-info-section TheRiseOfRedSkull hidden">
+<section class="campaign-info-section TheRiseOfRedSkull <%= locals.campaign?.campaignType === `TheRiseOfRedSkull` ? `current-campaign` : `hidden` %>">
     <label>
         Delay Counters:
         <input type="number" name="delayCounters" value="">
@@ -11,7 +11,7 @@
         <label for="energy-shield">Energy Shield</label>
         <input id="power-gaunts" type="checkbox" name="experimentalAttachments" value="Power Gauntlets" <% if (locals.campaign?.campaignInformation?.experimentalAttachments?.contains(`Power Gauntlets`)) { %> checked <% } %>>
         <label for="power-gaunts">Power Gauntlets</label>
-        <input id="exo-suit" type="checkbox" name="experimentalAttachments" value="Exo-Suit <% if (locals.campaign?.campaignInformation?.experimentalAttachments?.contains(`Exo-Suit`)) { %> checked <% } %>>
+        <input id="exo-suit" type="checkbox" name="experimentalAttachments" value="Exo-Suit" <% if (locals.campaign?.campaignInformation?.experimentalAttachments?.contains(`Exo-Suit`)) { %> checked <% } %>>
         <label for="exo-suit">Exo-Suit</label>
     </fieldset>
     <section class="player-section" id="red-skull-player-section">
@@ -43,20 +43,20 @@
                         </label>
                             Condition Card:
                             <select name="conditionCard">
-                                <option value="Thwart Upgrade" <% if (player.conditionCard.card === `Thwart Upgrade`) {%> selected <% } %>>Thwart Upgrade</option>
-                                <option value="Attack Upgrade" <% if (player.conditionCard.card === `Attack Upgrade`) {%> selected <% } %>>Attack Upgrade</option>
-                                <option value="Defence Upgrade" <% if (player.conditionCard.card === `Defence Upgrade`) {%> selected <% } %>>Defence Upgrade</option>
-                                <option value="Recovery Upgrade" <% if (player.conditionCard.card === `Recovery Upgrade`) {%> selected <% } %>>Recovery Upgrade</option>
+                                <option value="Thwart Upgrade" <% if (player.conditionCard?.card === `Thwart Upgrade`) {%> selected <% } %>>Thwart Upgrade</option>
+                                <option value="Attack Upgrade" <% if (player.conditionCard?.card === `Attack Upgrade`) {%> selected <% } %>>Attack Upgrade</option>
+                                <option value="Defence Upgrade" <% if (player.conditionCard?.card === `Defence Upgrade`) {%> selected <% } %>>Defence Upgrade</option>
+                                <option value="Recovery Upgrade" <% if (player.conditionCard?.card === `Recovery Upgrade`) {%> selected <% } %>>Recovery Upgrade</option>
                                 <option value="" class="hidden" <% if (!player.conditionCard) {%> selected <% } %>></option>
                             </select>
                         </label>
                         <label>
                             Basic
-                            <input type="radio" value="basic" name="improvedConditionCard" <% if (!player.conditionCard.improved) { %> checked <% } %>>
+                            <input type="radio" value="basic" name="improvedConditionCard" <% if (!player.conditionCard?.improved) { %> checked <% } %>>
                         </label>
                         <label>
                             Improved
-                            <input type="radio" value="improved" name="improvedConditionCard" <% if (player.conditionCard.improved) { %> checked <% } %>>
+                            <input type="radio" value="improved" name="improvedConditionCard" <% if (player.conditionCard?.improved) { %> checked <% } %>>
                         </label>
                     </fieldset>
                     <h4>Rescued Allies:</h4>

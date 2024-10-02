@@ -1,4 +1,4 @@
-<section class="campaign-info-section SinisterMotives hidden">
+<section class="campaign-info-section SinisterMotives <%= locals.campaign?.campaignType === `SinisterMotives` ? `current-campaign` : `hidden` %>">
     <label>
         Current Reputation
         <input type="number" name="currentReputation">
@@ -82,11 +82,11 @@
                     </label>
                     <label class="aspect-adv-element">
                         Aspect Advantage Card:
-                        <input type="text" name="aspectAdvantageCard" value="<%= player.aspectAdvantageCard %>">
+                        <input type="text" name="aspectAdvantageCard" <% if (player.aspectAdvantageCard) { %> value="<%= player.aspectAdvantageCard %>" <% } %>>
                     </label>
                     <label class="plan-ahead-element">
                         Planning Ahead Card:
-                        <input type="text" name="planningAheadCard" value="<%= player.planningAheadCard %>">
+                        <input type="text" name="planningAheadCard" <% if(player.planningAheadCard) { %> value="<%= player.planningAheadCard %>" <% } %>>
                     </label>
                     <button type="button" class="player-button button remove">Remove Player</button>
                 </fieldset>
