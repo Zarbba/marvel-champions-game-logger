@@ -53,4 +53,4 @@ const sinisterMotivesSchema = new mongoose.Schema ({
 const SinisterMotives = mongoose.model(`SinisterMotives`, sinisterMotivesSchema)
 
 module.exports = SinisterMotives
-//REVIEW - Remove empty string enums and apply ternaries in appropriate places
+//REVIEW - Remove empty string enums and apply ternaries/conditionals in appropriate places

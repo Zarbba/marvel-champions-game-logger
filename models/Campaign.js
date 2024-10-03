@@ -53,6 +53,13 @@ campaignSchema.virtual(`htmlDate`).get(function () {
     return this.datePlayed.toISOString().slice(0,10)
 })
 
+campaignSchema.virtual(`displayType`).get(function () {
+    let type = this.campaignType
+    type = type.replace(/([a-z])([A-Z])/g, '$1 $2')
+    type = type.replace(/([A-Z])([A-Z][a-z])/g, '$1 $2')
+    return type
+})
+
 const Campaign = mongoose.model(`Campaign`, campaignSchema)
 
 module.exports = Campaign

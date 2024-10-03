@@ -1,0 +1,43 @@
+<%- include(`../partials/header`) %>
+<h2>All Campaigns</h2>
+<table>
+    <% if (campaigns.length > 0) { %>
+        <tr>
+            <th><a href="/campaigns?sorting=campaignName&order=<%= order %>&page=<%= currentPage %>">Name</a></th>
+            <th><a href="/campaigns?sorting=owner&order=<%= order %>&page=<%= currentPage %>">Author</a></th>
+            <th><a href="/campaigns?sorting=campaignType&order=<%= order %>&page=<%= currentPage %>">Campaign</a></th>
+            <th><a href="/campaigns?sorting=createdAt&order=<%= order %>&page=<%= currentPage %>">Date Published</a></th>
+        </tr>
+        <% campaigns.forEach((campaign, i) => { %>
+            <tr>
+                <td><a class="campaign-link" href="/campaigns/<%= campaign.id %>"><%= campaign.campaignName %></a></td>
+                <td><%= campaign.owner.userName %></td>
+                <td><%= campaign.displayType%></td>
+                <td><%= campaign.createdAt.toDateString() %></td>
+            <% if (user !== null && user._id == campaign.owner._id) {%>
+                <td class ="button-cell">
+                    <form class="table-form" action="/campaigns/<%= campaign._id %>/edit">
+                        <button class="button edit">Edit</button>
+                    </form>
+                    <button class="button delete <%= campaign._id %>" type="button">Delete<span class="hidden"><%= campaign.campaignName %></span></button>
+                </td>
+            <% } %>
+        </tr>
+    <% }) %>
+<% } %>
+</table>
+<section class="pagination">
+    <% if (currentPage > 1 && totalPages > 1) { %>
+        <a href="/campaigns?page=<%= Number(currentPage) - 1 %>">&#8592;</a>
+    <% } %>
+    <% let i = 0 %>
+    <% while (i < totalPages) { %>
+        <a href="/campaigns?page=<%= i + 1 %>"><%= i + 1 %></a>
+        <% i++ %>
+    <% } %>
+    <% if (Number(currentPage) !== totalPages && totalPages > 1) { %>
+        <a href="/campaigns?page=<%= Number(currentPage) + 1 %>">&#8594;</a>
+    <% } %>    
+</section>
+<%- include(`../partials/modal`) %>
+<%- include(`../partials/footer`) %>

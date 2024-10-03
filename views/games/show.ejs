@@ -4,7 +4,9 @@
     <p><span>Date played:</span> <%= game.datePlayed.toDateString() %></p>
     <% if (game.campaign) { %>
         <h3>Players:</h3>
-        <%- include(`../campaigns/partials/${game.campaign.campaignType}/show-player`) %>
+        <% game.campaign.campaignInformation.players.forEach( (player) => { %>
+            <p>Player Name: <%= player.playerName %> Hero: <%= player.identity %></p>
+        <% }) %>
     <% } else { %>
         <% game.players.forEach( (player) => { %>
             <p>Player Name: <%= player.playerName %> Hero: <%= player.identity %></p>
