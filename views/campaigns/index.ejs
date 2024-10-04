@@ -1,14 +1,14 @@
 <%- include(`../partials/header`) %>
 <h2>All Campaigns</h2>
 <table>
-    <% if (campaigns.length > 0) { %>
+    <% if (paginatedResults.length > 0) { %>
         <tr>
             <th><a href="/campaigns?sorting=campaignName&order=<%= order %>&page=<%= currentPage %>">Name</a></th>
             <th><a href="/campaigns?sorting=owner&order=<%= order %>&page=<%= currentPage %>">Author</a></th>
             <th><a href="/campaigns?sorting=campaignType&order=<%= order %>&page=<%= currentPage %>">Campaign</a></th>
             <th><a href="/campaigns?sorting=createdAt&order=<%= order %>&page=<%= currentPage %>">Date Published</a></th>
         </tr>
-        <% campaigns.forEach((campaign, i) => { %>
+        <% paginatedResults.forEach((campaign, i) => { %>
             <tr>
                 <td><a class="campaign-link" href="/campaigns/<%= campaign.id %>"><%= campaign.campaignName %></a></td>
                 <td><%= campaign.owner.userName %></td>

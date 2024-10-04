@@ -44,7 +44,7 @@ router.post(`/`, isLoggedIn, async (req, res) => {
 router.get(`/`, async(req, res) => {
     try {
         let order = req.query.order ? utilities.reverseOrder(req.query.order) : `asc`
-        res.render(`campaigns/index`, await utilities.paginateCampaigns(req.query.page ? req.query.page : 1, 10, req.query.sorting, order))
+        res.render(`campaigns/index`, await utilities.paginateModel(`Campaign`, req.query.page ? req.query.page : 1, 10, req.query.sorting, order))
     } catch(err) {
         console.log(err)
         res.status(500).render(`errors/error-500`)

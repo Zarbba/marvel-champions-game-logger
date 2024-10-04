@@ -1,11 +1,11 @@
 <%- include(`../partials/header`) %>
 <h2>All Games</h2>
 <table>
-    <% if (games.length > 0) { %>
+    <% if (paginatedResults.length > 0) { %>
         <tr>
             <th><a href="/games?sorting=gameName&order=<%= order %>&page=<%= currentPage %>">Name</a></th> <th><a href="/games?sorting=owner&order=<%= order %>&page=<%= currentPage %>">Author</a></th> <th><a href="/games?sorting=datePlayed&order=<%= order %>&page=<%= currentPage %>">Date Played</a></th> <th><a href="/games?sorting=createdAt&order=<%= order %>&page=<%= currentPage %>">Date Published</a></th>
         </tr>
-        <% games.forEach((game, i) => { %>
+        <% paginatedResults.forEach((game, i) => { %>
             <tr>
                 <td><a class="game-link" href="/games/<%= game.id %>"><%= game.gameName %></a></td> <td><%= game.owner.userName %></td> <td><%= game.datePlayed.toDateString() %></td> <td><%= game.createdAt.toDateString() %></td>
             <% if (user !== null && user._id == game.owner._id) {%>
