@@ -41,7 +41,7 @@ router.post(`/`, isLoggedIn, async (req, res) => {
 })
 //TODO - Add warning when changing games from one campaign to another
 
-router.get(`/`, async(req, res) => {
+router.get(`/`, async (req, res) => {
     try {
         let order = req.query.order ? utilities.reverseOrder(req.query.order) : `asc`
         res.render(`campaigns/index`, await utilities.paginateModel(`Campaign`, req.query.page ? req.query.page : 1, 10, req.query.sorting, order))
@@ -50,7 +50,21 @@ router.get(`/`, async(req, res) => {
         res.status(500).render(`errors/error-500`)
     }
 })
-//TODO - Add get for /
+
+router.get(`/:campaignId`, async (req, res) => {
+    try{
+        const campaign = await Campaign.findById(req.params.campaignId)
+        .populate(`campaignInformation`)
+        .populate({path: `games`, populate:{path: `owner`}})
+        .populate(`owner`)
+        res.render(`campaigns/show`, {campaign})
+    } catch(err) {
+        console.log(err)
+        res.status(500).render(`errors/error-500`)
+    }
+})
+
+//TODO - Add get for /:campaignId
 //TODO - Add get for /edit
 //TODO - Add put for /edit
 //TODO - Add delete for /delete

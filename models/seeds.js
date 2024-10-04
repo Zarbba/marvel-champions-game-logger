@@ -255,7 +255,7 @@ async function seedCampaignInformation() {
             {
                 playerName: `Josh`,
                 identity: `Sp//dr`,
-                shiedlTechCard: `Wave Bracers`,
+                shieldTechCard: `Wave Bracers`,
                 aspectAdvantageCard: `Make the Call`,
                 planningAheadCard: `Host Spider`,
                 owner: zarbba
@@ -263,7 +263,7 @@ async function seedCampaignInformation() {
             {
                 playerName: `Henry`,
                 identity: `Rogue`,
-                shiedlTechCard: `Shock Knuckles`,
+                shieldTechCard: `Shock Knuckles`,
                 aspectAdvantageCard: `Hawkeye/Clint Barton`,
                 planningAheadCard: `X-Gene`,
                 owner: hnro

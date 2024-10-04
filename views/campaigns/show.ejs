@@ -1,0 +1,36 @@
+<%- include(`../partials/header`) %>
+<h2><%= campaign.campaignName %></h2>
+<section class="campaign-show-section">
+    <p><span>Campaign:</span> <%= campaign.displayType %></p>
+<%- include(`./partials/${campaign.campaignType}/show`) %>
+<h3>Games:</h3>
+<table>
+    <tr>
+        <th>Name</th><th>Author</th>
+    </tr>
+    <% campaign.games.forEach( (game) => { %> 
+        <tr>
+            <td><a class="game-link" href="/games/<%= game.id %>"><%= game.gameName %></a></td>
+            <td><%= game.owner.userName %></td>
+        </tr>
+    <% }) %>
+</table>
+<p><span>Difficulty:</span> <%= campaign.modes.expert ? `Expert` : `Standard` %></p>
+<p><span>Heroic Modifier:</span> <%= campaign.modes.heroic ? campaign.modes.heroic : 0 %></p>
+<h3>Players: </h3>
+<table>
+    <%- include(`./partials/${campaign.campaignType}/show-players`) %>
+</table>
+<h3>Notes:</h3>
+    <p><%= campaign.notes %></p>
+    <% if (user !== null && user._id == campaign.owner._id) {%>
+        <section class="button-section">
+            <form class="button edit" action="/campaigns/<%= campaign._id %>/edit">
+                <button>Edit</button>
+            </form>
+            <button class="button delete <%= campaign._id %>" type="button">Delete<span class="hidden"><%= campaign.campaignName %></span></button>
+        </section>
+<% } %>
+</section>
+<%- include(`../partials/modal`) %>
+<%- include(`../partials/footer`) %>
