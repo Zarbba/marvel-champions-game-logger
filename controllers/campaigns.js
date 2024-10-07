@@ -6,6 +6,7 @@ const utilities = require(`../lib/utilities`)
 const User = require(`../models/User`)
 const Game = require(`../models/Game`)
 const Campaign = require(`../models/Campaign`)
+const { default: mongoose } = require("mongoose")
 require(`dotenv`).config()
 
 router.get(`/new`, isLoggedIn, async (req, res) => {
@@ -29,9 +30,12 @@ router.post(`/`, isLoggedIn, async (req, res) => {
             res.render(`campaigns/new`, {campaign, ownedGames, message: `A campaign log already exists with that name.`})
             return
         }
-        campaign.owner = req.session.user._id
+        const owner = await User.findById(req.session.user._id)
+        campaign.owner = owner
         await utilities.createCampaignInformation(campaign)
         const newCampaign = await Campaign.create(campaign)
+        owner.ownedCampaigns.push(newCampaign)
+        await owner.save()
         const updatedGames = await Game.updateMany({_id: {"$in":[newCampaign.games]}}, {"$set":{campaign: newCampaign}})
         res.redirect(`/campaigns`)
     } catch(err) {
@@ -52,7 +56,7 @@ router.get(`/`, async (req, res) => {
 })
 
 router.get(`/:campaignId`, async (req, res) => {
-    try{
+    try {
         const campaign = await Campaign.findById(req.params.campaignId)
         .populate(`campaignInformation`)
         .populate({path: `games`, populate:{path: `owner`}})
@@ -64,9 +68,27 @@ router.get(`/:campaignId`, async (req, res) => {
     }
 })
 
-//TODO - Add get for /:campaignId
 //TODO - Add get for /edit
 //TODO - Add put for /edit
-//TODO - Add delete for /delete
+
+router.delete(`/:campaignId`, isLoggedIn, isCampaignOwner, async (req, res) => {
+    try {
+        const owner = await User.findById(req.session.user._id).populate(`ownedCampaigns`)
+        const targetCampaign = await Campaign.findById(req.params.campaignId)
+        owner.ownedCampaigns.pull(targetCampaign._id)
+        await owner.save()
+        const deletedCampaignInformation = 
+        mongoose.model(`${targetCampaign.campaignType}`)
+        .deleteOne({_id: targetCampaign.campaignInformation})
+        const updatedGames = await Game.updateMany(
+            {_id: {"$in":[targetCampaign.games]}},
+            {"$unset": {campaign: ``}})
+        const deletedCampaign = await Campaign.findOneAndDelete({_id: req.params.campaignId})
+        res.redirect(`/campaigns`)    
+    } catch(err) {
+        console.log(err)
+        res.status(500).render(`errors/error-500`)
+    }
+})
 
 module.exports = router

@@ -13,7 +13,7 @@
                     <form class="table-form" action="/games/<%= game._id %>/edit">
                         <button class="button edit">Edit</button>
                     </form>
-                    <button class="button delete <%= game._id %>" type="button">Delete<span class="hidden"><%= game.gameName %></span></button>
+                    <button class="button delete <%= game._id %> game" type="button">Delete<span class="hidden"><%= game.gameName %></span></button>
                 </td>
             <% } %>
         </tr>

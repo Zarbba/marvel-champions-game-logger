@@ -15,7 +15,7 @@
                             <form class="table-form" action="/games/<%= game._id %>/edit">
                                 <button>Edit</button>
                             </form>
-                            <button class="button delete <%= game._id %>" type="button">Delete<span class="hidden"><%= game.gameName %></span></button>
+                            <button class="button delete <%= game._id %> game" type="button">Delete<span class="hidden"><%= game.gameName %></span></button>
                         </td>
                     <% } %>
                 </tr>
@@ -38,7 +38,7 @@
                             <form class="table-form" action="/campaigns/<%= campaign._id %>/edit">
                                 <button>Edit</button>
                             </form>
-                            <button class="button delete <%= campaign._id %>" type="button">Delete<span class="hidden"><%= campaign.campaignName %></span></button>
+                            <button class="button delete <%= campaign._id %> campaign" type="button">Delete<span class="hidden"><%= campaign.campaignName %></span></button>
                         </td>
                     <% } %>
                 </tr>

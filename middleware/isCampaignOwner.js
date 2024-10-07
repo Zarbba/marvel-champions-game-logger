@@ -2,7 +2,7 @@ const Campaign = require(`../models/Campaign`)
 
 async function isCampaignOwner(req, res, next) {
     try {
-        const campaign = await Campaign.findById(req.params.gameId)
+        const campaign = await Campaign.findById(req.params.campaignId)
         if (campaign.owner != req.session.user._id) {
             res.status(403).render(`errors/error-403`)
             return

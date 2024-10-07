@@ -34,6 +34,7 @@ router.post(`/`, isLoggedIn, async (req, res) => {
             res.render(`games/new`, {game, message: `A game log already exists with that name.`})
             return
         }
+        const owner = await User.findById(req.session.user._id)
         const createdGame = await Game.create({
             gameName: req.body.gameName,
             datePlayed: req.body.datePlayed,
@@ -41,8 +42,10 @@ router.post(`/`, isLoggedIn, async (req, res) => {
             players,
             wonGame: req.body.wonGame,
             notes: req.body.notes,
-            owner: req.session.user
+            owner
         })
+        owner.ownedGames.push(createdGame)
+        await owner.save()
         res.redirect(`/games`)
     } catch(err) {
         console.log(err)
@@ -144,10 +147,10 @@ router.get(`/:gameId/delete`, isLoggedIn, isGameOwner, async (req, res) => {
 
 router.delete(`/:gameId`, isLoggedIn, isGameOwner, async (req, res) => {
     try {
-        const user = await User.findById(req.session.user._id).populate(`ownedGames`)
+        const owner = await User.findById(req.session.user._id).populate(`ownedGames`)
         const targetGame = await Game.findById(req.params.gameId).populate(`owner`)
-        user.ownedGames.pull(targetGame._id)
-        await user.save()
+        owner.ownedGames.pull(targetGame._id)
+        await owner.save()
         if (targetGame.campaign) {
             const targetCampaign = await Campaign.findById(targetGame.campaign)
             targetCampaign.games.pull(targetGame._id)

@@ -55,8 +55,14 @@ function handleButtonClick(e) {
         }
     }
     if (e.target.classList.contains(`delete`)) {
-        revealDeleteGameModal(e)
-        return
+        if (e.target.classList.contains(`game`)) {
+            revealDeleteGameModal(e)
+            return
+        }
+        if (e.target.classList.contains(`campaign`)) {
+            revealDeleteCampaignModal(e)
+            return
+        }
     }
     if (e.target.classList.contains(`cancel`)) {
         hideModal()
@@ -280,7 +286,7 @@ function removeGameWidget(e) {
 function revealDeleteGameModal(e) {
     modalEl.innerHTML =
     // REVIEW - There's gotta be a better way to pass these variables through...
-`<p class="delete-text">Are you sure you want to delete ${e.target.childNodes[1].textContent}?</p>
+    `<p class="delete-text">Are you sure you want to delete ${e.target.childNodes[1].textContent}?</p>
     <section class="button-section">
         <form class="button-element button confirm" action="/games/${e.target.classList[2]}?_method=delete" method="post">
             <button>Delete</button>
@@ -289,7 +295,18 @@ function revealDeleteGameModal(e) {
     </section>`
     modalEl.classList.remove(`hidden`)
 }
-//TODO - Add revealDeleteCampaignModal()
+
+function revealDeleteCampaignModal(e) {
+    modalEl.innerHTML =
+    `<p class="delete-text">Are you sure you want to delete ${e.target.childNodes[1].textContent}?</p>
+    <section class="button-section">
+        <form class="button-element button confirm" action="/campaigns/${e.target.classList[2]}?_method=delete" method="post">
+            <button>Delete</button>
+        </form>
+        <button class="button-element button cancel" type="button">Cancel</button>
+    </section>`
+    modalEl.classList.remove(`hidden`)
+}
 
 function hideModal() {
     modalEl.classList.add(`hidden`)

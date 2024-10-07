@@ -19,7 +19,7 @@
                     <form class="table-form" action="/campaigns/<%= campaign._id %>/edit">
                         <button class="button edit">Edit</button>
                     </form>
-                    <button class="button delete <%= campaign._id %>" type="button">Delete<span class="hidden"><%= campaign.campaignName %></span></button>
+                    <button class="button delete <%= campaign._id %> campaign" type="button">Delete<span class="hidden"><%= campaign.campaignName %></span></button>
                 </td>
             <% } %>
         </tr>
