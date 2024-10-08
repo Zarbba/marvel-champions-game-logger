@@ -10,12 +10,12 @@ const playerSchema = new mongoose.Schema ({
     techCard:
         {
             type: String,
-            enum: [`Adrenal Stims`,`Tactical Scanner`, `Emergency Teleporter`, `Laser Cannon`, ``]
+            enum: [`Adrenal Stims`,`Tactical Scanner`, `Emergency Teleporter`, `Laser Cannon`]
         },
     conditionCard: {
         card: {
             type: String,
-            enum: [`Thwart Upgrade`, `Attack Upgrade`, `Defence Upgrade`, `Recovery Upgrade`, ``]
+            enum: [`Thwart Upgrade`, `Attack Upgrade`, `Defence Upgrade`, `Recovery Upgrade`]
         },
         improved: {
             type: Boolean,
@@ -48,11 +48,24 @@ const redSkullSchema = new mongoose.Schema ({
     experimentalAttachments: [
         {
             type: String,
-            enum: [`Laser Rifle`, `Energy Shield`, `Power Gauntlets`, `Exo-Suit`, ``]    
+            enum: [`Laser Rifle`, `Energy Shield`, `Power Gauntlets`, `Exo-Suit`]    
         }
     ],
     players: [playerSchema]
-}, {timestamps: true})
+}, {timestamps: true, virtuals: true})
+
+playerSchema.virtual(`fullConditionCard`).get(function () {
+    const type = this.conditionCard.improved ? `Improved` : `Basic`
+    return `${type} ${this.conditionCard.card}`
+})
+
+// redSkullSchema.virtual(`playerNames`).get(function () {
+//     let playerNames = []
+//     this.players.forEach( (player) => {
+//         playerNames.push(player.playerName)
+//     })
+//     return playerNames
+// })
 
 const TheRiseOfRedSkull = mongoose.model(`TheRiseOfRedSkull`, redSkullSchema)
 

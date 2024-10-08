@@ -48,7 +48,15 @@ const sinisterMotivesSchema = new mongoose.Schema ({
         }
     ],
     players: [playerSchema] 
-}, {timestamps: true})
+}, {timestamps: true, virtuals: true})
+
+// sinisterMotivesSchema.virtual(`playerNames`).get(function () {
+//     let playerNames = []
+//     this.players.forEach( (player) => {
+//         playerNames.push(player.playerName)
+//     })
+//     return playerNames
+// })
 
 const SinisterMotives = mongoose.model(`SinisterMotives`, sinisterMotivesSchema)
 

@@ -22,8 +22,8 @@ mongoose.connection.on(`open`, async () => {
 async function seedUsers() {
     const deletedUsers = await User.deleteMany()
     const createdUsers = await User.create([
-        {userName: `Zarbba`, password: bcrypt.hashSync(`Peni Parker`, 10), email: `fake@hotmail.com`, ownedGames: []},
-        {userName: `Hnro`, password: bcrypt.hashSync(`X-23`, 10), email: `false@gmail.com`, ownedGames: []}
+        {userName: `Zarbba`, password: bcrypt.hashSync(`Peni Parker`, 10), email: `fake@hotmail.com`, ownedGames: [], ownedCampaigns: []},
+        {userName: `Hnro`, password: bcrypt.hashSync(`X-23`, 10), email: `false@gmail.com`, ownedGames: [], ownedCampaigns: []}
     ])
 }
 
@@ -33,7 +33,7 @@ async function seedGames() {
     const deletedGames = await Game.deleteMany()
     const createdGames = await Game.create([
         {
-            gameName: `Peni vs Crossbones Solo Game`,
+            gameName: `Peni vs Crossbones Solo Campaign Game`,
             datePlayed: new Date(`2024-08-23`),
             players:[
                 {
@@ -245,6 +245,23 @@ async function seedCampaignInformation() {
     const hnro = await User.findOne({userName: `Hnro`})
     const deletedRedSkullInformation = await TheRiseOfRedSkull.deleteMany()
     const deletedSinisterMotivesInformation = await SinisterMotives.deleteMany()
+    const createdRedSkullInformation = await TheRiseOfRedSkull.create({
+        delayCounters: 1,
+        experimentalAttachments: [`Energy Shield`, `Exo-Suit`],
+        players:[
+            {
+                playerName: `Josh`,
+                identity: `Sp//dr`,
+                techCard: `Laser Cannon`,
+                conditionCard: {
+                    card: `Defence Upgrade`,
+                    improved: false
+                }
+            }
+        ],
+        owner: zarbba
+
+    })
     const createdSinisterMotivesInformation = await SinisterMotives.create({
         currentReputation: 18,
         osbornTechCards: [`Ionic Boots`, `Spiked Gauntlet`],
@@ -273,25 +290,42 @@ async function seedCampaignInformation() {
 }
 
 async function seedCampaigns() {
-    const info = await SinisterMotives.findOne({currentReputation: 18,})
+    const infoSinMot = await SinisterMotives.findOne({currentReputation: 18,})
+    const infoRedSkull = await TheRiseOfRedSkull.findOne({delayCounters: 1,})
     const zarbba = await User.findOne({userName: `Zarbba`})
     const hnro = await User.findOne({userName: `Hnro`})
-    const campaignGame = await Game.findOne({gameName: `Sp//dr and Rogue vs Mysterio 2-Player Sinister Motives Campaign Game`})
+    const sinMotCampaignGame = await Game.findOne({gameName: `Sp//dr and Rogue vs Mysterio 2-Player Sinister Motives Campaign Game`})
+    const redSkullCampaignGame = await Game.findOne({gameName: `Peni vs Crossbones Solo Campaign Game`})
     const deletedCampaigns = await Campaign.deleteMany()
-    const createdCampaigns = await Campaign.create({
-        campaignName: `Josh and Henry Get Sinister`,
-        owner: zarbba,
-        campaignType: `SinisterMotives`,
-        games: [campaignGame],
-        modes: {
-            expert: false,
+    const createdCampaigns = await Campaign.create([
+        {
+            campaignName: `Josh and Henry Get Sinister`,
+            owner: zarbba,
+            campaignType: `SinisterMotives`,
+            games: [sinMotCampaignGame],
+            modes: {
+                expert: false,
+            },
+            campaignInformation: infoSinMot,
+            notes: `Finally beat Mysterio. Looks like making Henry's deck cheaper did the trick.`
         },
-        campaignInformation: info,
-        notes: `Finally beat Mysterio. Looks like making Henry's deck cheaper did the trick.`
-    })
-    await Game.findByIdAndUpdate(campaignGame._id, {campaign: createdCampaigns._id})
+        {
+            campaignName: `Alone with the Skull`,
+            owner: zarbba,
+            campaignType: `TheRiseOfRedSkull`,
+            games: [redSkullCampaignGame],
+            modes: {
+                expert: false,
+            },
+            campaignInformation: infoRedSkull,
+            notes: `Trying Red Skull campaign on my own.`
+        }
+    ])
+    await Game.findByIdAndUpdate(sinMotCampaignGame._id, {campaign: createdCampaigns[0]._id})
+    await Game.findByIdAndUpdate(redSkullCampaignGame._id, {campaign: createdCampaigns[1]._id})
     const allCampaigns = await Campaign.find()
     console.log(allCampaigns)
+    await addCampaignOwners(zarbba, hnro)
 }
 
 async function addGameOwners(u1, u2) {
@@ -304,8 +338,20 @@ async function addGameOwners(u1, u2) {
         u2.ownedGames.push(game)
     })
     await u1.save()
-    await u2.save()
+    await u2.save()    
+}
+
+async function addCampaignOwners (u1, u2) {
+    const u1Campaigns = await Campaign.find({owner: u1})
+    const u2Campaigns = await Campaign.find({owner: u2})
+    u1Campaigns.forEach((campaign) => {
+        u1.ownedCampaigns.push(campaign)
+    })
+    u2Campaigns.forEach((campaign) => {
+        u2.ownedCampaigns.push(campaign)
+    })
+    await u1.save()
+    await u2.save()    
     const allUsers = await User.find()
     console.log(allUsers)
-    
 }

@@ -41,14 +41,6 @@ const campaignSchema = new mongoose.Schema ({
     notes: String,
 }, {timestamps: true, virtuals: true})
 
-campaignSchema.virtual(`playerNames`).get(function () {
-    let playerNames = []
-    this.campaignInformation.players.forEach( (player) => {
-        playerNames.push(player.playerName)
-    })
-    return playerNames
-})
-
 campaignSchema.virtual(`displayType`).get(function () {
     let type = this.campaignType
     type = type.replace(/([a-z])([A-Z])/g, '$1 $2')

@@ -1,1 +1,22 @@
-<!-- TODO - Complete this file -->
+<tr>
+    <th>Name</th>
+    <th>Hero</th>
+    <th>Tech Card</th>
+    <th>Condition Card</th>
+    <th>Rescued Ally Cards</th>
+    <th>Expert Obligation Cards</th>
+    <th>Was engaged by a minion?</th>
+    <th>Hit Points Remaining</th>
+</tr>
+<% campaign.campaignInformation.players.forEach( (player) => { %> 
+    <tr>
+        <td><%= player.playerName %></td>
+        <td><%= player.identity %></td>
+        <td><%= player.techCard %></td>
+        <td><%= player.fullConditionCard %></td>
+        <td><%= player.rescuedAllyCards.join(`, `) %></td>
+        <td><%= player.expertObligationCards.join(`, `) %></td>
+        <td><%= player.wasEngaged? `Yes` : `No` %></td>
+        <td><%= player.remainingHitPoints %></td>    
+    </tr>
+    <% }) %>
