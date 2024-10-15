@@ -68,8 +68,40 @@ router.get(`/:campaignId`, async (req, res) => {
     }
 })
 
-//TODO - Add get for /edit
-//TODO - Add put for /edit
+router.get(`/:campaignId/edit`, isLoggedIn, isCampaignOwner, async (req, res) => {
+    try {
+        const user = await User.findById(req.session.user._id).populate(`ownedGames`)
+        const ownedGames = user.ownedGames
+        const campaign = await Campaign.findById(req.params.campaignId).populate(`campaignInformation`)
+        if (!campaign) {
+            res.status(404).render(`errors/error-404`)
+            return
+        }
+        res.render(`campaigns/edit`, {campaign, ownedGames})
+    } catch(err) {
+        console.log(err)
+        res.status(500).render(`errors/error-500`)
+    }
+})
+
+router.put(`/:campaignId`, isLoggedIn, isCampaignOwner, async (req, res) => {
+    try {
+        const user = await User.findById(req.session.user._id).populate(`ownedGames`)
+        const ownedGames = user.ownedGames
+        const nameInDatabase = await Campaign.findOne({campaignName: req.body.campaignName})
+        const targetCampaign = await Campaign.findById(req.params.campaignId)
+        const campaign = utilities.processCampaignFormData(req.body)
+        if (nameInDatabase && nameInDatabase.id !== targetCampaign.id) {
+            res.render(`campaigns/edit`, {campaign, ownedGames, message: `A campaign log already exists with that name.`})
+            return
+        }
+        // TODO - Write logic for updating campaigns and campaignInfo
+        res.redirect(`/campaigns`)
+    } catch(err) {
+        console.log(err)
+        res.status(500).render(`errors/error-500`)
+    }
+})
 
 router.delete(`/:campaignId`, isLoggedIn, isCampaignOwner, async (req, res) => {
     try {

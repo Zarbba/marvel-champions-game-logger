@@ -19,14 +19,14 @@
             <option class="hidden" value="" <% if (!locals.campaign) { %> selected <% } %>></option>
         </select>
     <h3>Campaign Information:</h3>
-    <%- include(`./partials/TheRiseOfRedSkull/new`) %>
-    <%- //include(`./partials/TheGalacysMostWanted/new`) %>
-    <%- //include(`./partials/TheMadTitansShadow/new`) %>
-    <%- include(`./partials/SinisterMotives/new`) %>
-    <%- //include(`./partials/MutantGenesis/new`) %>
-    <%- //include(`./partials/NeXtEvolution/new`) %>
-    <%- //include(`./partials/AgeOfApocalypse/new`) %>
-    <%- //include(`./partials/AgentsOfSHIELD/new`) %>
+    <%- include(`./partials/TheRiseOfRedSkull/form`) %>
+    <%- //include(`./partials/TheGalacysMostWanted/form`) %>
+    <%- //include(`./partials/TheMadTitansShadow/form`) %>
+    <%- include(`./partials/SinisterMotives/form`) %>
+    <%- //include(`./partials/MutantGenesis/form`) %>
+    <%- //include(`./partials/NeXtEvolution/form`) %>
+    <%- //include(`./partials/AgeOfApocalypse/form`) %>
+    <%- //include(`./partials/AgentsOfSHIELD/form`) %>
     <section class="game-section">
         <% if (locals.campaign) { %>
             <% campaign.games.forEach( (game) => { %>

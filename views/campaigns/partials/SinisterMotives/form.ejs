@@ -1,7 +1,7 @@
 <section class="campaign-info-section SinisterMotives <%= locals.campaign?.campaignType === `SinisterMotives` ? `current-campaign` : `hidden` %>">
     <label>
         Current Reputation
-        <input type="number" name="currentReputation">
+        <input type="number" name="currentReputation" value="<%= locals.campaign?.campaignInformation?.currentReputation ? campaign.campaignInformation.currentReputation : 0 %>">
     </label>
     <h4>Osborn Tech:</h4>
     <fieldset class="campaign-widget checkboxes">

@@ -1,7 +1,7 @@
 <section class="campaign-info-section TheRiseOfRedSkull <%= locals.campaign?.campaignType === `TheRiseOfRedSkull` ? `current-campaign` : `hidden` %>">
     <label>
         Delay Counters:
-        <input type="number" name="delayCounters" value="">
+        <input type="number" name="delayCounters" value="<%= locals.campaign?.campaignInformation?.delayCounters ? campaign.campaignInformation.delayCounters : 0 %>">
     </label>
     <h4>Experimental Attachments:</h4>
     <fieldset class="campaign-widget checkboxes">
