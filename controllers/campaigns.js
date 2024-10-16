@@ -22,7 +22,9 @@ router.get(`/new`, isLoggedIn, async (req, res) => {
 
 router.post(`/`, isLoggedIn, async (req, res) => {
     try {
+        console.log("🚀 ~ router.post ~ req.body:", req.body)
         const campaign = utilities.processCampaignFormData(req.body)
+        console.log("🚀 ~ router.post ~ campaign:", campaign)
         const nameInDatabase = await Campaign.findOne({campaignName: campaign.campaignName})
         if (nameInDatabase !== null) {
             const user = await User.findById(req.session.user._id).populate(`ownedGames`)
@@ -86,8 +88,8 @@ router.get(`/:campaignId/edit`, isLoggedIn, isCampaignOwner, async (req, res) =>
 
 router.put(`/:campaignId`, isLoggedIn, isCampaignOwner, async (req, res) => {
     try {
-        const user = await User.findById(req.session.user._id).populate(`ownedGames`)
-        const ownedGames = user.ownedGames
+        const owner = await User.findById(req.session.user._id).populate(`ownedGames`)
+        const ownedGames = owner.ownedGames
         const nameInDatabase = await Campaign.findOne({campaignName: req.body.campaignName})
         const targetCampaign = await Campaign.findById(req.params.campaignId)
         const campaign = utilities.processCampaignFormData(req.body)
@@ -95,7 +97,16 @@ router.put(`/:campaignId`, isLoggedIn, isCampaignOwner, async (req, res) => {
             res.render(`campaigns/edit`, {campaign, ownedGames, message: `A campaign log already exists with that name.`})
             return
         }
-        // TODO - Write logic for updating campaigns and campaignInfo
+        //TODO - Add logic to remove and create for changes in campaignType
+        const updatedCampaignInfo = await mongoose.model(targetCampaign.campaignType)
+        .findByIdAndUpdate(targetCampaign.campaignInformation._id, campaign.campaignInformation, {new: true, runValidators: true})
+        campaign.campaignInformation = updatedCampaignInfo
+        campaign.owner = owner
+        const updatedCampaign = await Campaign.findByIdAndUpdate(targetCampaign._id,
+            campaign,
+            {new: true, runValidators: true}
+        )
+        const updatedGames = await Game.updateMany({_id: {"$in":[campaign.games]}}, {"$set":{campaign: updatedCampaign}})
         res.redirect(`/campaigns`)
     } catch(err) {
         console.log(err)
