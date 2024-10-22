@@ -10,7 +10,8 @@
     <input id="date-played" type="date" name="datePlayed" required value="<%= game.htmlDate ? game.htmlDate : game.datePlayed %>">
     <label for="scenario">Scenario:</label>
     <input id="scenario" type="text" name="scenario" required value="<%= game.scenario %>">
-    <section class="player-section">
+    <div class="message"><% if (game.campaign) { %> Players on campaign games must be edited on the campaign. <% } %></div>
+    <section class="player-section <% if (game.campaign) { %> hidden <% } %>">
         <% game.players.forEach( (player, i) => { %>
             <fieldset class="player-widget player<%= i %>">
                 <label class="player-element">
@@ -26,8 +27,7 @@
             <% }) %>
     <!-- FIXME - Player Name/ID Front End Validation is failing -->
     </section>
-    <!-- TODO - Wrap Player section in logic that prevents it appearing if the game is a campaign game. -->
-<button type="button" class="player-button button add">Add a player</button>
+<button type="button" class="player-button button add <% if (game.campaign) { %> hidden <% } %>">Add a player</button>
 <label for="won-game">The players:</label>
         <select id="won-game" name="wonGame">
             <option value="true" <% if (game.wonGame) { %> selected <% } %>>Won</option>

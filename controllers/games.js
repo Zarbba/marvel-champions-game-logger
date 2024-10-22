@@ -52,7 +52,6 @@ router.post(`/`, isLoggedIn, async (req, res) => {
         res.status(500).render(`errors/error-500`)
     }
 })
-//TODO - Add functionality to attach a game to a campaign at creation.
 
 router.get(`/`, async (req, res) => {
     try {
