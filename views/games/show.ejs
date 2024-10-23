@@ -3,6 +3,8 @@
 <section class="game-show-section">
     <p><span>Date played:</span> <%= game.datePlayed.toDateString() %></p>
     <% if (game.campaign) { %>
+        <h3>Campaign:</h3> 
+        <p><a href="/campaigns/<%= game.campaign._id %>"><%= game.campaign.campaignName %></a></p>
         <h3>Players:</h3>
         <% game.campaign.campaignInformation.players.forEach( (player) => { %>
             <p>Player Name: <%= player.playerName %> Hero: <%= player.identity %></p>

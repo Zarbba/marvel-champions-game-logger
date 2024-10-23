@@ -95,10 +95,17 @@ router.put(`/:campaignId`, isLoggedIn, isCampaignOwner, async (req, res) => {
             res.render(`campaigns/edit`, {campaign, ownedGames, message: `A campaign log already exists with that name.`})
             return
         }
-        //TODO - Add logic to remove and create for changes in campaignType
-        const updatedCampaignInfo = await mongoose.model(targetCampaign.campaignType)
-        .findByIdAndUpdate(targetCampaign.campaignInformation._id, campaign.campaignInformation, {new: true, runValidators: true})
-        campaign.campaignInformation = updatedCampaignInfo
+        if (targetCampaign.campaignType !== campaign.campaignType) {
+            console.log(`Changing type`)
+            const deletedCampaignInformation = await mongoose.model(`${targetCampaign.campaignType}`).findByIdAndDelete(targetCampaign.campaignInformation._id)
+            await utilities.createCampaignInformation(campaign)
+        } else {
+            console.log(`Maintaining type`)
+            const updatedCampaignInfo = await mongoose.model(targetCampaign.campaignType)
+            .findByIdAndUpdate(targetCampaign.campaignInformation._id, campaign.campaignInformation, {new: true, runValidators: true})
+            campaign.campaignInformation = updatedCampaignInfo
+        }
+        console.log(campaign)
         campaign.owner = owner
         const updatedCampaign = await Campaign.findByIdAndUpdate(targetCampaign._id,
             campaign,
@@ -111,6 +118,8 @@ router.put(`/:campaignId`, isLoggedIn, isCampaignOwner, async (req, res) => {
         res.status(500).render(`errors/error-500`)
     }
 })
+//FIXME - When changing from one campaign type to another, lingering player fragments from the old type cause issues.
+
 
 router.delete(`/:campaignId`, isLoggedIn, isCampaignOwner, async (req, res) => {
     try {
@@ -122,7 +131,7 @@ router.delete(`/:campaignId`, isLoggedIn, isCampaignOwner, async (req, res) => {
         mongoose.model(`${targetCampaign.campaignType}`)
         .deleteOne({_id: targetCampaign.campaignInformation})
         const updatedGames = await Game.updateMany(
-            {_id: {"$in":[targetCampaign.games]}},
+            {_id: {"$in":targetCampaign.games}},
             {"$unset": {campaign: ``}})
         const deletedCampaign = await Campaign.findOneAndDelete({_id: req.params.campaignId})
         res.redirect(`/campaigns`)    
