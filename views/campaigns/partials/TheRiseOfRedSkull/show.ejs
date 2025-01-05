@@ -1,0 +1,5 @@
+<p><span>Delay Counters: </span><%= campaign.campaignInformation.delayCounters %></p>
+<h3>Experimental Attachments: </h3>
+<% campaign.campaignInformation.experimentalAttachments.forEach( (card) => { %> 
+        <%= card %>
+    <% }) %>

@@ -11,9 +11,11 @@ const methodOverride = require(`method-override`)
 const session = require(`express-session`)
 const app = express()
 const Game = require(`./models/Game`)
+const Campaign = require(`./models/Campaign`)
 const User = require(`./models/User`)
 const authController = require(`./controllers/auth`)
 const gamesController = require(`./controllers/games`)
+const campaignsController = require(`./controllers/campaigns`)
 const usersController = require(`./controllers/users`)
 
 //----------------------- Server Config
@@ -35,6 +37,7 @@ app.use((req, res, next) => {
 })
 app.use(`/auth`, authController)
 app.use(`/games`, gamesController)
+app.use(`/campaigns`, campaignsController)
 app.use(`/users`, usersController)
 app.listen(process.env.PORT,() => {
     console.log(`Server listening at http://localhost:${process.env.PORT}/`)
@@ -43,8 +46,9 @@ app.listen(process.env.PORT,() => {
 //----------------------- Routing
 
 app.get(`/`, async (req, res) =>{
-    const recentGames = await Game.find({}, null, {limit: 10}).populate(`owner`).sort({createdAt: `desc`})
-    res.render(`home`, {recentGames})
+    const recentGames = await Game.find({}, null, {limit: 5}).populate(`owner`).sort({createdAt: `desc`})
+    const recentCampaigns = await Campaign.find({}, null, {limit: 5}).populate(`owner`).sort({createdAt: `desc`})
+    res.render(`home`, {recentGames, recentCampaigns})
 })
 
 app.get(`/*`, (req, res) => {

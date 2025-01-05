@@ -12,8 +12,8 @@
     <input id="scenario" type="text" name="scenario" required <% if (locals.game) { %> value="<%= game.scenario %>" <% } %>>
     <section class="player-section">
         <% if (locals.game) { %>
-            <% game.players.forEach( (player, i) => { %>
-                <fieldset class="player-widget player<%= i %>">
+            <% game.players.forEach( (player) => { %>
+                <fieldset class="player-widget">
                     <label class="player-element">
                         Player Name:
                         <input type="text" name="playerName" required value="<%= player.playerName %>">
@@ -28,6 +28,7 @@
         <% } %>
         <!-- FIXME - Player Name/ID Front End Validation is failing -->
     </section>
+    <!-- TODO - Add logic that offers a campaign to attach and removes the player section if a campaign is attached. -->
     <button type="button" class="player-button button add">Add a player</button>
     <label for="won-game">The players:</label>
         <select id="won-game" name="wonGame">

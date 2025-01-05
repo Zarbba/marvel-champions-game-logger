@@ -16,13 +16,15 @@
         <nav>
             <div class="main-nav">
                 <a class="nav-link" href="/">Home</a>
-                <a class="nav-link" href="/games">Browse Games</a>    
+                <a class="nav-link" href="/games">Browse Games</a>
+                <a class="nav-link" href="/campaigns">Browse Campaigns</a>       
             <% if (user !== null) {%>
                     <a class="nav-link" href="/games/new">Log a Game</a>
+                    <a class="nav-link" href="/campaigns/new">Log a Campaign</a>
                 </div>
                 <div class="profile-nav">
                     <a class="nav-link" href="/users/<%= user._id %>">Profile</a>
-                    <a class="nav-link" href="/auth/logout">Logout</a>
+                <a class="nav-link" href="/auth/logout">Logout</a>
                 </div>
             <% } else { %>
                 </div>

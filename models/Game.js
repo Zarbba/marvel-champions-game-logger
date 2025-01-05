@@ -4,9 +4,9 @@ const playerSchema = new mongoose.Schema ({
     playerName: {
         type: String,
         required: true
-    },
-    identity: `String`,
-    user: {
+    }, 
+    identity: String,
+    owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: `User`
     }
@@ -28,19 +28,23 @@ const gameSchema = new mongoose.Schema ({
     },
     wonGame: Boolean,
     notes: String,
+    campaign: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `Campaign`
+    },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: `User`
     }
 }, {timestamps: true, virtuals: true})
 
-gameSchema.virtual(`playerNames`).get(function () {
-    let playerNames = []
-    this.players.forEach( (player) => {
-        playerNames.push(player.playerName)
-    })
-    return playerNames
-})
+// gameSchema.virtual(`playerNames`).get(function () {
+//     let playerNames = []
+//     this.players.forEach( (player) => {
+//         playerNames.push(player.playerName)
+//     })
+//     return playerNames
+// })
 
 gameSchema.virtual(`htmlDate`).get(function () {
     return this.datePlayed.toISOString().slice(0,10)

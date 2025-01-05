@@ -1,39 +1,74 @@
 <%- include(`../partials/header`) %>
 <h2>Update <%= game.gameName %></h2>
-<div class="message">
-    <% if(locals.message) {%> <%= message %><% } %>
-</div>
+<div class="message"><% if(locals.message) {%> <%= message %><% } %></div>
 <form action="/games/<%= game._id %>?_method=put" method="post">
-    <label for="game-name">Game Name:</label>
-    <input id="game-name" type="text" name="gameName" required value="<%= game.gameName %>">
-    <label for="date-played">Date Played:</label>
-    <input id="date-played" type="date" name="datePlayed" required value="<%= game.htmlDate ? game.htmlDate : game.datePlayed %>">
-    <label for="scenario">Scenario:</label>
-    <input id="scenario" type="text" name="scenario" required value="<%= game.scenario %>">
-    <section class="player-section">
-        <% game.players.forEach( (player, i) => { %>
-            <fieldset class="player-widget player<%= i %>">
-                <label class="player-element">
-                    Player Name:
-                    <input type="text" name="playerName" required value="<%= player.playerName %>">
-                </label>
-                <label class="hero-element">
-                    Hero:
-                    <input type="text" name="playerHero" required value="<%= player.identity %>">
-                </label>
-                <button type="button" class="player-button button remove">Remove Player</button>
-            </fieldset>
-            <% }) %>
-    <!-- FIXME - Player Name/ID Front End Validation is failing -->
-    </section>
-<button type="button" class="player-button button add">Add a player</button>
-<label for="won-game">The players:</label>
-        <select id="won-game" name="wonGame">
-            <option value="true" <% if (game.wonGame) { %> selected <% } %>>Won</option>
-            <option value="false" <% if (!game.wonGame) { %> selected <% } %>>Lost</option>
-        </select>
-    <label for="notes">Notes:</label>
-    <textarea id="notes" type="" name="notes" rows="6" cols="40"><%= game.notes %></textarea>
-    <button>Update Game Log</button>
+	<label for="game-name">Game Name:</label>
+	<input
+		id="game-name"
+		type="text"
+		name="gameName"
+		required
+		value="<%= game.gameName %>" />
+	<label for="date-played">Date Played:</label>
+	<input
+		id="date-played"
+		type="date"
+		name="datePlayed"
+		required
+		value="<%= game.htmlDate ? game.htmlDate : game.datePlayed %>" />
+	<label for="scenario">Scenario:</label>
+	<input
+		id="scenario"
+		type="text"
+		name="scenario"
+		required
+		value="<%= game.scenario %>" />
+	<div class="message">
+		<% if (game.campaign) { %> Players on campaign games must be edited on the
+		campaign. <% } %>
+	</div>
+	<section class="player-section <% if (game.campaign) { %> hidden <% } %>">
+		<% game.players.forEach( (player, i) => { %>
+		<fieldset class="player-widget player<%= i %>">
+			<label class="player-element">
+				Player Name:
+				<input
+					type="text"
+					name="playerName"
+					required
+					value="<%= player.playerName %>" />
+			</label>
+			<label class="hero-element">
+				Hero:
+				<input
+					type="text"
+					name="playerHero"
+					required
+					value="<%= player.identity %>" />
+			</label>
+			<button type="button" class="player-button button remove">
+				Remove Player
+			</button>
+		</fieldset>
+		<% }) %>
+		<!-- FIXME - Player Name/ID Front End Validation is failing -->
+	</section>
+	<button
+		type="button"
+		class="player-button button add <% if (game.campaign) { %> hidden <% } %>">
+		Add a player
+	</button>
+	<label for="won-game">The players:</label>
+	<select id="won-game" name="wonGame">
+		<option value="true" <% if (game.wonGame) { %>selected <% } %>>Won</option>
+		<option value="false" <% if (!game.wonGame) { %>
+			selected <% } %>>Lost
+		</option>
+	</select>
+	<label for="notes">Notes:</label>
+	<textarea id="notes" type="" name="notes" rows="6" cols="40">
+<%= game.notes %></textarea
+	>
+	<button>Update Game Log</button>
 </form>
 <%- include(`../partials/footer`) %>

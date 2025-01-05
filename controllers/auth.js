@@ -48,7 +48,8 @@ router.post(`/signup`, isAlreadyLoggedIn, async (req, res) => {
                 userName: req.body.userName, 
                 password: bcrypt.hashSync(req.body.password, 10), 
                 email: req.body.email,
-                ownedGames: []
+                ownedGames: [],
+                ownedCampaigns: []
             }
         )
         req.session.user = {
@@ -116,6 +117,5 @@ router.get(`/logout`, isLoggedIn, (req, res) => {
         res.status(500).render(`errors/error-500`)
     }
 })
-
 
 module.exports = router

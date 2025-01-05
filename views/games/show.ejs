@@ -2,10 +2,18 @@
 <h2><%= game.gameName %></h2>
 <section class="game-show-section">
     <p><span>Date played:</span> <%= game.datePlayed.toDateString() %></p>
-    <h3>Players:</h3>
-    <% game.players.forEach( (player) => { %>
-        <p>Player Name: <%= player.playerName %> Hero: <%= player.identity %></p>
-    <% }) %>
+    <% if (game.campaign) { %>
+        <h3>Campaign:</h3> 
+        <p><a href="/campaigns/<%= game.campaign._id %>"><%= game.campaign.campaignName %></a></p>
+        <h3>Players:</h3>
+        <% game.campaign.campaignInformation.players.forEach( (player) => { %>
+            <p>Player Name: <%= player.playerName %> Hero: <%= player.identity %></p>
+        <% }) %>
+    <% } else { %>
+        <% game.players.forEach( (player) => { %>
+            <p>Player Name: <%= player.playerName %> Hero: <%= player.identity %></p>
+        <% }) %>
+    <% } %>
     <p><span>Scenario:</span> <%= game.scenario %></p>
     <p><span>Outcome:</span> The players <%= game.wonGame ? `won` : `lost` %> this game.</p>
     <h3>Notes:</h3>
@@ -15,9 +23,9 @@
             <form class="button edit" action="/games/<%= game._id %>/edit">
                 <button>Edit</button>
             </form>
-            <button class="button delete <%= game._id %>" type="button">Delete<span class="hidden"><%= game.gameName %></span></button>
+            <button class="button delete <%= game._id %> game" type="button">Delete<span class="hidden"><%= game.gameName %></span></button>
         </section>
 <% } %>
 </section>
-<%- include(`../partials/delete`) %>
+<%- include(`../partials/modal`) %>
 <%- include(`../partials/footer`) %>

@@ -1,0 +1,18 @@
+<tr>
+    <th>Name</th>
+    <th>Hero</th>
+    <th>Shield Tech Card</th>
+    <th>Aspect Advantage Card</th>
+    <th>Planning Ahead Card</th>
+    <th>Hit Points Remaining</th>
+</tr>
+<% campaign.campaignInformation.players.forEach( (player) => { %> 
+    <tr>
+        <td><%= player.playerName %></td>
+        <td><%= player.identity %></td>
+        <td><%= player.shieldTechCard %></td>
+        <td><%= player.aspectAdvantageCard %></td>
+        <td><%= player.planningAheadCard %></td>
+        <td><%= player.remainingHitPoints %></td>    
+    </tr>
+    <% }) %>

@@ -16,6 +16,10 @@ const userSchema = new mongoose.Schema ({
     ownedGames: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: `Game`
+    }],
+    ownedCampaigns: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `Campaign`
     }]
 }, {timestamps: true, virtuals: true})
 

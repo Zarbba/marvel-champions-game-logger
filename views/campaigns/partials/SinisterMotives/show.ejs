@@ -1,0 +1,14 @@
+<p><span>Current Reputation: </span><%= campaign.campaignInformation.currentReputation %></p>
+<h3>Osborne Tech Cards: </h3>
+<% campaign.campaignInformation.osbornTechCards.forEach( (card) => { %> 
+        <%= card %>
+    <% }) %>
+<h3>Completed Community Service Side Schemes: </h3>
+    <% campaign.campaignInformation.completedCommunityServices.forEach( (card) => { %> 
+            <%= card %>
+        <% }) %>
+<p><span>Waking Nightmares: </span><%= campaign.campaignInformation.wakingNightmares %></p>
+<h3>Last Ones Standing: </h3>
+<% campaign.campaignInformation.lastOnesStanding.forEach( (card) => { %> 
+        <%= card %>
+    <% }) %>

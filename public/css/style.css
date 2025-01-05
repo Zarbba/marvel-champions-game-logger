@@ -109,7 +109,7 @@ td {
     vertical-align: center;
 }
 
-.game-link, .footer-link {
+.game-link, .footer-link, .campaign-link {
     text-decoration: underline;
 }
 
@@ -172,9 +172,18 @@ td {
     justify-content: center;
 }
 
-.player-widget, .profile-widget {
+.player-widget, .profile-widget, .game-widget {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
+.campaign-widget.checkboxes {
+    display: grid;
+    grid-template-columns: 1fr .4fr 1fr .4fr 1fr .4fr;
+    row-gap: 1rem;
     align-items: center;
     justify-content: center;
     border: none;
@@ -225,7 +234,7 @@ td {
     gap: 3rem;
 }
 
-.delete-modal {
+.modal {
     position: absolute;
     text-align: center;
     max-width: 80%;
