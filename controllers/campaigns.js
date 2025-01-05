@@ -96,11 +96,9 @@ router.put(`/:campaignId`, isLoggedIn, isCampaignOwner, async (req, res) => {
             return
         }
         if (targetCampaign.campaignType !== campaign.campaignType) {
-            console.log(`Changing type`)
             const deletedCampaignInformation = await mongoose.model(`${targetCampaign.campaignType}`).findByIdAndDelete(targetCampaign.campaignInformation._id)
             await utilities.createCampaignInformation(campaign)
         } else {
-            console.log(`Maintaining type`)
             const updatedCampaignInfo = await mongoose.model(targetCampaign.campaignType)
             .findByIdAndUpdate(targetCampaign.campaignInformation._id, campaign.campaignInformation, {new: true, runValidators: true})
             campaign.campaignInformation = updatedCampaignInfo
