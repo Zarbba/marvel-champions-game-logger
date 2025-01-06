@@ -12,86 +12,97 @@ let playerCounter = playerCounterEls.length
 
 // -----Event Listeners-----
 document.addEventListener(`click`, (e) => {
-    if (e.target.classList.contains(`button`))
-    handleButtonClick(e)
+	if (e.target.classList.contains(`button`)) handleButtonClick(e)
 })
 
 document.addEventListener(`change`, (e) => {
-    if (e.target.id === `campaign-type`) {
-        renderCampaignInformation(e)
-    }
+	if (e.target.id === `campaign-type`) {
+		renderCampaignInformation(e)
+	}
 })
 //TODO - Move Nav links into sub menus and add logic to expand and contract menus
 
 // -----Functions-----
 
 function handleButtonClick(e) {
-    if (e.target.classList.contains(`player-button`)) {
-        if(e.target.classList.contains(`add`) && e.target.classList.contains(`red-skull`) ) {
-            addRedSkullPlayerWidget()
-            return
-        }
-        if (e.target.classList.contains(`add`) && e.target.classList.contains(`sin-mot`)) {
-            addSinisterMotivesPlayerWidget()
-            return
-        } 
-        if (e.target.classList.contains(`add`)) {
-            addDefaultPlayerWidget()
-            return
-        }
-        if (e.target.classList.contains(`remove`)) {
-            removePlayerWidget(e)
-            return
-        }
-    }
-    if (e.target.classList.contains(`game-button`)) {
-        if (e.target.classList.contains(`add`)) {
-            addGameWidget()
-            return
-        }
-        if (e.target.classList.contains(`remove`)) {
-            removeGameWidget(e)
-            return
-        }
-    }
-    if (e.target.classList.contains(`delete`)) {
-        if (e.target.classList.contains(`game`)) {
-            revealDeleteGameModal(e)
-            return
-        }
-        if (e.target.classList.contains(`campaign`)) {
-            revealDeleteCampaignModal(e)
-            return
-        }
-    }
-    if (e.target.classList.contains(`cancel`)) {
-        hideModal()
-        return
-    }
+	if (e.target.classList.contains(`player-button`)) {
+		if (
+			e.target.classList.contains(`add`) &&
+			e.target.classList.contains(`red-skull`)
+		) {
+			addRedSkullPlayerWidget()
+			return
+		}
+		if (
+			e.target.classList.contains(`add`) &&
+			e.target.classList.contains(`sin-mot`)
+		) {
+			addSinisterMotivesPlayerWidget()
+			return
+		}
+		if (
+			e.target.classList.contains(`add`) &&
+			e.target.classList.contains(`age`)
+		) {
+			addAgeOfApocalypsePlayerWidget()
+			return
+		}
+		if (e.target.classList.contains(`add`)) {
+			addDefaultPlayerWidget()
+			return
+		}
+		if (e.target.classList.contains(`remove`)) {
+			removePlayerWidget(e)
+			return
+		}
+	}
+	if (e.target.classList.contains(`game-button`)) {
+		if (e.target.classList.contains(`add`)) {
+			addGameWidget()
+			return
+		}
+		if (e.target.classList.contains(`remove`)) {
+			removeGameWidget(e)
+			return
+		}
+	}
+	if (e.target.classList.contains(`delete`)) {
+		if (e.target.classList.contains(`game`)) {
+			revealDeleteGameModal(e)
+			return
+		}
+		if (e.target.classList.contains(`campaign`)) {
+			revealDeleteCampaignModal(e)
+			return
+		}
+	}
+	if (e.target.classList.contains(`cancel`)) {
+		hideModal()
+		return
+	}
 }
 
 function chooseCampaignInformation(string) {
-    return campaignInformation[string].new
+	return campaignInformation[string].new
 }
 
 function renderCampaignInformation(e) {
-    let oldCampaignInfoEl = document.querySelector(`.current-campaign`)
-    let newCampaignInfoEl = document.querySelector(`.${e.target.value}`)
-    newCampaignInfoEl.classList.toggle(`hidden`)
-    newCampaignInfoEl.classList.toggle(`current-campaign`)
-    if (oldCampaignInfoEl) {
-        oldCampaignInfoEl.classList.toggle(`hidden`)
-        oldCampaignInfoEl.classList.toggle(`current-campaign`)
-    }
+	let oldCampaignInfoEl = document.querySelector(`.current-campaign`)
+	let newCampaignInfoEl = document.querySelector(`.${e.target.value}`)
+	newCampaignInfoEl.classList.toggle(`hidden`)
+	newCampaignInfoEl.classList.toggle(`current-campaign`)
+	if (oldCampaignInfoEl) {
+		oldCampaignInfoEl.classList.toggle(`hidden`)
+		oldCampaignInfoEl.classList.toggle(`current-campaign`)
+	}
 }
 
 function addRedSkullPlayerWidget() {
-    if (playerCounter < 4) {
-        const playerSectionEl = document.getElementById(`red-skull-player-section`)
-        const newPlayerEl = document.createElement(`fieldset`)
-        newPlayerEl.classList.add(`player-widget`)
-        newPlayerEl.innerHTML =
-        `<label class="player-element">
+	if (playerCounter < 4) {
+		const playerSectionEl = document.getElementById(`red-skull-player-section`)
+		const newPlayerEl = document.createElement(`fieldset`)
+		newPlayerEl.classList.add(`player-widget`)
+		newPlayerEl.innerHTML = `<label class="player-element">
                 Player Name:
                 <input type="text" name="playerName" required value="">
             </label>
@@ -159,25 +170,24 @@ function addRedSkullPlayerWidget() {
                 <input type="checkbox" value="true">
             </label>
             <button type="button" class="player-button button remove">Remove Player</button>`
-        playerSectionEl.appendChild(newPlayerEl)
-        playerCounter++
-        if (playerCounter === 4) {
-            addPlayerEl.classList.add(`hidden`)
-            const maxPlayerMessageEl = document.createElement(`p`)
-            maxPlayerMessageEl.classList.add(`player-message`)
-            maxPlayerMessageEl.textContent = `Maximum player count reached.`
-            playerSectionEl.appendChild(maxPlayerMessageEl)
-        }
-    }
+		playerSectionEl.appendChild(newPlayerEl)
+		playerCounter++
+		if (playerCounter === 4) {
+			addPlayerEl.classList.add(`hidden`)
+			const maxPlayerMessageEl = document.createElement(`p`)
+			maxPlayerMessageEl.classList.add(`player-message`)
+			maxPlayerMessageEl.textContent = `Maximum player count reached.`
+			playerSectionEl.appendChild(maxPlayerMessageEl)
+		}
+	}
 }
 
 function addSinisterMotivesPlayerWidget() {
-    if (playerCounter < 4) {
-        const playerSectionEl = document.getElementById(`sin-mot-player-section`)
-        const newPlayerEl = document.createElement(`fieldset`)
-        newPlayerEl.classList.add(`player-widget`)
-        newPlayerEl.innerHTML =
-        `<label class="player-element">
+	if (playerCounter < 4) {
+		const playerSectionEl = document.getElementById(`sin-mot-player-section`)
+		const newPlayerEl = document.createElement(`fieldset`)
+		newPlayerEl.classList.add(`player-widget`)
+		newPlayerEl.innerHTML = `<label class="player-element">
             Player Name:
             <input type="text" name="playerName" required value="">
         </label>
@@ -212,25 +222,54 @@ function addSinisterMotivesPlayerWidget() {
             <input type="text" name="planningAheadCard" value="">
         </label>
         <button type="button" class="player-button button remove">Remove Player</button>`
-        playerSectionEl.appendChild(newPlayerEl)
-        playerCounter++
-        if (playerCounter === 4) {
-            addPlayerEl.classList.add(`hidden`)
-            const maxPlayerMessageEl = document.createElement(`p`)
-            maxPlayerMessageEl.classList.add(`player-message`)
-            maxPlayerMessageEl.textContent = `Maximum player count reached.`
-            playerSectionEl.appendChild(maxPlayerMessageEl)
-        }
-    }
+		playerSectionEl.appendChild(newPlayerEl)
+		playerCounter++
+		if (playerCounter === 4) {
+			addPlayerEl.classList.add(`hidden`)
+			const maxPlayerMessageEl = document.createElement(`p`)
+			maxPlayerMessageEl.classList.add(`player-message`)
+			maxPlayerMessageEl.textContent = `Maximum player count reached.`
+			playerSectionEl.appendChild(maxPlayerMessageEl)
+		}
+	}
+}
+function addAgeOfApocalypsePlayerWidget() {
+	if (playerCounter < 4) {
+		const playerSectionEl = document.getElementById(`age-player-section`)
+		const newPlayerEl = document.createElement(`fieldset`)
+		newPlayerEl.classList.add(`player-widget`)
+		newPlayerEl.innerHTML = `<label class="player-element">
+						Player Name:
+						<input type="text" name="playerName" required>
+					</label>
+					<label class="hero-element">
+						Hero:
+						<input type="text" name="playerHero" required>
+					</label>
+					<label class="hp-element">
+						Remaining Hitpoints:
+						<input type="number" name="remainingHitPoints">
+					</label>
+	</section>
+	<button type="button" class="player-button button add age">Add a player</button>`
+		playerSectionEl.appendChild(newPlayerEl)
+		playerCounter++
+		if (playerCounter === 4) {
+			addPlayerEl.classList.add(`hidden`)
+			const maxPlayerMessageEl = document.createElement(`p`)
+			maxPlayerMessageEl.classList.add(`player-message`)
+			maxPlayerMessageEl.textContent = `Maximum player count reached.`
+			playerSectionEl.appendChild(maxPlayerMessageEl)
+		}
+	}
 }
 
 function addDefaultPlayerWidget() {
-    if (playerCounter < 4) {
-        const playerSectionEl = document.querySelector(`.player-section`)
-        const newPlayerEl = document.createElement(`fieldset`)
-        newPlayerEl.classList.add(`player-widget`)
-        newPlayerEl.innerHTML = 
-        `<label class="player-element">
+	if (playerCounter < 4) {
+		const playerSectionEl = document.querySelector(`.player-section`)
+		const newPlayerEl = document.createElement(`fieldset`)
+		newPlayerEl.classList.add(`player-widget`)
+		newPlayerEl.innerHTML = `<label class="player-element">
             Player Name:
             <input type="text" name="playerName" required">
         </label>
@@ -239,76 +278,75 @@ function addDefaultPlayerWidget() {
             <input type="text" name="playerHero" required">
         </label>
         <button type="button" class="player-button button remove">Remove Player</button>`
-        playerSectionEl.appendChild(newPlayerEl)
-        playerCounter++
-        if (playerCounter === 4) {
-            addPlayerEl.classList.add(`hidden`)
-            const maxPlayerMessageEl = document.createElement(`p`)
-            maxPlayerMessageEl.classList.add(`player-message`)
-            maxPlayerMessageEl.textContent = `Maximum player count reached.`
-            playerSectionEl.appendChild(maxPlayerMessageEl)
-        }
-    }
+		playerSectionEl.appendChild(newPlayerEl)
+		playerCounter++
+		if (playerCounter === 4) {
+			addPlayerEl.classList.add(`hidden`)
+			const maxPlayerMessageEl = document.createElement(`p`)
+			maxPlayerMessageEl.classList.add(`player-message`)
+			maxPlayerMessageEl.textContent = `Maximum player count reached.`
+			playerSectionEl.appendChild(maxPlayerMessageEl)
+		}
+	}
 }
 
 function removePlayerWidget(e) {
-    if (playerCounter > 0) {
-        playerCounter--
-        const removePlayerEl = e.target.parentNode
-        removePlayerEl.remove()
-        if (playerCounter === 3) {
-            addPlayerEl.classList.remove(`hidden`)
-            const maxPlayerMessageEl = document.querySelector(`.player-message`)
-            maxPlayerMessageEl.remove()
-        }
-    }
+	if (playerCounter > 0) {
+		playerCounter--
+		const removePlayerEl = e.target.parentNode
+		removePlayerEl.remove()
+		if (playerCounter === 3) {
+			addPlayerEl.classList.remove(`hidden`)
+			const maxPlayerMessageEl = document.querySelector(`.player-message`)
+			maxPlayerMessageEl.remove()
+		}
+	}
 }
 
 function addGameWidget() {
-    if (defaultGameWidgetEl.classList.contains(`hidden`)) {
-        defaultGameWidgetEl.classList.remove(`hidden`)
-    } else {
-        const newGameEl = defaultGameWidgetEl.cloneNode(true)
-        newGameEl.classList.remove(`default-widget`)
-        gameSectionEl.appendChild(newGameEl)    
-    }
+	if (defaultGameWidgetEl.classList.contains(`hidden`)) {
+		defaultGameWidgetEl.classList.remove(`hidden`)
+	} else {
+		const newGameEl = defaultGameWidgetEl.cloneNode(true)
+		newGameEl.classList.remove(`default-widget`)
+		gameSectionEl.appendChild(newGameEl)
+	}
 }
 
 function removeGameWidget(e) {
-    if (e.target.classList.contains(`default-widget`)) {
-        defaultGameWidgetEl.classList.add(`hidden`)
-    } else {
-        const removeGameEl = e.target.parentNode
-        removeGameEl.remove()
-    }
+	if (e.target.classList.contains(`default-widget`)) {
+		defaultGameWidgetEl.classList.add(`hidden`)
+	} else {
+		const removeGameEl = e.target.parentNode
+		removeGameEl.remove()
+	}
 }
 
 function revealDeleteGameModal(e) {
-    modalEl.innerHTML =
-    // REVIEW - There's gotta be a better way to pass these variables through...
-    `<p class="delete-text">Are you sure you want to delete ${e.target.childNodes[1].textContent}?</p>
+	modalEl.innerHTML =
+		// REVIEW - There's gotta be a better way to pass these variables through...
+		`<p class="delete-text">Are you sure you want to delete ${e.target.childNodes[1].textContent}?</p>
     <section class="button-section">
         <form class="button-element button confirm" action="/games/${e.target.classList[2]}?_method=delete" method="post">
             <button>Delete</button>
         </form>
         <button class="button-element button cancel" type="button">Cancel</button>
     </section>`
-    modalEl.classList.remove(`hidden`)
+	modalEl.classList.remove(`hidden`)
 }
 
 function revealDeleteCampaignModal(e) {
-    modalEl.innerHTML =
-    `<p class="delete-text">Are you sure you want to delete ${e.target.childNodes[1].textContent}?</p>
+	modalEl.innerHTML = `<p class="delete-text">Are you sure you want to delete ${e.target.childNodes[1].textContent}?</p>
     <section class="button-section">
         <form class="button-element button confirm" action="/campaigns/${e.target.classList[2]}?_method=delete" method="post">
             <button>Delete</button>
         </form>
         <button class="button-element button cancel" type="button">Cancel</button>
     </section>`
-    modalEl.classList.remove(`hidden`)
+	modalEl.classList.remove(`hidden`)
 }
 
 function hideModal() {
-    modalEl.classList.add(`hidden`)
-    modalEl.innerHTML = ``
+	modalEl.classList.add(`hidden`)
+	modalEl.innerHTML = ``
 }
