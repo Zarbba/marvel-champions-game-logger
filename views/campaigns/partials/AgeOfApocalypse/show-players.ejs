@@ -1,0 +1,12 @@
+<tr>
+	<th>Name</th>
+	<th>Hero</th>
+	<th>Hit Points Remaining</th>
+</tr>
+<% campaign.campaignInformation.players.forEach( (player) => { %>
+<tr>
+	<td><%= player.playerName %></td>
+	<td><%= player.identity %></td>
+	<td><%= player.remainingHitPoints %></td>
+</tr>
+<% }) %>

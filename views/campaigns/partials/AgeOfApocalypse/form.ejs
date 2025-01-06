@@ -1,0 +1,126 @@
+<h4>Defeated Side Missions:</h4>
+<fieldset class="campaign-widget checkboxes">
+	<input
+		id="seattle-core"
+		type="checkbox"
+		name="defeatedSideMissions"
+		value="Liberate the Seattle Core"
+		<%
+		if
+		(locals.campaign?.campaignInformation?.defeatedSideMissions?.includes(`Liberate
+		the
+		Seattle
+		Core`))
+		{
+		%>
+	checked <% } %>>
+	<label for="seattle-core">Liberate the Seattle Core</label>
+	<input
+		id="survivors"
+		type="checkbox"
+		name="defeatedSideMissions"
+		value="Evacuate Survivors"
+		<%
+		if
+		(locals.campaign?.campaignInformation?.defeatedSideMissions?.includes(`Evacuate
+		Survivors`))
+		{
+		%>
+	checked <% } %>>
+	<label for="survivors">Evacuate Survivors</label>
+	<input
+		id="sea-wall"
+		type="checkbox"
+		name="defeatedSideMissions"
+		value="Sabotage the Sea Wall"
+		<%
+		if
+		(locals.campaign?.campaignInformation?.defeatedSideMissions?.includes(`Sabotage
+		the
+		Sea
+		Wall`))
+		{
+		%>
+	checked <% } %>>
+	<label for="sea-wall">Sabotage the Sea Wall</label>
+	<input
+		id="lost-mutants"
+		type="checkbox"
+		name="defeatedSideMissions"
+		value="Find Lost Mutants"
+		<%
+		if
+		(locals.campaign?.campaignInformation?.defeatedSideMissions?.includes(`Find
+		Lost
+		Mutants`))
+		{
+		%>
+	checked <% } %>>
+	<label for="lost-mutants">Find Lost Mutants</label>
+</fieldset>
+<h4>Defeated Overseer Minions:</h4>
+<fieldset class="campaign-widget checkboxes">
+	<input
+		id="sinister"
+		type="checkbox"
+		name="defeatedOverseerMinions"
+		value="Mister Sinister"
+		<%
+		if
+		(locals.campaign?.campaignInformation?.defeatedOverseerMinions?.includes(`Mister
+		Sinister`))
+		{
+		%>
+	checked <% } %>>
+	<label for="sinister">Mister Sinister</label>
+	<input
+		id="shadow-king"
+		type="checkbox"
+		name="defeatedOverseerMinions"
+		value="The Shadow King"
+		<%
+		if
+		(locals.campaign?.campaignInformation?.defeatedOverseerMinions?.includes(`The
+		Shadow
+		King`))
+		{
+		%>
+	checked <% } %>>
+	<label for="shadow-king">The Shadow King</label>
+	<input
+		id="abyss"
+		type="checkbox"
+		name="defeatedOverseerMinions"
+		value="Abyss"
+		<%
+		if
+		(locals.campaign?.campaignInformation?.defeatedOverseerMinions?.includes(`Abyss`))
+		{
+		%>
+	checked <% } %>>
+	<label for="abyss">Abyss</label>
+	<input
+		id="sugar-man"
+		type="checkbox"
+		name="defeatedOverseerMinions"
+		value="Sugar Man"
+		<%
+		if
+		(locals.campaign?.campaignInformation?.defeatedOverseerMinions?.includes(`Sugar
+		Man`))
+		{
+		%>
+	checked <% } %>>
+	<label for="sugar-man">Sugar Man</label>
+	<input
+		id="rasputin"
+		type="checkbox"
+		name="defeatedOverseerMinions"
+		value="Mikhail Rasputin"
+		<%if(locals.campaign?.campaignInformation?.defeatedOverseerMinions?.includes(`Mikhail
+		Rasputin`))
+		{
+		%>
+	checked <% } %>>
+	<label for="rasputin">Mikhail Rasputin</label>
+</fieldset>
